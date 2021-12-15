@@ -4,7 +4,7 @@ class Order(db.Model):
     __tablename__ = "orders"
 
     id= db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     items = db.Column(db.Integer, nullable=False)
     address = db.Column(db.String(255), nullable=False)
     credit_card = db.Column(db.Numeric(16,0), nullable=False)
@@ -14,6 +14,7 @@ class Order(db.Model):
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
+    users = db.relationship('User', back_populates="orders")
 
     def to_dict(self):
         return {
