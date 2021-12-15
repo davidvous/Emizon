@@ -12,12 +12,15 @@ class Product(db.Model):
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
+    users = db.relationship("Cart_item", back_populates="product")
+    users_reviews = db.relationship('Review', back_populates="product")
+
     def to_dict(self):
         return {
             'id': self.id,
             'name': self.name,
             'description': self.description,
-            'price': self.price,
+            'price': str(self.price),
             'product_url': self.product_url,
             'department': self.department,
             'created_at': self.created_at,
