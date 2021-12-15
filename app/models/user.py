@@ -14,10 +14,10 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
-    orders = db.relationship('Order', back_populates="users", cascade="all, delete-orphan")
+    orders = db.relationship('Order', back_populates="users", cascade="all, delete")
     
-    products = db.relationship('Cart_item', back_populates="user", cascade="all, delete-orphan")
-    products_reviews = db.relationship('Review', back_populates="user", cascade="all, delete-orphan")
+    products = db.relationship('Cart_item', back_populates="user", cascade="all, delete")
+    products_reviews = db.relationship('Review', back_populates="user", cascade="all, delete")
 
 
     @property
