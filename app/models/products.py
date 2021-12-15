@@ -20,7 +20,7 @@ class Product(db.Model):
             'id': self.id,
             'name': self.name,
             'description': self.description,
-            'price': self.price,
+            'price': str(self.price),
             'product_url': self.product_url,
             'department': self.department,
             'created_at': self.created_at,
