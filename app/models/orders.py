@@ -14,6 +14,7 @@ class Order(db.Model):
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
+
     def to_dict(self):
         return {
             'id': self.id,
