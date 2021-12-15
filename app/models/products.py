@@ -13,6 +13,7 @@ class Product(db.Model):
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
     users = db.relationship("Cart_item", back_populates="product")
+    users_reviews = db.relationship('Review', back_populates="product")
 
     def to_dict(self):
         return {
