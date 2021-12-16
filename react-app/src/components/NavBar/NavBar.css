@@ -1,0 +1,91 @@
+.header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #97BFB4;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header__title {
+    font-family: 'Pacifico', cursive;
+    padding: 5px;
+    color: #012443;
+}
+
+.header__logo {
+    width: 100px;
+    object-fit: contain;
+    margin: 0 20px;
+    margin-top: 18px;
+}
+
+.header__search {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    border-radius: 24px;
+}
+
+.header__searchInput {
+    height: 14px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px 0px 0px 10px;
+    width: 100%;
+}
+
+.header__searchIcon {
+    padding: 5px;
+    height: 25px !important;
+    background-color: #F5EEDC;
+    border-radius: 0px 10px 10px 0px;
+}
+
+.header__nav {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.header__meta {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #012443;
+}
+
+.header__metaLineOne {
+    font-size: 12px;
+}
+
+.header__metaLineTwo {
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.header__metaBasket {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #012443;
+    padding: 5px;
+}
+
+.fa-shopping-basket {
+    color: #012443;
+}
+
+.category {
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #FDD2BF;
+}
+
+.category__heading {
+    font-weight: 500;
+    color: #012443;
+}
