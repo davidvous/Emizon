@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import Category from './Category';
 import './NavBar.css'
@@ -35,7 +35,9 @@ const NavBar = () => {
   return (
     <nav>
       <div className="header">
-        <h1 className="header__title">Emizon</h1>
+        <Link to="/" exact={true}>
+          <h1 className="header__title">Emizon</h1>
+        </Link>
         <div className="header__search">
           <input className="header__searchInput" type="text" />
           <i className="fas fa-search header__searchIcon"></i>
@@ -55,11 +57,15 @@ const NavBar = () => {
           </div>
         </div>
         <div className="header__metaBasket">
+          <Link to="/cart" exact={true}>
           <i className="fas fa-shopping-basket fa-lg"></i>
+          </Link>
+          <Link to="/cart" exact={true}>
           <span className="header__metaLineTwo header__basketCount">0</span>
+          </Link>
         </div>
       </div>
-        <Category/>
+      <Category />
     </nav>
   );
 }

@@ -1,0 +1,12 @@
+.cart__fakeAd {
+    width: 400px;
+    height: 100%;
+    margin-bottom: 10px;
+    mask-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0) 80%)
+}
+
+.cart__title {
+    margin-right: 10px;
+    padding: 10px;
+    border-bottom: 1px solid rgb(216, 216, 216);
+}
