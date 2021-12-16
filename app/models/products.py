@@ -25,4 +25,5 @@ class Product(db.Model):
             'department': self.department,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
+            'average_rating': int(sum([obj.rating for obj in self.users_reviews])/len([obj.rating for obj in self.users_reviews]))
         }

@@ -1,21 +1,23 @@
 import React from 'react'
 import './Product.css'
 
-function Product() {
+function Product({name, price, product_url, rating}) {
     return (
       <div className="product">
         <div className="product__info">
-          <p>Info about product</p>
+          <p>{name}</p>
           <p className="product__price">
             <small>$</small>
-            <strong>21.99</strong>
+            <strong>{price}</strong>
           </p>
           <div className="product__rating">
-            <p>⭐️</p>
+            {Array(rating).fill().map((_,i) => (
+              <p>⭐️</p>
+            ))}
           </div>
         </div>
           <img
-            src="https://cdn.discordapp.com/attachments/920474033932349511/920474083332862002/default-product-image.png"
+            src={`${product_url}`}
             alt=""
           />
         <button>Add to Basket</button>
