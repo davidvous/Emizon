@@ -58,12 +58,13 @@ const NavBar = () => {
         </div>
         <div className="header__metaBasket">
           <Link to="/cart" exact={true}>
-          <i className="fas fa-shopping-basket fa-lg"></i>
+            <i className="fas fa-shopping-basket fa-lg"></i>
           </Link>
           <Link to="/cart" exact={true}>
-          <span className="header__metaLineTwo header__basketCount">0</span>
+            <span className="header__metaLineTwo header__basketCount">0</span>
           </Link>
         </div>
+        <LogoutButton />
       </div>
       <Category />
     </nav>
