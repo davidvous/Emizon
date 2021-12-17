@@ -29,7 +29,7 @@ function Product({name, price, product_url, rating, id:item}) {
             src={`${product_url}`}
             alt=""
           />
-        <button onClick={() => addToCart()}>Add to Basket</button>
+        <button onClick={() => addToCart()}>Add to Cart</button>
       </div>
     );
 }

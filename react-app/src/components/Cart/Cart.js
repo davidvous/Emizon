@@ -20,6 +20,19 @@ function Cart() {
         }
     }
 
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+
+      // These options are needed to round to whole numbers if that's what you want.
+      //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+      //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+    });
+
+    const cartSubTotal = Object.keys(cartItems).reduce(function (previous, key) {
+      return previous + parseFloat((cartItems[key].product_info.price)*cartItems[key].quantity);
+    }, 0.00);
+
     useEffect(() => {
       (async () => {
           await userCheck()
@@ -69,9 +82,8 @@ function Cart() {
               {Object.keys(cartItems).reduce(function (previous, key) {
                 return previous + cartItems[key].quantity;
               }, 0)}{" "}
-              items):{" "}
-              <strong>
-              </strong>
+              items):
+              <strong>{formatter.format(cartSubTotal)}</strong>
             </p>
             <small className="subtotal__gift">
               <input type="checkbox" />
