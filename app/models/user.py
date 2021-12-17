@@ -39,5 +39,4 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
-            'cart_items': sum([each.quantity for each in self.products])
         }

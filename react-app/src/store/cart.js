@@ -33,10 +33,16 @@ const initialState = {};
 
 // thunks
 export const getCart = (userId) => async (dispatch) => {
-  const cart = await fetch(`/api/${userId}/cart`);
-  const data = await cart.json();
-  const formattedData = data.Cart_item;
-  return dispatch(showCart(formattedData));
+  if (userId) {
+    const res = await fetch(`/api/${userId}/cart`);
+    if (res.ok) {
+      const data = await res.json();
+      const formattedData = data.Cart_item;
+      return dispatch(showCart(formattedData));
+    }
+  } else {
+    return ['The user needs to log in.']
+  }
 };
 
 export const addCart = (user, item) => async (dispatch) => {

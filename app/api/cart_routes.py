@@ -13,7 +13,8 @@ def all_cart(id):
 @cart_routes.route('/<int:userId>/cart/<int:id>', methods=['POST'])
 def add_cart_item(userId, id):
     data = request.get_json()
-    checkCart = Cart_item.query.filter(Cart_item.product_id == id).first()
+    print(">>>>>>>>", data)
+    checkCart = Cart_item.query.filter(Cart_item.product_id == id, Cart_item.user_id == userId).first()
     if not checkCart:
         newItem = Cart_item(product_id=id, user_id=userId, quantity=1)
         db.session.add(newItem)

@@ -15,7 +15,7 @@ function Cart() {
     const userCheck = () => {
         if (!user) return <Redirect to="/login" />;
         else {
-            dispatch(getCart(user.id));
+            dispatch(getCart(user?.id));
             setLoaded(true);
         }
     }
