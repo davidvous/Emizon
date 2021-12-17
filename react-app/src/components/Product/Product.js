@@ -1,7 +1,14 @@
 import React from 'react'
 import './Product.css'
+import addCart from '../../store/cart'
 
 function Product({name, price, product_url, rating}) {
+
+  const addToCart = (id, userId, item) => {
+    dispatch(addCart(id, userId, item));
+    // console.log(song, playlistId)
+  };
+
     return (
       <div className="product">
         <div className="product__info">

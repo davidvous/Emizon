@@ -4,19 +4,19 @@ from app.models import Cart_item, db, Product
 cart_routes = Blueprint('cart', __name__)
 
 
-@cart_routes.route('/')
-def all_cart():
-    all_cart = Cart_item.query.all()
-    return {'Cart': [each.to_dict() for each in all_cart]}
-
-
-@cart_routes.route('/<int:id>')
-def cart(id):
+@cart_routes.route('/<int:id>/cart')
+def all_cart(id):
     cart = Cart_item.query.filter(Cart_item.user_id == id).all()
     return {'Cart_item': [each.to_dict() for each in cart]}
 
-@cart_routes.route('/<int:id>', methods=['POST'])
-def add_cart_item(id):
+
+# @cart_routes.route('/<int:id>')
+# def cart(id):
+#     cart = Cart_item.query.filter(Cart_item.user_id == id).all()
+#     return {'Cart_item': [each.to_dict() for each in cart]}
+
+@cart_routes.route('/<int:userId>/cart/<int:id>', methods=['POST'])
+def add_cart_item(id, userId):
     data = request.get_json()
     checkCart = Cart_item.query.filter(Cart_item.product_id == id).first()
     if not checkCart:
