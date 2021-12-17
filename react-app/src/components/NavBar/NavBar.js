@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import LogoutButton from '../auth/LogoutButton';
 import Category from './Category';
 import './NavBar.css'
-import { getCart } from "../../store/cart";
 
 const NavBar = () => {
 

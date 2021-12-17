@@ -1,12 +1,14 @@
 import React from 'react'
 import './Product.css'
-import addCart from '../../store/cart'
+import { addCart } from '../../store/cart'
+import { useDispatch, useSelector } from "react-redux";
 
-function Product({name, price, product_url, rating}) {
+function Product({name, price, product_url, rating, id:item}) {
+  const user = useSelector((state) => state.session.user);
+  const dispatch = useDispatch()
 
-  const addToCart = (id, userId, item) => {
-    dispatch(addCart(id, userId, item));
-    // console.log(song, playlistId)
+  const addToCart = () => {
+    dispatch(addCart(user?.id, item));
   };
 
     return (
@@ -27,7 +29,7 @@ function Product({name, price, product_url, rating}) {
             src={`${product_url}`}
             alt=""
           />
-        <button>Add to Basket</button>
+        <button onClick={() => addToCart()}>Add to Basket</button>
       </div>
     );
 }

@@ -8,12 +8,10 @@ const showCart = (cart) => ({
   payload: cart,
 });
 
-const addOneCart = (payload) => {
-  return {
+const addOneCart = (payload) => ({
     type: ADD_ONE_CART,
     payload,
-  };
-};
+  });
 
 const initialState = {};
 
@@ -25,11 +23,11 @@ export const getCart = (userId) => async (dispatch) => {
   dispatch(showCart(formattedData));
 };
 
-export const addCart = (id, userId, item) => async (dispatch) => {
-  const response = await fetch(`/api/${userId}/cart/${id}`, {
+export const addCart = (user,item) => async (dispatch) => {
+  const response = await fetch(`/api/${user}/cart/${item}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(item),
+    body: JSON.stringify({"product_id": item, "user_id": user})
   });
   if (response.ok) {
     const data = await response.json();
@@ -46,9 +44,8 @@ export default function reducer(state = initialState, action) {
       action.payload.forEach((cart_item, idx) => (newState[idx] = cart_item));
       return newState;
     case ADD_ONE_CART:
-      console.log(action.payload)
-      // newState = { ...state, [action.payload.id]: action.payload };
-      return newState;
+      newState = { ...state, [action.payload.Cart_item.product_id]: action.payload.Cart_item };
+      return state;
     default:
       return state;
   }

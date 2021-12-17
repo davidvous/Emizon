@@ -42,6 +42,7 @@ function Home() {
                 price={each.price}
                 product_url={each.product_url}
                 rating={each.average_rating}
+                id={each.id}
               />
             ))}
           </div>
@@ -53,6 +54,7 @@ function Home() {
                 price={each.price}
                 product_url={each.product_url}
                 rating={each.average_rating}
+                id={each.id}
               />
             ))}
           </div>
@@ -64,6 +66,7 @@ function Home() {
                 price={each.price}
                 product_url={each.product_url}
                 rating={each.average_rating}
+                id={each.id}
               />
             ))}
           </div>

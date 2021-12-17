@@ -4,7 +4,7 @@ import './CartProduct.css'
 function CartProduct({id, product_url, name, price, rating, quantity}) {
     return (
       <div className="cartProduct">
-        <img className="cartProduct__image" src={product_url} />
+        <img alt="" className="cartProduct__image" src={product_url} />
 
         <div className="cartProduct__info">
           <p className="cartProduct__title">{name}</p>

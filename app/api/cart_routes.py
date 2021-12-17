@@ -16,14 +16,14 @@ def all_cart(id):
 #     return {'Cart_item': [each.to_dict() for each in cart]}
 
 @cart_routes.route('/<int:userId>/cart/<int:id>', methods=['POST'])
-def add_cart_item(id, userId):
+def add_cart_item(userId, id):
     data = request.get_json()
     checkCart = Cart_item.query.filter(Cart_item.product_id == id).first()
     if not checkCart:
-        newItem = Cart_item(product_id=id, user_id=data['userId'], quantity=1)
+        newItem = Cart_item(product_id=id, user_id=userId, quantity=1)
         db.session.add(newItem)
         db.session.commit()
-        return {'message': f"Product {id} was added"}
+        return {'Cart_item': newItem.to_dict()}
     else:
         currentQuantity = checkCart.quantity
         checkCart.quantity = currentQuantity + 1 
