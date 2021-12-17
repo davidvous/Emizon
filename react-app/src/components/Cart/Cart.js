@@ -23,8 +23,6 @@ function Cart() {
     useEffect(() => {
       (async () => {
           await userCheck()
-        // await dispatch(getCart(user));
-        // setLoaded(true);
       })();
     }, [dispatch]);
 
@@ -32,9 +30,6 @@ function Cart() {
     return <Redirect to="/login" />;
     }
 
-    // if (!loaded) {
-    //   return null;
-    // }
     return (
       <div className="cart">
         <div className="cart__left">
@@ -45,10 +40,6 @@ function Cart() {
           />
           <div>
             <h2 className="cart__title">Your Shopping Cart</h2>
-            {/* {cartItems.length > 0 ? cartItems.map((each,idx) => (
-            <CartProduct key={idx} id={each.product_id} product_url={each.product_info.product_url} name={each.product_info.name} price={each.product_info.price} rating={each.product_info.average_rating} />
-            )) : <h1>You ain't got nothing in your cart</h1>} */}
-
             {loaded
               ? [
                   cartItems.length > 0 ? (
