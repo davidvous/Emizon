@@ -20,15 +20,16 @@ function Product({name, price, product_url, rating, id:item}) {
             <strong>{price}</strong>
           </p>
           <div className="product__rating">
-            {Array(rating).fill().map((_,i) => (
-              <p key={i}>⭐️</p>
-            ))}
+            {Array(rating)
+              .fill()
+              .map((_, i) => (
+                <p key={i}>
+                  <i key={i} className="fas fa-star"></i>
+                </p>
+              ))}
           </div>
         </div>
-          <img
-            src={`${product_url}`}
-            alt=""
-          />
+        <img src={`${product_url}`} alt="" />
         <button onClick={() => addToCart()}>Add to Cart</button>
       </div>
     );

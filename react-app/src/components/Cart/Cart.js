@@ -69,7 +69,7 @@ function Cart() {
                       />
                     ))
                   ) : (
-                    <h1>The cart is empty!</h1>
+                    <h1 key="empty___cart">The cart is empty!</h1>
                   ),
                 ]
               : null}
