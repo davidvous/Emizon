@@ -1,7 +1,7 @@
 import React from 'react'
 import './CartProduct.css'
 
-function CartProduct({id, product_url, name, price, rating}) {
+function CartProduct({id, product_url, name, price, rating, quantity}) {
     return (
       <div className="cartProduct">
         <img className="cartProduct__image" src={product_url} />
@@ -18,6 +18,9 @@ function CartProduct({id, product_url, name, price, rating}) {
               .map((_, i) => (
                 <p key={i}>⭐️</p>
               ))}
+          </div>
+          <div className="cartProduct__title">
+              <small>Quantity: </small><strong>{quantity}</strong>
           </div>
           <button>Remove from Cart</button>
         </div>

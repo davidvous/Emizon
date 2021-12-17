@@ -51,6 +51,7 @@ function Cart() {
                         name={each.product_info.name}
                         price={each.product_info.price}
                         rating={each.product_info.average_rating}
+                        quantity={each.quantity}
                       />
                     ))
                   ) : (
