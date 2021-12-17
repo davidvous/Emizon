@@ -33,6 +33,7 @@ const LoginForm = () => {
 
   return (
     <div className="login">
+      <h1>LOGO GOES HERE BRUH</h1>
       <div className="login__container">
         <h1>Sign-in</h1>
         <form onSubmit={onLogin}>

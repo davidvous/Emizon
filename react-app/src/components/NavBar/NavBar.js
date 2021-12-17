@@ -35,7 +35,7 @@ const NavBar = () => {
   return (
     <nav>
       <div className="header">
-        <Link to="/" exact={true}>
+        <Link to="/" exact="true">
           <h1 className="header__title">Emizon</h1>
         </Link>
         <div className="header__search">
@@ -57,10 +57,10 @@ const NavBar = () => {
           </div>
         </div>
         <div className="header__metaBasket">
-          <Link to="/cart" exact={true}>
+          <Link to="/cart" exact="true">
             <i className="fas fa-shopping-basket fa-lg"></i>
           </Link>
-          <Link to="/cart" exact={true}>
+          <Link to="/cart" exact="true">
             <span className="header__metaLineTwo header__basketCount">0</span>
           </Link>
         </div>
