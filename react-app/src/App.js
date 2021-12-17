@@ -5,6 +5,7 @@ import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar/NavBar';
 import Home from './components/Home/Home';
+import Cart from './components/Cart/Cart'
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
@@ -41,6 +42,9 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
+        <Route path='/cart' exact={true} >
+          <Cart />
+        </Route>
         <Route path='/' exact={true} >
           <Home/>
         </Route>

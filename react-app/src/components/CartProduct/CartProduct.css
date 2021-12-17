@@ -1,0 +1,34 @@
+.cartProduct {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.cartProduct__info {
+    padding-left: 20px;
+}
+
+.cartProduct__info > button {
+    background: #FF6B6B;
+    border: 1px solid;
+    margin-top: 10px;
+    border-color: #4F091D #000000 #4F091D;
+    border-radius: 2px;
+    padding: 5px;
+    color: #FFF;
+}
+
+.cartProduct__image {
+    object-fit: contain;
+    width: 180px;
+    height: 180px;
+}
+
+.cartProduct__rating {
+    display: flex;
+}
+
+.cartProduct__title {
+    font-size: 17px;
+    font-weight: 800;
+}

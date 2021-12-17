@@ -6,8 +6,8 @@ function Category() {
     
     return (
       <div className="category">
-          {categories.map(each => 
-              <span className="category__heading">{each}</span>
+          {categories.map((each,idx) => 
+              <span key={idx} className="category__heading">{each}</span>
           )}
       </div>
     );

@@ -73,6 +73,14 @@
     padding: 5px;
 }
 
+.header__metaBasket > a {
+    text-decoration: none;
+}
+
+.header__metaBasket > a:visited {
+    color: #012443;
+}
+
 .fa-shopping-basket {
     color: #012443;
 }
@@ -89,3 +97,4 @@
     font-weight: 500;
     color: #012443;
 }
+

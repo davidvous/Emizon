@@ -1,24 +1,35 @@
 import React from 'react'
 import './Product.css'
+import { addCart } from '../../store/cart'
+import { useDispatch, useSelector } from "react-redux";
 
-function Product() {
+function Product({name, price, product_url, rating, id:item}) {
+  const user = useSelector((state) => state.session.user);
+  const dispatch = useDispatch()
+
+  const addToCart = () => {
+    dispatch(addCart(user?.id, item));
+  };
+
     return (
       <div className="product">
         <div className="product__info">
-          <p>Info about product</p>
+          <p>{name}</p>
           <p className="product__price">
             <small>$</small>
-            <strong>21.99</strong>
+            <strong>{price}</strong>
           </p>
           <div className="product__rating">
-            <p>⭐️</p>
+            {Array(rating).fill().map((_,i) => (
+              <p key={i}>⭐️</p>
+            ))}
           </div>
         </div>
           <img
-            src="https://cdn.discordapp.com/attachments/920474033932349511/920474083332862002/default-product-image.png"
+            src={`${product_url}`}
             alt=""
           />
-        <button>Add to Basket</button>
+        <button onClick={() => addToCart()}>Add to Basket</button>
       </div>
     );
 }
