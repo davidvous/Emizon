@@ -52,6 +52,7 @@ function Cart() {
                         price={each.product_info.price}
                         rating={each.product_info.average_rating}
                         quantity={each.quantity}
+                        userId={user.id}
                       />
                     ))
                   ) : (
@@ -64,7 +65,13 @@ function Cart() {
         <div className="cart__right">
           <div className="subtotal">
             <p>
-              Subtotal ({cartItems.length} items): <strong>0</strong>
+              Subtotal (
+              {Object.keys(cartItems).reduce(function (previous, key) {
+                return previous + cartItems[key].quantity;
+              }, 0)}{" "}
+              items):{" "}
+              <strong>
+              </strong>
             </p>
             <small className="subtotal__gift">
               <input type="checkbox" />

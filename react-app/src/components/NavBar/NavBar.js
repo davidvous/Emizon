@@ -1,14 +1,20 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import LogoutButton from '../auth/LogoutButton';
 import Category from './Category';
 import './NavBar.css'
+import { getCart } from '../../store/cart';
 
 const NavBar = () => {
-
+  const user = useSelector((state) => state.session.user);
   const cartItems = useSelector((state) => Object.values(state.cart));
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCart(user?.id))
+  }, [])
 
   return (
     <nav>
@@ -39,7 +45,9 @@ const NavBar = () => {
             <i className="fas fa-shopping-basket fa-lg"></i>
           </Link>
           <Link to="/cart" exact="true">
-            <span className="header__metaLineTwo header__basketCount">{cartItems.length}</span>
+            <span className="header__metaLineTwo header__basketCount">{user ? Object.keys(cartItems).reduce(function (previous, key) {
+                  return previous + cartItems[key].quantity;
+              }, 0) : 0}</span>
           </Link>
         </div>
         <LogoutButton />

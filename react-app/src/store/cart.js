@@ -1,6 +1,8 @@
 // constants
 const GET_CART = "cart/GET_CART";
 const ADD_ONE_CART = "cart/ADD_ONE_CART";
+const REMOVE_ONE_CART = "cart/REMOVE_ONE_CART";
+const REMOVE_ENTIRE_LINE_CART = "cart/REMOVE_ONE_LINE_CART";
 
 // action creators
 const showCart = (cart) => ({
@@ -13,6 +15,20 @@ const addOneCart = (payload) => ({
     payload,
   });
 
+const removeOneCart = (payload) => {
+  return {
+    type: REMOVE_ONE_CART,
+    payload
+  };
+};
+
+const removeEntireLine = (payload) => {
+    return {
+      type: REMOVE_ENTIRE_LINE_CART,
+      payload,
+    };
+}
+
 const initialState = {};
 
 // thunks
@@ -20,10 +36,10 @@ export const getCart = (userId) => async (dispatch) => {
   const cart = await fetch(`/api/${userId}/cart`);
   const data = await cart.json();
   const formattedData = data.Cart_item;
-  dispatch(showCart(formattedData));
+  return dispatch(showCart(formattedData));
 };
 
-export const addCart = (user,item) => async (dispatch) => {
+export const addCart = (user, item) => async (dispatch) => {
   const response = await fetch(`/api/${user}/cart/${item}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -31,8 +47,19 @@ export const addCart = (user,item) => async (dispatch) => {
   });
   if (response.ok) {
     const data = await response.json();
-    dispatch(addOneCart(data));
+    return dispatch(addOneCart(data));
   }
+};
+
+export const deleteCart = (user, item, quantity) => async (dispatch) => {
+  const response = await fetch(`/api/${user}/cart/${item}`, {
+    method: "DELETE",
+  });
+  if (quantity === 1) {
+    return dispatch(removeEntireLine(item));
+  }
+  const data = await response.json();
+  return dispatch(removeOneCart(data));
 };
 
 // reducer
@@ -41,11 +68,24 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_CART:
       newState = {};
-      action.payload.forEach((cart_item, idx) => (newState[idx] = cart_item));
+      action.payload.forEach(
+        (cart_item, idx) => (newState[cart_item.product_id] = cart_item)
+      );
       return newState;
     case ADD_ONE_CART:
-      newState = { ...state, [action.payload.Cart_item.product_id]: action.payload.Cart_item };
-      return state;
+      newState = {
+        ...state,
+        [action.payload.Cart_item.product_id]: action.payload.Cart_item,
+      };
+      return newState;
+    case REMOVE_ENTIRE_LINE_CART:
+      newState = { ...state };
+      delete newState[action.payload]
+      return newState;
+    case REMOVE_ONE_CART:
+      const product = action.payload.Cart_item
+      newState = { ...state, [product.product_id]: product };
+      return newState;
     default:
       return state;
   }
