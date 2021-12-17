@@ -12,5 +12,5 @@ def all_cart():
 
 @cart_routes.route('/<int:id>')
 def cart(id):
-    cart = Cart_item.query.get(id)
-    return cart.to_dict()
+    cart = Cart_item.query.filter(Cart_item.user_id == id).all()
+    return {'Cart_item': [each.to_dict() for each in cart]}

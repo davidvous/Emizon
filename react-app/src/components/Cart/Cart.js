@@ -1,15 +1,40 @@
 import React from 'react'
 import './Cart.css'
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { getCart } from '../../store/cart'
+import CartProduct from '../CartProduct/CartProduct';
 
 function Cart() {
     const user = useSelector((state) => state.session.user);
+    const cartItems = useSelector((state) => Object.values(state.cart));
+    const [loaded, setLoaded] = useState(false);
+    const dispatch = useDispatch();
+
+    const userCheck = () => {
+        if (!user) return <Redirect to="/login" />;
+        else {
+            dispatch(getCart(user.id));
+            setLoaded(true);
+        }
+    }
+
+    useEffect(() => {
+      (async () => {
+          await userCheck()
+        // await dispatch(getCart(user));
+        // setLoaded(true);
+      })();
+    }, [dispatch]);
 
     if (!user) {
     return <Redirect to="/login" />;
     }
 
+    // if (!loaded) {
+    //   return null;
+    // }
     return (
       <div className="cart">
         <div className="cart__left">
@@ -20,16 +45,34 @@ function Cart() {
           />
           <div>
             <h2 className="cart__title">Your Shopping Cart</h2>
-            <h3>BasketItem</h3>
-            <h3>BasketItem</h3>
-            <h3>BasketItem</h3>
-            <h3>BasketItem</h3>
+            {/* {cartItems.length > 0 ? cartItems.map((each,idx) => (
+            <CartProduct key={idx} id={each.product_id} product_url={each.product_info.product_url} name={each.product_info.name} price={each.product_info.price} rating={each.product_info.average_rating} />
+            )) : <h1>You ain't got nothing in your cart</h1>} */}
+
+            {loaded
+              ? [
+                  cartItems.length > 0 ? (
+                    cartItems.map((each, idx) => (
+                      <CartProduct
+                        key={idx}
+                        id={each.product_id}
+                        product_url={each.product_info.product_url}
+                        name={each.product_info.name}
+                        price={each.product_info.price}
+                        rating={each.product_info.average_rating}
+                      />
+                    ))
+                  ) : (
+                    <h1>The cart is empty!</h1>
+                  ),
+                ]
+              : null}
           </div>
         </div>
         <div className="cart__right">
           <div className="subtotal">
             <p>
-              Subtotal (0 items): <strong>0</strong>
+              Subtotal ({cartItems.length} items): <strong>0</strong>
             </p>
             <small className="subtotal__gift">
               <input type="checkbox" />

@@ -1,37 +1,16 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
 import LogoutButton from '../auth/LogoutButton';
 import Category from './Category';
 import './NavBar.css'
-
-
-    //  <li>
-    //       <NavLink to="/" exact={true} activeClassName="active">
-    //         Home
-    //       </NavLink>
-    //     </li>
-    //     <li>
-    //       <NavLink to="/login" exact={true} activeClassName="active">
-    //         Login
-    //       </NavLink>
-    //     </li>
-    //     <li>
-    //       <NavLink to="/sign-up" exact={true} activeClassName="active">
-    //         Sign Up
-    //       </NavLink>
-    //     </li>
-    //     <li>
-    //       <NavLink to="/users" exact={true} activeClassName="active">
-    //         Users
-    //       </NavLink>
-    //     </li>
-    //     <li>
-    //       <LogoutButton />
-    //   </li>
-
+import { getCart } from "../../store/cart";
 
 const NavBar = () => {
+
+  const cartItems = useSelector((state) => Object.values(state.cart));
+
   return (
     <nav>
       <div className="header">
@@ -61,7 +40,7 @@ const NavBar = () => {
             <i className="fas fa-shopping-basket fa-lg"></i>
           </Link>
           <Link to="/cart" exact="true">
-            <span className="header__metaLineTwo header__basketCount">0</span>
+            <span className="header__metaLineTwo header__basketCount">{cartItems.length}</span>
           </Link>
         </div>
         <LogoutButton />
