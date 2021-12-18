@@ -12,7 +12,7 @@ function Product({name, price, product_url, rating, id:item}) {
   };
 
     return (
-      <div className="product">
+      <div className="product hvr-grow pointer">
         <div className="product__info">
           <p>{name}</p>
           <p className="product__price">

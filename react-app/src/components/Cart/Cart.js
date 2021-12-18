@@ -58,7 +58,7 @@ function Cart() {
                   cartItems.length > 0 ? (
                     cartItems.map((each, idx) => (
                       <CartProduct
-                        key={idx}
+                        key={each.product_id}
                         id={each.product_id}
                         product_url={each.product_info.product_url}
                         name={each.product_info.name}
@@ -69,7 +69,7 @@ function Cart() {
                       />
                     ))
                   ) : (
-                    <h1 key="empty___cart">The cart is empty!</h1>
+                    <h1>The cart is empty!</h1>
                   ),
                 ]
               : null}

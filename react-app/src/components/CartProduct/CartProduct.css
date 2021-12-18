@@ -6,6 +6,8 @@
 
 .cartProduct__info {
     padding-left: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .cartProduct__info > button {
@@ -16,6 +18,7 @@
     border-radius: 2px;
     padding: 5px;
     color: rgb(255, 255, 255);
+    width: 10rem;
 }
 
 .cartProduct__image {
@@ -34,8 +37,25 @@
     font-weight: 800;
 }
 
+.cartProduct__remove__error {
+    font-size: 0.9rem;
+    color: red;
+    padding-bottom: 0.3rem;
+}
+
+.cartProduct__remove__container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+}
+
+.cartProduct__remove__quantity {
+    font-size: 0.9rem;
+
+}
 .cartProduct__remove__input {
-    width: 18%;
+    width: 4.2rem;
     text-align: center;
 }
 

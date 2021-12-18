@@ -32,19 +32,21 @@ function EditProduct({userId, product_id, quantity}) {
       <>
         <div>
           {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
+            <div className="cartProduct__remove__error" key={ind}>{error}</div>
           ))}
-          <input
-            className="cartProduct__remove__input"
-            type="number"
-            name="item_quantity"
-            required
-            min="1"
-            onBlur={updateItem}
-            onChange={changeQuantity}
-            value={itemQuantity}
-          ></input>
-          <span className="cartProduct__remove__quantity"> items</span>
+          <div className="cartProduct__remove__container">
+            <span className="cartProduct__remove__quantity">Quantity: </span>
+            <input
+                className="cartProduct__remove__input"
+                type="number"
+                name="item_quantity"
+                required
+                min="1"
+                onBlur={updateItem}
+                onChange={changeQuantity}
+                value={itemQuantity}
+            ></input>
+          </div>
         </div>
       </>
     );
