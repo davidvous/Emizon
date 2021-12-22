@@ -24,8 +24,8 @@ export const getProducts = () => async dispatch => {
 }
 
 export const getOneProduct = (id) => async (dispatch) => {
-  const products = await fetch(`/api/products/${id}`);
-  const data = await products.json();
+  const product = await fetch(`/api/products/${id}`);
+  const data = await product.json();
   const formattedData = data.products;
   dispatch(showOneProduct(formattedData));
 };

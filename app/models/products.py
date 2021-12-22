@@ -27,3 +27,23 @@ class Product(db.Model):
             'updated_at': self.updated_at,
             'average_rating': int(sum([obj.rating for obj in self.users_reviews])/len([obj.rating for obj in self.users_reviews]))
         }
+
+    def solo_product(self):
+        print([each for each in self.users_reviews])
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'price': str(self.price),
+            'product_url': self.product_url,
+            'department': self.department,
+            'average_rating': int(sum([obj.rating for obj in self.users_reviews])/len([obj.rating for obj in self.users_reviews])),
+            'review': [{
+                'headline' : each.headline,
+                'user_id' : each.user_id,
+                'body': each.body,
+                'indivRating': each.rating,
+                'createdAt': each.created_at,
+                'updated_at': each.updated_at
+                } for each in self.users_reviews]
+        }

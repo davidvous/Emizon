@@ -1,0 +1,23 @@
+.product__detail__container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    min-width: 100%;
+}
+.product_detail__top {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.product__detail__divider {
+    content: "";
+    border: 1px rgb(223, 222, 222) solid;
+}
+
+.product__detail__bottom {
+    display: flex;
+    flex-direction: row;
+}

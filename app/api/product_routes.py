@@ -13,4 +13,4 @@ def products():
 @product_routes.route('/<int:id>')
 def product(id):
     product = Product.query.get(id)
-    return product.to_dict()
+    return product.solo_product()
