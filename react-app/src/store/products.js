@@ -8,9 +8,9 @@ const showProducts = (products) => ({
   payload: products,
 });
 
-const showOneProduct = (products) => ({
-  type: GET_PRODUCTS,
-  payload: products,
+const showOneProduct = (payload) => ({
+  type: GET_ONE_PROD,
+  payload,
 });
 
 const initialState = {};
@@ -26,8 +26,8 @@ export const getProducts = () => async dispatch => {
 export const getOneProduct = (id) => async (dispatch) => {
   const product = await fetch(`/api/products/${id}`);
   const data = await product.json();
-  const formattedData = data.products;
-  dispatch(showOneProduct(formattedData));
+  console.log("individual product>>>>>", data)
+  dispatch(showOneProduct(data));
 };
 
 // reducer
@@ -37,6 +37,10 @@ export default function reducer(state = initialState, action) {
         case GET_PRODUCTS:
             newState = {}
             action.payload.forEach(product => newState[product.id] = product)
+            return newState
+        case GET_ONE_PROD:
+            newState = {}
+            newState[action.payload.id] = action.payload
             return newState
         default:
             return state;

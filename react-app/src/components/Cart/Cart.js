@@ -37,7 +37,7 @@ function Cart() {
       (async () => {
           await userCheck()
       })();
-    }, [dispatch]);
+    }, []);
 
     if (!user) {
     return <Redirect to="/login" />;
@@ -69,7 +69,7 @@ function Cart() {
                       />
                     ))
                   ) : (
-                    <h1>The cart is empty!</h1>
+                    <h1 key="cartEmptyMessage">The cart is empty!</h1>
                   ),
                 ]
               : null}

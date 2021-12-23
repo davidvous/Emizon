@@ -26,7 +26,7 @@ function CartProduct({id:product_id, userId, product_url, name, price, rating, q
               .fill()
               .map((_, i) => (
                 <p key={i}>
-                  <i class="fas fa-star"></i>
+                  <i className="fas fa-star"></i>
                 </p>
               ))}
           </div>
