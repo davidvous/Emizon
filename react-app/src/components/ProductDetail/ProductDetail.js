@@ -17,6 +17,7 @@ function ProductDetail() {
     },[])
 
     const averageRating = product?.[productId]?.average_rating
+    const currentDate = new Date().getDate();
 
     return (
       <div className="product__detail__container product__detail__price">
@@ -73,15 +74,29 @@ function ProductDetail() {
                 </span>
               </div>
               <div className="product__detail__description">
-                  <span><b>Item Description</b></span>
-                  <p></p>
-                  <span> {product?.[productId]?.description}</span>
-
+                <span>
+                  <b>Item Description</b>
+                </span>
+                <p></p>
+                <span> {product?.[productId]?.description}</span>
               </div>
             </div>
           </div>
-          <div className="product__detail__top__right">Cart information
-          <AddToCart user={user} productId={productId}/>
+          <div className="product__detail__top__right">
+            <span className="product__detail__priceInfo">{`$${product?.[productId]?.price}`}</span>
+            <div>
+              <span className="product__detail__priceText"> &</span>
+              <span className="product__detail__priceReturns">
+                {" "}
+                FREE RETURNS
+              </span>
+            </div>
+            <br></br>
+            <span className="product__detail__priceReturns">
+              {" "}
+              FREE DELIVERY {currentDate}
+            </span>
+            <AddToCart user={user} productId={productId} />
           </div>
         </div>
         <div className="product__detail__divider" />
