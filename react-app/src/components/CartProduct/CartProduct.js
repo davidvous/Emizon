@@ -2,6 +2,7 @@ import React from 'react'
 import './CartProduct.css'
 import { deleteCartLine } from "../../store/cart";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import EditProduct from './EditProduct';
 
 function CartProduct({id:product_id, userId, product_url, name, price, rating, quantity}) {
@@ -15,7 +16,9 @@ function CartProduct({id:product_id, userId, product_url, name, price, rating, q
 
     return (
       <div className="cartProduct">
+        <Link to={`/products/${product_id}`}>
         <img alt="" className="cartProduct__image" src={product_url} />
+        </Link>
 
         <div className="cartProduct__info">
           <p className="cartProduct__title">{name}</p>
