@@ -12,8 +12,6 @@ def all_cart(id):
 
 @cart_routes.route('/<int:userId>/cart/<int:id>', methods=['POST'])
 def add_cart_item(userId, id):
-    data = request.get_json()
-    print(">>>>>>>>", data)
     checkCart = Cart_item.query.filter(Cart_item.product_id == id, Cart_item.user_id == userId).first()
     if not checkCart:
         newItem = Cart_item(product_id=id, user_id=userId, quantity=1)
@@ -38,4 +36,19 @@ def delete_cart_item(userId, id):
         cart_item.quantity = currentQuantity - 1
         db.session.commit()
         return {'Cart_item': cart_item.to_dict()}
+
+@cart_routes.route('/<int:userId>/cart/<int:id>/all', methods=['DELETE'])
+def delete_cart_line(userId, id):
+    cart_item = Cart_item.query.filter(Cart_item.product_id == id, Cart_item.user_id == userId).first()
+    db.session.delete(cart_item)
+    db.session.commit()
+    return {'Message': f"Product {id} was deleted!"}
+
+@cart_routes.route('/<int:userId>/cart/<int:id>', methods=['PUT'])
+def update_cart_item(userId, id):
+    data = request.get_json()
+    cart_item = Cart_item.query.filter(Cart_item.product_id == id, Cart_item.user_id == userId).first()
+    cart_item.quantity = data['quantity']
+    db.session.commit() 
+    return cart_item.to_dict()
 

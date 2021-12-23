@@ -1,13 +1,14 @@
 import React from 'react'
 import './CartProduct.css'
-import { deleteCart } from '../../store/cart'
+import { deleteCartLine } from "../../store/cart";
 import { useDispatch } from "react-redux";
+import EditProduct from './EditProduct';
 
 function CartProduct({id:product_id, userId, product_url, name, price, rating, quantity}) {
     const dispatch = useDispatch();
 
     const removeItem = () => {
-      dispatch(deleteCart(userId, product_id, quantity));
+      dispatch(deleteCartLine(userId, product_id));
     }
 
     return (
@@ -24,12 +25,16 @@ function CartProduct({id:product_id, userId, product_url, name, price, rating, q
             {Array(rating)
               .fill()
               .map((_, i) => (
-                <p key={i}>⭐️</p>
+                <p key={i}>
+                  <i className="fas fa-star"></i>
+                </p>
               ))}
           </div>
-          <div className="cartProduct__title">
-              <small>Quantity: </small><strong>{quantity}</strong>
-          </div>
+          <EditProduct
+            userId={userId}
+            product_id={product_id}
+            quantity={quantity}
+          />
           <button onClick={removeItem}>Remove from Cart</button>
         </div>
       </div>

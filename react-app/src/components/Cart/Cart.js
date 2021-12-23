@@ -20,11 +20,24 @@ function Cart() {
         }
     }
 
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+
+      // These options are needed to round to whole numbers if that's what you want.
+      //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+      //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+    });
+
+    const cartSubTotal = Object.keys(cartItems).reduce(function (previous, key) {
+      return previous + parseFloat((cartItems[key].product_info.price)*cartItems[key].quantity);
+    }, 0.00);
+
     useEffect(() => {
       (async () => {
           await userCheck()
       })();
-    }, [dispatch]);
+    }, []);
 
     if (!user) {
     return <Redirect to="/login" />;
@@ -45,7 +58,7 @@ function Cart() {
                   cartItems.length > 0 ? (
                     cartItems.map((each, idx) => (
                       <CartProduct
-                        key={idx}
+                        key={each.product_id}
                         id={each.product_id}
                         product_url={each.product_info.product_url}
                         name={each.product_info.name}
@@ -56,7 +69,7 @@ function Cart() {
                       />
                     ))
                   ) : (
-                    <h1>The cart is empty!</h1>
+                    <h1 key="cartEmptyMessage">The cart is empty!</h1>
                   ),
                 ]
               : null}
@@ -69,9 +82,8 @@ function Cart() {
               {Object.keys(cartItems).reduce(function (previous, key) {
                 return previous + cartItems[key].quantity;
               }, 0)}{" "}
-              items):{" "}
-              <strong>
-              </strong>
+              items):
+              <strong>{formatter.format(cartSubTotal)}</strong>
             </p>
             <small className="subtotal__gift">
               <input type="checkbox" />

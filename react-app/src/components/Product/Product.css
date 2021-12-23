@@ -12,6 +12,29 @@
     z-index: 1;
 }
 
+.hvr-grow {
+    vertical-align: middle;
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    transition-duration: 0.3s;
+    transition-property: transform;
+}
+
+.hvr-grow:hover,
+.hvr-grow:focus,
+.hvr-grow:active {
+    transform: scale(1.05);
+}
+
+.product__link {
+    display: flex;
+    width: 100%;
+    text-decoration: none;
+    max-height: 400px;
+}
+
 .product__info {
     height: 200px;
     margin-bottom: 15px;
@@ -35,5 +58,13 @@
 .product__info {
     height: 100px;
     margin-bottom: 15px;
+}
+
+.star-gray {
+    color: rgb(195, 192, 192);
+}
+
+.star-yellow {
+    color: rgb(237, 183, 117);
 }
 

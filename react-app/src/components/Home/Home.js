@@ -5,6 +5,7 @@ import Product from '../Product/Product';
 import './Home.css'
 import { getProducts } from '../../store/products';
 
+
 function Home() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();

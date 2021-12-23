@@ -9,6 +9,7 @@ import Cart from './components/Cart/Cart'
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
+import ProductDetail from './components/ProductDetail/ProductDetail';
 import { authenticate } from './store/session';
 
 function App() {
@@ -30,23 +31,26 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
-        <Route path='/login' exact={true}>
+        <Route path="/login" exact={true}>
           <LoginForm />
         </Route>
-        <Route path='/sign-up' exact={true}>
+        <Route path="/sign-up" exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
+        <ProtectedRoute path="/users" exact={true}>
+          <UsersList />
         </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
+        <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
-        <Route path='/cart' exact={true} >
+        <Route path="/products/:productId" exact={true}>
+          <ProductDetail />
+        </Route>
+        <Route path="/cart" exact={true}>
           <Cart />
         </Route>
-        <Route path='/' exact={true} >
-          <Home/>
+        <Route path="/" exact={true}>
+          <Home />
         </Route>
       </Switch>
     </BrowserRouter>
