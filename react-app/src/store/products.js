@@ -17,14 +17,14 @@ const initialState = {};
 
 // thunks
 export const getProducts = () => async dispatch => {
-  const products = await fetch(`/api/products`)
+  const products = await fetch(`/api/products/`)
   const data = await products.json()
   const formattedData = data.products
   dispatch(showProducts(formattedData));
 }
 
 export const getOneProduct = (id) => async (dispatch) => {
-  const product = await fetch(`/api/products/${id}`);
+  const product = await fetch(`/api/products/${id}/`);
   const data = await product.json();
   console.log("individual product>>>>>", data)
   dispatch(showOneProduct(data));

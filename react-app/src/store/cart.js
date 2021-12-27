@@ -40,7 +40,7 @@ const initialState = {};
 // thunks
 export const getCart = (userId) => async (dispatch) => {
   if (userId) {
-    const res = await fetch(`/api/${userId}/cart`);
+    const res = await fetch(`/api/${userId}/cart/`);
     if (res.ok) {
       const data = await res.json();
       const formattedData = data.Cart_item;
@@ -52,7 +52,7 @@ export const getCart = (userId) => async (dispatch) => {
 };
 
 export const addCart = (user, item) => async (dispatch) => {
-  const response = await fetch(`/api/${user}/cart/${item}`, {
+  const response = await fetch(`/api/${user}/cart/${item}/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({"product_id": item, "user_id": user})
@@ -64,7 +64,7 @@ export const addCart = (user, item) => async (dispatch) => {
 };
 
 export const deleteCart = (user, item, quantity) => async (dispatch) => {
-  const response = await fetch(`/api/${user}/cart/${item}`, {
+  const response = await fetch(`/api/${user}/cart/${item}/`, {
     method: "DELETE",
   });
   if (quantity === 1) {
@@ -75,14 +75,14 @@ export const deleteCart = (user, item, quantity) => async (dispatch) => {
 };
 
 export const deleteCartLine = (user, item) => async (dispatch) => {
-  await fetch(`/api/${user}/cart/${item}`, {
+  await fetch(`/api/${user}/cart/${item}/`, {
     method: "DELETE",
   });
   return dispatch(removeEntireLine(item));
 };
 
 export const updateOneCart = (user, item, data) => async (dispatch) => {
-  const response = await fetch(`/api/${user}/cart/${item}`, {
+  const response = await fetch(`/api/${user}/cart/${item}/`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
