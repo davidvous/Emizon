@@ -10,7 +10,7 @@ def products():
     return {'products': [product.to_dict() for product in products]}
 
 
-@product_routes.route('/<int:id>')
+@product_routes.route('/<int:id>/')
 def product(id):
     product = Product.query.get(id)
     return product.solo_product()

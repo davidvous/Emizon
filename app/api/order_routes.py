@@ -10,7 +10,7 @@ def orders():
     return {'orders': [order.to_dict() for order in orders]}
 
 
-@order_routes.route('/<int:id>')
+@order_routes.route('/<int:id>/')
 def order(id):
     order = Order.query.get(id)
     return order.to_dict()
