@@ -17,7 +17,12 @@ function ProductDetail() {
     },[])
 
     const averageRating = product?.[productId]?.average_rating
-    const currentDate = new Date().getDate();
+    const currentDate = () => {
+        let today =  new Date();
+        today.setDate(today.getDate() + 7);
+        const options = { weekday: "long", month: "long", day: "numeric" };
+        return today.toLocaleDateString("en-US", options)
+    }
 
     return (
       <div className="product__detail__container product__detail__price">
@@ -94,7 +99,8 @@ function ProductDetail() {
             <br></br>
             <span className="product__detail__priceReturns">
               {" "}
-              FREE DELIVERY {currentDate}
+              FREE DELIVERY:
+              <span className>{currentDate()}</span>
             </span>
             <AddToCart user={user} productId={productId} />
           </div>
