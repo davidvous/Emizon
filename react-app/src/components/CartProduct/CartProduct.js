@@ -2,6 +2,7 @@ import React from 'react'
 import './CartProduct.css'
 import { deleteCartLine } from "../../store/cart";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import EditProduct from './EditProduct';
 
 function CartProduct({id:product_id, userId, product_url, name, price, rating, quantity}) {
@@ -11,9 +12,13 @@ function CartProduct({id:product_id, userId, product_url, name, price, rating, q
       dispatch(deleteCartLine(userId, product_id));
     }
 
+    const averageRating = rating;
+
     return (
       <div className="cartProduct">
+        <Link to={`/products/${product_id}`}>
         <img alt="" className="cartProduct__image" src={product_url} />
+        </Link>
 
         <div className="cartProduct__info">
           <p className="cartProduct__title">{name}</p>
@@ -22,13 +27,23 @@ function CartProduct({id:product_id, userId, product_url, name, price, rating, q
             <strong>{price}</strong>
           </p>
           <div className="cartProduct__rating">
-            {Array(rating)
+            {Array(5)
               .fill()
-              .map((_, i) => (
-                <p key={i}>
-                  <i className="fas fa-star"></i>
-                </p>
-              ))}
+              .map((_, i) => {
+                let currentRating = i + 1;
+                return (
+                  <p key={i}>
+                    <i
+                      key={i}
+                      className={`fas fa-star ${
+                        currentRating <= averageRating
+                          ? `star-yellow`
+                          : `star-gray`
+                      }`}
+                    ></i>
+                  </p>
+                );
+              })}
           </div>
           <EditProduct
             userId={userId}

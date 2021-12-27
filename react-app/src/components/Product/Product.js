@@ -1,16 +1,10 @@
 import React from 'react'
 import './Product.css'
-import { addCart } from '../../store/cart'
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 function Product({name, price, product_url, rating, id:item}) {
   const user = useSelector((state) => state.session.user);
-  const dispatch = useDispatch()
-
-  const addToCart = () => {
-    dispatch(addCart(user?.id, item));
-  };
 
   const averageRating = rating
 
@@ -36,7 +30,6 @@ function Product({name, price, product_url, rating, id:item}) {
             </div>
           </div>
           <img src={`${product_url}`} alt="" />
-          <button onClick={() => addToCart()}>Add to Cart</button>
         </div>
       </Link>
     );
