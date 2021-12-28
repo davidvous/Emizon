@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getOneProduct } from '../../store/products'
 import './ProductDetail.css'
 import AddToCart from '../CartProduct/AddToCart'
+import UserReviews from '../UserReviews/UserReviews'
 
 function ProductDetail() {
     const { productId } = useParams()
@@ -105,12 +106,14 @@ function ProductDetail() {
             <AddToCart user={user} productId={productId} />
           </div>
         </div>
-        <div className="product__detail__divider" />
+        <div className="product__detail__divider"/>
         <div className="product__detail__bottom">
           <div className="product__detail__bottom__left">
             Average Reviews and Such
           </div>
-          <div className="product__detail__bottom__right">User Reviews</div>
+          <div className="product__detail__bottom__right">
+              <UserReviews/>
+          </div>
         </div>
       </div>
     );
