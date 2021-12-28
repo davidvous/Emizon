@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getOneProduct } from '../../store/products'
+import { getOneReview } from '../../store/review'
 import './ProductDetail.css'
 import AddToCart from '../CartProduct/AddToCart'
 import UserReviews from '../UserReviews/UserReviews'
@@ -14,8 +15,12 @@ function ProductDetail() {
     const product = useSelector(state => state.products)
 
     useEffect(()=> {
-        dispatch(getOneProduct(productId))
-    },[])
+        const loadProductInfo = async () => {
+            await dispatch(getOneProduct(productId));
+            await dispatch(getOneReview(productId));   
+        }
+        loadProductInfo()
+    },[dispatch, productId])
 
     const averageRating = product?.[productId]?.average_rating
     const currentDate = () => {
@@ -101,7 +106,7 @@ function ProductDetail() {
             <span className="product__detail__priceReturns">
               {" "}
               FREE DELIVERY:
-              <span className>{currentDate()}</span>
+              <span>{currentDate()}</span>
             </span>
             <AddToCart user={user} productId={productId} />
           </div>
