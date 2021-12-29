@@ -1,0 +1,38 @@
+.reviewBreakdown__container {
+
+}
+
+.reviewBreakdown__outOf {
+    padding-left: 5px;
+}
+
+.reviewBreakdown__totalRatings {
+    font-size: 0.85rem;
+    line-height: 20px;
+    color: #151515;
+}
+
+.reviewBreakdown__indivBreakdown__outerProgress {
+    box-sizing: content-box;
+    height: 20px; /* Can be anything */
+    position: relative;
+    background: #F0F2F2;
+    border-radius: 25px;
+    box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.reviewBreakdown__indivBreakdown__innerProgress {
+    display: block;
+    height: 100%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: rgb(237, 183, 117);
+    background-image: linear-gradient(center bottom,
+    rgb(205, 159, 103) 37%,
+    rgb(249, 201, 143) 69%
+    );
+    box-shadow: inset 0 2px 9px rgba(255, 255, 255, 0.5),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}

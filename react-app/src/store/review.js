@@ -78,7 +78,6 @@ export const editReview = (item, user, headline, body, rating) => async (dispatc
     },
     body: JSON.stringify({product_id:item, user_id:user, headline, body, rating} ),
   });
-  console.log("THIS IS THE RESPONSE>>>>", response)
   if (response.ok) {
     const review = await response.json();
     dispatch(updateReview(review));
