@@ -13,13 +13,11 @@ function ProductDetail() {
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
     const product = useSelector(state => state.products)
+    const review = useSelector(state => Object.values(state.review))
 
     useEffect(()=> {
-        const loadProductInfo = async () => {
-            await dispatch(getOneProduct(productId));
-            await dispatch(getOneReview(productId));   
-        }
-        loadProductInfo()
+        dispatch(getOneProduct(productId));
+        dispatch(getOneReview(productId));   
     },[dispatch, productId])
 
     const averageRating = product?.[productId]?.average_rating
@@ -29,6 +27,8 @@ function ProductDetail() {
         const options = { weekday: "long", month: "long", day: "numeric" };
         return today.toLocaleDateString("en-US", options)
     }
+
+    console.log('THIS IS THE REVIEW>>>>', review)
 
     return (
       <div className="product__detail__container product__detail__price">
@@ -117,7 +117,9 @@ function ProductDetail() {
             Average Reviews and Such
           </div>
           <div className="product__detail__bottom__right">
-              <UserReviews/>
+              {review.map((indiv, index) => (
+                  <UserReviews key={indiv.user_id} reviewInfo={indiv}/>
+              ))}
           </div>
         </div>
       </div>
