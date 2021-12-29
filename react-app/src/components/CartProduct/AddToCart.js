@@ -1,6 +1,7 @@
 import React from 'react'
 import { addCart } from "../../store/cart";
 import { useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom'
 
 function AddToCart({user, productId}) {
       const dispatch = useDispatch();
@@ -9,11 +10,15 @@ function AddToCart({user, productId}) {
         dispatch(addCart(user?.id, productId));
       };
 
-    return (
-      <button className="addToCart__button pointer" onClick={() => addToCart()}>
-        Add to Cart
-      </button>
-    );
+      console.log("WHAT IT DO???????>>>", user, user?.id)
+      return (
+          <button
+            className="addToCart__button pointer"
+            onClick={user?.id ? () => addToCart() : () => window.location.href="/login"}
+          >
+            Add to Cart
+          </button>
+      );
 }
 
 export default AddToCart
