@@ -10,7 +10,7 @@ function AddToCart({user, productId}) {
       };
 
     return (
-      <button className="addToCart__button" onClick={() => addToCart()}>
+      <button className="addToCart__button pointer" onClick={() => addToCart()}>
         Add to Cart
       </button>
     );

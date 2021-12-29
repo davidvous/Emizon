@@ -41,8 +41,8 @@ function UserReviews({currentUserReview, reviewInfo}) {
         <span>Verified Purchase</span>
         <div className="userReviews__review">{reviewInfo.body}</div>
         {currentUserReview ? (
-          <div>
-            <button onClick={onDeleteReview} type="submit">
+          <div className="userReviews_review_buttons">
+            <button className="userReviews_review_buttons_delete" onClick={onDeleteReview} type="submit">
               Delete Your Review
             </button>
             <EditReviewModal reviewInfo={reviewInfo}/>

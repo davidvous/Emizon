@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
 import { editReview } from "../../../store/review";
+import "../ReviewModal.css";
 
 function EditReview({ reviewInfo, setShowModal}) {
   const [errors, setErrors] = useState([]);
@@ -85,6 +85,11 @@ function EditReview({ reviewInfo, setShowModal}) {
           ></textarea>
         </div>
         <div>
+          <div className="numeric__ratings">
+            {Array(5).fill().map((_,i) => (
+              <span key={i}>{i+1}</span>
+            ))}
+          </div>
           <input
             type="range"
             name="rating"

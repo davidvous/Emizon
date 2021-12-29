@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
 import { addAReview } from '../../../store/review'
+import '../ReviewModal.css'
 
 function CreateReview({ productId, user, setShowModal }) {
   const [errors, setErrors] = useState([]);
@@ -63,7 +63,7 @@ function CreateReview({ productId, user, setShowModal }) {
           <input
             type="text"
             name="headline"
-            placeholder="headline"
+            placeholder="Title of Your Review"
             onChange={updateHeadline}
             value={headline}
           ></input>
@@ -71,7 +71,7 @@ function CreateReview({ productId, user, setShowModal }) {
         <div>
           <textarea
             name="body"
-            placeholder="body"
+            placeholder="What did you think of this product?"
             onChange={updateBody}
             value={body}
           ></textarea>

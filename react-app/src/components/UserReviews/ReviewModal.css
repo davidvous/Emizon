@@ -1,0 +1,89 @@
+.signUpForm {
+    color: white;
+    border-radius: 20px;
+    min-width: 35vw;
+    background: #F5EEDC;
+    padding: 2vh 3vw 2vh 3vw;
+    text-align: center;
+}
+
+.LOLsignUpForm {
+    color: rgb(0, 0, 0);
+    border-radius: 20px;
+    min-width: 35vw;
+    background: #F5EEDC;
+    padding: 2vh 3vw 2vh 3vw;
+    text-align: center;
+}
+
+.signUpForm > img {
+    margin-top: -6vh;
+    width: 7vw;
+    height: auto;
+}
+
+.signUpForm > hr {
+    margin-top: 20px;
+    width: 20vw; 
+}
+
+
+.signUpContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.signUpContent > h1, .signUpForm > p {
+    color: #0d1230;
+}
+
+.signUpContent > div > input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #999;
+    outline: none;
+}
+
+.signUpContent > div > textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #999;
+    outline: none;
+}
+
+.signUpContent-btn {
+    color: #fff;
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    font-size: 15px;
+    margin: 10px 0;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: #0d1230;
+}
+
+#deleteContent-btn {
+    background-color: rgb(211, 26, 26);
+}
+
+.signUpLogin {
+    color: #0d1230;
+}
+
+.validationErrors > ul {
+    list-style: none;
+}
+
+.numeric__ratings {
+    display: flex;
+    color: #0d1230;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 72px;
+}
+
+
