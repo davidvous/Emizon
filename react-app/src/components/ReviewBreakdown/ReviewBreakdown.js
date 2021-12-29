@@ -1,6 +1,10 @@
 import './ReviewBreakdown.css'
 
-function ReviewBreakdown({review, totalReviews, averageRating}) {
+function ReviewBreakdown({review, averageRating}) {
+    const ratingMap = {5: 0, 4: 0, 3: 0, 2: 0, 1:0}
+    review.forEach((ele,i) => (ele.rating in ratingMap) ? ratingMap[ele.rating]++ : null)
+    console.log(ratingMap)
+
     return (
       <div className="reviewBreakdown__container">
         <h2>Customer Reviews</h2>
@@ -22,33 +26,31 @@ function ReviewBreakdown({review, totalReviews, averageRating}) {
                 </p>
               );
             })}
-          <h4 className="reviewBreakdown__outOf">{Math.floor(averageRating)} out of 5</h4>
+          <h4 className="reviewBreakdown__outOf">
+            {averageRating ? Math.floor(averageRating) : 0} out of 5
+          </h4>
         </div>
         <span className="reviewBreakdown__totalRatings">
-          {totalReviews} total ratings
+          {review.length} total ratings
         </span>
-        <div className="reviewBreakdown_indivBreakdown">
-          <span className="product__detail__priceReturns">5 star</span>
-          <div className="reviewBreakdown__indivBreakdown__outerProgress">
-            <span
-              className="reviewBreakdown__indivBreakdown__innerProgress"
-              style={{ width: "80%"}}
-            ></span>
-          </div>
-        </div>
-        <div className="reviewBreakdown_indivBreakdown">
-          <span className="product__detail__priceReturns">4 star</span>
-          <div className="reviewBreakdown__indivBreakdown__outerProgress"></div>
-        </div>
-        <div className="reviewBreakdown_indivBreakdown">
-          <span className="product__detail__priceReturns">3 star</span>
-        </div>
-        <div className="reviewBreakdown_indivBreakdown">
-          <span className="product__detail__priceReturns">2 star</span>
-        </div>
-        <div className="reviewBreakdown_indivBreakdown">
-          <span className="product__detail__priceReturns">1 star</span>
-        </div>
+        {Array(5)
+          .fill()
+          .map((_, index) => (
+            <div className="reviewBreakdown_indivBreakdown">
+              <span className="reviewBreakDown__smallText">
+                {index + 1} star
+              </span>
+              <div className="reviewBreakdown__indivBreakdown__outerProgress">
+                <span
+                  className="reviewBreakdown__indivBreakdown__innerProgress"
+                  style={{ width: `${(ratingMap[index + 1] / review.length) * 100}%` }}
+                ></span>
+              </div>
+              <span className="reviewBreakDown__smallText">
+                {(ratingMap[index + 1] / review.length) * 100} %
+              </span>
+            </div>
+          )).reverse()}
       </div>
     );
 }

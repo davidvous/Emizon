@@ -4,7 +4,7 @@ import { addAReview } from '../../../store/review'
 import '../ReviewModal.css'
 
 function CreateReview({ productId, user, setShowModal }) {
-  const [errors, setErrors] = useState([]);
+  let [errors, setErrors] = useState([]);
   const [headline, setHeadline] = useState("");
   const [body, setBody] = useState("");
   const [rating, setRating] = useState(3);
@@ -22,13 +22,16 @@ function CreateReview({ productId, user, setShowModal }) {
 
   const onCreate = async (e) => {
     e.preventDefault();
-    const errors = validate();
+    errors = validate();
     if (errors.length > 0) return setValidationErrors(errors);
     else {
       const data = await dispatch(
         addAReview(productId, user.id, headline, body, rating)
       );
       setShowModal(false);
+      if (data) {
+        setErrors(data);
+      }
     }
   };
 
@@ -83,7 +86,6 @@ function CreateReview({ productId, user, setShowModal }) {
             placeholder="rating"
             min="1"
             max="5"
-            value="3"
             onChange={updateRating}
             value={rating}
           ></input>

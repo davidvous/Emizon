@@ -16,8 +16,6 @@ function ProductDetail() {
     const user = useSelector(state => state.session.user)
     const product = useSelector(state => state.products)
     const review = useSelector(state => Object.values(state.review))
-    const totalReviews = product?.[productId]?.review?.length;
-    const averageRating = product?.[productId]?.average_rating;
 
     useEffect(()=> {
         (async () => {
@@ -32,7 +30,6 @@ function ProductDetail() {
         const options = { weekday: "long", month: "long", day: "numeric" };
         return today.toLocaleDateString("en-US", options)
     }
-
     const currentUserHasReview = review?.some((ele) => ele.user_id === user?.id);
     const manAvgRating =
       review?.reduce(function (sum, value) {
@@ -80,7 +77,7 @@ function ProductDetail() {
                     })}
                 </div>
                 <span className="product__detail__priceReturns">
-                  {totalReviews} ratings
+                  {review.length} ratings
                 </span>
               </div>
               <div className="product__detail__divider" />
@@ -123,11 +120,11 @@ function ProductDetail() {
         <div className="product__detail__divider" />
         <div className="product__detail__bottom">
           <div className="product__detail__bottom__left">
-            <ReviewBreakdown review={review} totalReviews={totalReviews} averageRating={manAvgRating}/>
+            <ReviewBreakdown review={review} averageRating={manAvgRating}/>
             {user
               ? [
                   currentUserHasReview ? null : (
-                    <CreateReviewModal productId={productId} user={user} />
+                    <CreateReviewModal key={user.id} productId={productId} user={user} />
                   ),
                 ]
               : null}

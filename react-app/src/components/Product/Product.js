@@ -1,10 +1,8 @@
 import React from 'react'
 import './Product.css'
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 function Product({name, price, product_url, rating, id:item}) {
-  const user = useSelector((state) => state.session.user);
 
   const averageRating = rating
 
