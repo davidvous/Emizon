@@ -24,7 +24,7 @@ export const getReviews = () => async (dispatch) => {
 };
 
 export const getOneReview = (id) => async (dispatch) => {
-  const review = await fetch(`/api/reviews/${id}/`);
+  const review = await fetch(`/api/products/${id}/reviews/`);
   const data = await review.json();
   dispatch(showOneReview(data));
 };

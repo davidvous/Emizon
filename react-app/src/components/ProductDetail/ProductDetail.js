@@ -1,12 +1,13 @@
 import React from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getOneProduct } from '../../store/products'
 import { getOneReview } from '../../store/review'
 import './ProductDetail.css'
 import AddToCart from '../CartProduct/AddToCart'
 import UserReviews from '../UserReviews/UserReviews'
+import CreateReviewModal from '../UserReviews/CreateReviewModal/CreateReviewModal'
 
 function ProductDetail() {
     const { productId } = useParams()
@@ -16,8 +17,10 @@ function ProductDetail() {
     const review = useSelector(state => Object.values(state.review))
 
     useEffect(()=> {
-        dispatch(getOneProduct(productId));
-        dispatch(getOneReview(productId));   
+        (async () => {
+        await dispatch(getOneProduct(productId));
+        await dispatch(getOneReview(productId));
+    })();
     },[dispatch, productId])
 
     const averageRating = product?.[productId]?.average_rating
@@ -27,8 +30,8 @@ function ProductDetail() {
         const options = { weekday: "long", month: "long", day: "numeric" };
         return today.toLocaleDateString("en-US", options)
     }
-
-    console.log('THIS IS THE REVIEW>>>>', review)
+    const currentUserHasReview = review?.some((ele) => ele.user_id === user?.id);
+    console.log("DOES USER HAVE CURRENT REVIEW??!>>>", review?.some((ele) => ele.user_id === user?.id));
 
     return (
       <div className="product__detail__container product__detail__price">
@@ -115,10 +118,11 @@ function ProductDetail() {
         <div className="product__detail__bottom">
           <div className="product__detail__bottom__left">
             Average Reviews and Such
+            <CreateReviewModal/>
           </div>
           <div className="product__detail__bottom__right">
               {review.map((indiv, index) => (
-                  <UserReviews key={indiv.user_id} reviewInfo={indiv}/>
+                  <UserReviews currentUserReview={indiv.user_id === user?.id} key={indiv.user_id} reviewInfo={indiv}/>
               ))}
           </div>
         </div>

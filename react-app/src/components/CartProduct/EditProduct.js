@@ -20,7 +20,9 @@ function EditProduct({userId, product_id, quantity}) {
     useEffect(() => {
         const validationErrors = [];
         if (!/^[1-9][0-9]*$/.test(itemQuantity))
-          validationErrors.push("Please enter a valid integer!");
+          validationErrors.push("Please enter a valid quantity of 1 or more");
+        if (itemQuantity > 999)
+          validationErrors.push("Please call wholesale for quantities over 999!");
         setErrors(validationErrors)
     },[itemQuantity])
 

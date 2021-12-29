@@ -1,6 +1,6 @@
 import "./UserReviews.css";
 
-function UserReviews({reviewInfo}) {
+function UserReviews({currentUserReview, reviewInfo}) {
     return (
       <div className="userReviews_container">
         <div className="userReviews__user">
@@ -26,7 +26,9 @@ function UserReviews({reviewInfo}) {
             })}
           <span>{reviewInfo.headline}</span>
         </div>
-        <span>Reviewed on {reviewInfo.created_at}</span>
+        <span>{currentUserReview} sdfdsfdsfsd</span>
+        <p></p>
+        <span>Reviewed on {reviewInfo.updated_at}</span>
         <span>Verified Purchase</span>
         <div className="userReviews__review">{reviewInfo.body}</div>
       </div>
