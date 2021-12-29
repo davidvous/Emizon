@@ -1,0 +1,16 @@
+.userReviews_container {
+    display: flex;
+    flex-direction: column;
+    max-width: 700px;
+    width: 700px;
+    margin-bottom: 20px;
+}
+
+.userReviews_rating {
+    display: flex;
+    flex-direction: row;
+}
+
+.userReviews__review {
+    overflow-wrap: anywhere;
+}

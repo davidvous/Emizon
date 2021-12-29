@@ -1,20 +1,27 @@
 import React from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getOneProduct } from '../../store/products'
+import { getOneReview } from '../../store/review'
 import './ProductDetail.css'
 import AddToCart from '../CartProduct/AddToCart'
+import UserReviews from '../UserReviews/UserReviews'
+import CreateReviewModal from '../UserReviews/CreateReviewModal/CreateReviewModal'
 
 function ProductDetail() {
     const { productId } = useParams()
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
     const product = useSelector(state => state.products)
+    const review = useSelector(state => Object.values(state.review))
 
     useEffect(()=> {
-        dispatch(getOneProduct(productId))
-    },[])
+        (async () => {
+        await dispatch(getOneProduct(productId));
+        await dispatch(getOneReview(productId));
+    })();
+    },[dispatch, productId])
 
     const averageRating = product?.[productId]?.average_rating
     const currentDate = () => {
@@ -23,6 +30,8 @@ function ProductDetail() {
         const options = { weekday: "long", month: "long", day: "numeric" };
         return today.toLocaleDateString("en-US", options)
     }
+    const currentUserHasReview = review?.some((ele) => ele.user_id === user?.id);
+    console.log("DOES USER HAVE CURRENT REVIEW??!>>>", review?.some((ele) => ele.user_id === user?.id));
 
     return (
       <div className="product__detail__container product__detail__price">
@@ -100,17 +109,22 @@ function ProductDetail() {
             <span className="product__detail__priceReturns">
               {" "}
               FREE DELIVERY:
-              <span className>{currentDate()}</span>
+              <span>{currentDate()}</span>
             </span>
             <AddToCart user={user} productId={productId} />
           </div>
         </div>
-        <div className="product__detail__divider" />
+        <div className="product__detail__divider"/>
         <div className="product__detail__bottom">
           <div className="product__detail__bottom__left">
             Average Reviews and Such
+            <CreateReviewModal productId={productId} user={user}/>
           </div>
-          <div className="product__detail__bottom__right">User Reviews</div>
+          <div className="product__detail__bottom__right">
+              {review.map((indiv, index) => (
+                  <UserReviews currentUserReview={indiv.user_id === user?.id} key={indiv.user_id} reviewInfo={indiv}/>
+              ))}
+          </div>
         </div>
       </div>
     );
