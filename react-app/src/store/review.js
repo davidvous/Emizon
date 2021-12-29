@@ -2,6 +2,7 @@
 const GET_REVIEWS = "reviews/GET_REVIEWS";
 const GET_ONE_PROD_REVIEW = "reviews/GET_ONE_PROD_REVIEW";
 const ADD_REVIEW = "reviews/ADD_REVIEW";
+const REMOVE_REVIEW = "reviews/REMOVE_REVIEW";
 
 // action creators
 const showReviews = (reviews) => ({
@@ -18,6 +19,13 @@ const addReview = (payload) => ({
   type: ADD_REVIEW,
   payload,
 });
+
+const removeReview = (payload) => {
+  return {
+    type: REMOVE_REVIEW,
+    payload,
+  };
+};
 
 //
 
@@ -49,6 +57,13 @@ export const addAReview = (product_id, user_id, headline, body, rating) => async
   }
 };
 
+export const deleteReview = (user, item) => async (dispatch) => {
+  await fetch(`/api/products/${item}/reviews/${user}/delete/`, {
+    method: "DELETE",
+  });
+  return dispatch(removeReview(user));
+};
+
 
 // reducer
 export default function reducer(state = initialState, action) {
@@ -65,6 +80,10 @@ export default function reducer(state = initialState, action) {
     case ADD_REVIEW:
       newState = {};
       newState = {...state, [action.payload.Added_Review.user_id]: action.payload.Added_Review}
+      return newState;
+    case REMOVE_REVIEW:
+      newState = { ...state };
+      delete newState[action.payload]
       return newState;
     default:
       return state;
