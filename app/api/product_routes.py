@@ -35,7 +35,7 @@ def addReview(id):
         )
         db.session.add(review)
         db.session.commit()
-        return 'FINISHED POSTING!'
+        return {'Added_Review': review.to_dict()}
     return 'This failed!'
 
 @product_routes.route('/<int:id>/reviews/<int:userId>/delete/', methods=['DELETE'])

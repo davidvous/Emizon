@@ -118,7 +118,7 @@ function ProductDetail() {
         <div className="product__detail__bottom">
           <div className="product__detail__bottom__left">
             Average Reviews and Such
-            <CreateReviewModal/>
+            <CreateReviewModal productId={productId} user={user}/>
           </div>
           <div className="product__detail__bottom__right">
               {review.map((indiv, index) => (
