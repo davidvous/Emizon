@@ -3,6 +3,7 @@ const GET_REVIEWS = "reviews/GET_REVIEWS";
 const GET_ONE_PROD_REVIEW = "reviews/GET_ONE_PROD_REVIEW";
 const ADD_REVIEW = "reviews/ADD_REVIEW";
 const REMOVE_REVIEW = "reviews/REMOVE_REVIEW";
+const UPDATE_REVIEW = "reviews/UPDATE_REVIEW";
 
 // action creators
 const showReviews = (reviews) => ({
@@ -26,6 +27,11 @@ const removeReview = (payload) => {
     payload,
   };
 };
+
+const updateReview = (payload) => ({
+  type: UPDATE_REVIEW,
+  payload,
+});
 
 //
 
@@ -64,6 +70,22 @@ export const deleteReview = (user, item) => async (dispatch) => {
   return dispatch(removeReview(user));
 };
 
+export const editReview = (item, user, headline, body, rating) => async (dispatch) => {
+  const response = await fetch(`/api/products/${item}/reviews/${user}/edit/`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({product_id:item, user_id:user, headline, body, rating} ),
+  });
+  console.log("THIS IS THE RESPONSE>>>>", response)
+  if (response.ok) {
+    const review = await response.json();
+    dispatch(updateReview(review));
+    return review;
+  }
+};
+
 
 // reducer
 export default function reducer(state = initialState, action) {
@@ -84,6 +106,9 @@ export default function reducer(state = initialState, action) {
     case REMOVE_REVIEW:
       newState = { ...state };
       delete newState[action.payload]
+      return newState;
+    case UPDATE_REVIEW:
+      newState = { ...state, [action.payload.Edited_Review.user_id]: action.payload.Edited_Review };
       return newState;
     default:
       return state;

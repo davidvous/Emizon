@@ -1,12 +1,12 @@
-import React from 'react'
+import { useSelector } from 'react-redux';
 
 function Category() {
-
-    const categories = ['Best Sellers', 'Coupons', 'Outdoor Recreation', 'Pet Supplies', 'Health & Household','Emizon Home', 'Livestreams' ]
+    const categories = useSelector(state => Object.values(state.products))
+    const uniqueCategories = new Set(categories.map(each => each.department));
     
     return (
       <div className="category">
-          {categories.map((each,idx) => 
+          {[...uniqueCategories].map((each,idx) => 
               <span key={idx} className="category__heading">{each}</span>
           )}
       </div>

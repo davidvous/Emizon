@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
+import { Modal } from '../../context/Modal'
 import './LoginForm.css'
+import SignUpForm from './SignUpForm';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showModal, setShowModal] = useState(false);
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
@@ -17,6 +20,11 @@ const LoginForm = () => {
     if (data) {
       setErrors(data);
     }
+  };
+
+  const demoLogin = async (e) => {
+    e.preventDefault();
+    await dispatch(login("demo@demouser.com", "password"));
   };
 
   const updateEmail = (e) => {
@@ -36,7 +44,7 @@ const LoginForm = () => {
       <h1>LOGO GOES HERE BRUH</h1>
       <div className="login__container">
         <h1>Sign-in</h1>
-        <form onSubmit={onLogin}>
+        <form>
           <div>
             {errors.map((error, ind) => (
               <div key={ind}>{error}</div>
@@ -61,7 +69,16 @@ const LoginForm = () => {
               value={password}
               onChange={updatePassword}
             />
-            <button className="login__signInButton" type="submit">Login</button>
+            <button
+              onClick={onLogin}
+              className="login__signInButton"
+              type="submit"
+            >
+              Login
+            </button>
+            <button onClick={demoLogin} className="login__demoButton pointer">
+              Demo User
+            </button>
           </div>
         </form>
         <p>
@@ -69,10 +86,19 @@ const LoginForm = () => {
           see our Privacy Notice, our Cookies Notice and our Interest-Based Ads
           Notice.
         </p>
-
-        <button className="login__registerButton">
-          Create your Emizon account
+        <button
+          className="login_registerButton pointer"
+          onClick={() => setShowModal(true)}
+        >
+          Create Your Emizon account
         </button>
+        {showModal && (
+          <Modal onClose={() => setShowModal(false)}>
+            <SignUpForm
+              setShowModal={setShowModal}
+            />
+          </Modal>
+        )}
       </div>
     </div>
   );
