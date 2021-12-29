@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { deleteReview } from "../../store/review";
 import "./UserReviews.css";
+import EditReviewModal from "./EditReviewModal/EditReviewModal";
 
 function UserReviews({currentUserReview, reviewInfo}) {
     const dispatch = useDispatch()
@@ -39,9 +40,14 @@ function UserReviews({currentUserReview, reviewInfo}) {
         <span>Reviewed on {reviewInfo.updated_at}</span>
         <span>Verified Purchase</span>
         <div className="userReviews__review">{reviewInfo.body}</div>
-        {currentUserReview ? <button onClick={onDeleteReview} type="submit">
-        Delete Your Review
-      </button> : null}
+        {currentUserReview ? (
+          <div>
+            <button onClick={onDeleteReview} type="submit">
+              Delete Your Review
+            </button>
+            <EditReviewModal reviewInfo={reviewInfo}/>
+          </div>
+        ) : null}
       </div>
     );
 }

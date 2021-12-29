@@ -55,5 +55,5 @@ def editReview(id, userId):
         fetchReview.body=form.data['body']
         fetchReview.rating=form.data['rating']
         db.session.commit()
-        return 'FINISHED EDITING!'
+        return {'Edited_Review': fetchReview.to_dict()}
     return 'This failed!'

@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
-import { addAReview } from '../../../store/review'
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { editReview } from "../../../store/review";
 
-function CreateReview({ productId, user, setShowModal }) {
+function EditReview({ reviewInfo, setShowModal}) {
   const [errors, setErrors] = useState([]);
-  const [headline, setHeadline] = useState("");
-  const [body, setBody] = useState("");
-  const [rating, setRating] = useState(3);
+  const [headline, setHeadline] = useState(reviewInfo.headline);
+  const [body, setBody] = useState(reviewInfo.body);
+  const [rating, setRating] = useState(reviewInfo.rating);
   const [validationErrors, setValidationErrors] = useState([]);
   const dispatch = useDispatch();
 
@@ -20,15 +20,23 @@ function CreateReview({ productId, user, setShowModal }) {
     return validateErrors;
   };
 
-  const onCreate = async (e) => {
+  const onEdit = async (e) => {
     e.preventDefault();
     const errors = validate();
     if (errors.length > 0) return setValidationErrors(errors);
     else {
       const data = await dispatch(
-        addAReview(productId, user.id, headline, body, rating)
-      );
+        editReview(
+          reviewInfo.product_id,
+          reviewInfo.user_id,
+          headline,
+          body,
+          rating
+        ))
       setShowModal(false);
+      if (data) {
+        setErrors(data);
+      }
     }
   };
 
@@ -47,7 +55,7 @@ function CreateReview({ productId, user, setShowModal }) {
     <form className="signUpForm">
       <img alt="userlogo" src={true} />
       <div className="signUpContent">
-        <h1>Leave a Review!</h1>
+        <h1>Edit Review</h1>
         {validationErrors.length > 0 && (
           <div className="validationErrors">
             The following errors were found:
@@ -89,11 +97,11 @@ function CreateReview({ productId, user, setShowModal }) {
           ></input>
         </div>
       </div>
-      <button onClick={onCreate} type="submit" className="signUpContent-btn">
+      <button onClick={onEdit} type="submit" className="signUpContent-btn">
         Finished
       </button>
     </form>
   );
 }
 
-export default CreateReview
+export default EditReview;
