@@ -24,25 +24,12 @@ def add_cart_item(userId, id):
         db.session.commit()
         return {'Cart_item': checkCart.to_dict()}
 
-@cart_routes.route('/<int:userId>/cart/<int:id>/', methods=['DELETE'])
-def delete_cart_item(userId, id):
-    cart_item = Cart_item.query.filter(Cart_item.product_id == id, Cart_item.user_id == userId).first()
-    currentQuantity = cart_item.quantity
-    if currentQuantity == 1:
-        db.session.delete(cart_item)
-        db.session.commit()
-        return {'Message': f"Product {id} was deleted!"}
-    else:
-        cart_item.quantity = currentQuantity - 1
-        db.session.commit()
-        return {'Cart_item': cart_item.to_dict()}
-
 @cart_routes.route('/<int:userId>/cart/<int:id>/all/', methods=['DELETE'])
 def delete_cart_line(userId, id):
     cart_item = Cart_item.query.filter(Cart_item.product_id == id, Cart_item.user_id == userId).first()
     db.session.delete(cart_item)
     db.session.commit()
-    return {'Message': f"Product {id} was deleted!"}
+    return {'Deleted Entire Cart Item': f"Product {id} from {userId} was deleted!"}
 
 @cart_routes.route('/<int:userId>/cart/<int:id>/', methods=['PUT'])
 def update_cart_item(userId, id):
