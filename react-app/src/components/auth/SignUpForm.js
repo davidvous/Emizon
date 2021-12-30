@@ -39,11 +39,10 @@ const SignUpForm = ({setShowModal}) => {
     errors = validate();
     if (errors.length > 0) return setErrors(errors);
       const data = await dispatch(signUp(firstName, lastName, email, password));
-      setShowModal(false)
       if (data) {
-        setErrors(data)
-    
+        return setErrors(data)
     }
+    setShowModal(false);
   };
 
   const updateFirstName = (e) => {
@@ -76,7 +75,7 @@ const SignUpForm = ({setShowModal}) => {
         <h1>Sign Up</h1>
         <div className="validation__errors">
           {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
+            <div key={ind}>{error.includes('email :') ? 'Email already in use' : error}</div>
           ))}
         </div>
         <input
