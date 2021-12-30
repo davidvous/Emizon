@@ -85,8 +85,9 @@
     font-weight: 300;
 }
 
-.signup__errors {
+.validation__errors {
     color:#619d8d;
+    font-family: 'Pacifico', cursive;
 }
 
 .signup__container__left__box {

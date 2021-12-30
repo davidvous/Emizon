@@ -7,15 +7,30 @@ import './LoginForm.css'
 import SignUpForm from './SignUpForm';
 
 const LoginForm = () => {
-  const [errors, setErrors] = useState([]);
+  let [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showModal, setShowModal] = useState(false);
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
+   const validate = () => {
+     const validationErrors = [];
+     if (
+       !/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
+         email
+       )
+     )
+       validationErrors.push("Please enter a valid e-mail");
+     if (!password) validationErrors.push("Please enter a password");
+
+     return validationErrors;
+   };
+
   const onLogin = async (e) => {
     e.preventDefault();
+    errors = validate();
+    if (errors.length > 0) return setErrors(errors);
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
@@ -45,10 +60,18 @@ const LoginForm = () => {
       <div className="login__container">
         <h1>Sign-in</h1>
         <form>
-          <div>
-            {errors.map((error, ind) => (
-              <div key={ind}>{error}</div>
-            ))}
+          <div className="validation__errors ">
+            <center>
+              {errors.map((error, ind) => (
+                <div key={ind}>
+                  {error.includes("password :")
+                    ? "This user does not exist"
+                    : error.includes("email")
+                    ? null
+                    : error}
+                </div>
+              ))}
+            </center>
           </div>
           <div>
             <input
@@ -99,7 +122,6 @@ const LoginForm = () => {
         )}
       </div>
     </div>
-
   );
 };
 

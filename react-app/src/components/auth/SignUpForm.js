@@ -74,7 +74,7 @@ const SignUpForm = ({setShowModal}) => {
     <div id="signup__container">
       <div className="signup__container__left__box">
         <h1>Sign Up</h1>
-        <div className="signup__errors">
+        <div className="validation__errors">
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
           ))}
@@ -124,8 +124,9 @@ const SignUpForm = ({setShowModal}) => {
         </button>
       </div>
       <div className="signup__container__right__box">
-        <span className="signup__headone">Emi</span><span className="signup__headtwo">zon</span>
-        <br/>
+        <span className="signup__headone">Emi</span>
+        <span className="signup__headtwo">zon</span>
+        <br />
         <span className="signup__tagline">"smile"</span>
       </div>
     </div>

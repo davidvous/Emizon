@@ -52,6 +52,7 @@ function App() {
         <Route path="/" exact={true}>
           <Home />
         </Route>
+        <Home />
       </Switch>
     </BrowserRouter>
   );
