@@ -25,7 +25,8 @@ class Product(db.Model):
             'department': self.department,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
-            'average_rating': int(sum([obj.rating for obj in self.users_reviews])/len([obj.rating for obj in self.users_reviews]))
+            'average_rating_total': int(sum([obj.rating for obj in self.users_reviews])),
+            'average_rating_length': len([obj.rating for obj in self.users_reviews]),
         }
 
     def solo_product(self):
@@ -37,7 +38,8 @@ class Product(db.Model):
             'price': str(self.price),
             'product_url': self.product_url,
             'department': self.department,
-            'average_rating': int(sum([obj.rating for obj in self.users_reviews])/len([obj.rating for obj in self.users_reviews])),
+            'average_rating_total': int(sum([obj.rating for obj in self.users_reviews])),
+            'average_rating_length': len([obj.rating for obj in self.users_reviews]),
             'review': [{
                 'headline' : each.headline,
                 'user_id' : each.user_id,
