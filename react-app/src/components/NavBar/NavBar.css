@@ -70,9 +70,26 @@
 .header__metaBasket {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
     color: #012443;
-    padding: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    width: 30px;
+}
+
+.header__basket__badge {
+    position: relative;
+    top: 5px;
+    left: 5px;
+    min-width: .3em; /* rem unit */
+    padding: 0.05rem 0.4rem; /* rem unit */
+    border-radius: 50%;
+    text-align: center;
+    background: #FDD2BF;
+    color: #012443;
+    font-size: 0.8rem;
+    font-weight: bold;
 }
 
 .header__metaBasket > a {
@@ -91,6 +108,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.1rem;
+    padding-right: 5px;
 }
 
 .category {

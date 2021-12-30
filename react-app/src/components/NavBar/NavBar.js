@@ -41,13 +41,16 @@ const NavBar = () => {
           </div>
           <div className="header__metaBasket">
             <Link to="/cart" exact="true">
-              <span className="header__metaLineTwo header__basketCount">
+              <div className="header__basket__wrapper">
+              {/* <span className="header__metaLineTwo header__basketCount"> */}
+                <span className="header__basket__badge">
                 {user
                   ? Object.keys(cartItems).reduce(function (previous, key) {
-                      return previous + cartItems[key].quantity;
-                    }, 0)
+                    return previous + cartItems[key].quantity;
+                  }, 0)
                   : 0}
-              </span>
+                </span>
+              </div>
             </Link>
             <Link to="/cart" exact="true">
               <i className="fas fa-shopping-basket fa-lg fa-colored"></i>
