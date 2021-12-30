@@ -67,16 +67,18 @@ const LoginForm = () => {
               value={password}
               onChange={updatePassword}
             />
-            <button
-              onClick={onLogin}
-              className="login__signInButton"
-              type="submit"
-            >
-              Login
-            </button>
-            <button onClick={demoLogin} className="login__demoButton pointer">
-              Demo User
-            </button>
+            <div className="login__buttons">
+              <button
+                onClick={onLogin}
+                className="submit__button pointer"
+                type="submit"
+              >
+                Login
+              </button>
+              <button onClick={demoLogin} className="submit__button pointer">
+                Demo User
+              </button>
+            </div>
           </div>
         </form>
         <p>
@@ -85,20 +87,19 @@ const LoginForm = () => {
           Notice.
         </p>
         <button
-          className="login_registerButton pointer"
+          className="login__signInButton pointer"
           onClick={() => setShowModal(true)}
         >
           Create Your Emizon account
         </button>
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
-            <SignUpForm
-              setShowModal={setShowModal}
-            />
+            <SignUpForm setShowModal={setShowModal} />
           </Modal>
         )}
       </div>
     </div>
+
   );
 };
 

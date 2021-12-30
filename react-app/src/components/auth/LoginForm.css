@@ -1,14 +1,25 @@
 .login {
-    background-color: white;
-    height: 100vh;
+    background-color: #f2f1ec;
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100vh;
+}
+
+.login::after {
+    content: "";
+    height: 100vh;
+    width: 100vw;
+    background-image: url('https://media.discordapp.net/attachments/920474033932349511/926138253873143858/edited_footer.png');
+    background-repeat: no-repeat;
+    background-size: 100% 80%;
+    background-position: bottom;
+    opacity: 0.30;
 }
 
 .login__container {
+    background: #fff;
     width: 300px;
-    height: fit-content;
     display: flex;
     flex-direction: column;
     border-radius: 5px;
@@ -33,45 +44,34 @@
     font-size: 12px;
 }
 
+
+
+/* Revamping the signup modal */
+/* Revamping the signup modal */
+/* Revamping the signup modal */
+/* Revamping the signup modal */
+/* Revamping the signup modal */
+/* Revamping the signup modal */
+/* Revamping the signup modal */
+
 .login__signInButton {
-    background: #FF6B6B;
+    background: #012443;
+    color: #fff;
+    font-weight: 500;
     border-radius: 2px;
     width: 100%;
     height: 30px;
     border: 1px solid;
     margin-top: 10px;
-    border-color: #4F091D #4F091D;
-    
+    border-color: #d3cdcf #4F091D;
+    text-transform: lowercase;
 }
 
-.login__demoButton {
-    background: #eddcb1;
-    border-radius: 2px;
-    width: 100%;
-    height: 30px;
-    border: 1px solid;
-    margin-top: 10px;
-    border-color: #4F091D #4F091D;
-    
+.login__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
 }
-
-
-.login__registerButton {
-    border-radius: 2px;
-    width: 100%;
-    height: 30px;
-    border: 1px solid;
-    margin-top: 10px;
-    border-color: darkgray;
-}
-
-/* Revamping the signup modal */
-/* Revamping the signup modal */
-/* Revamping the signup modal */
-/* Revamping the signup modal */
-/* Revamping the signup modal */
-/* Revamping the signup modal */
-/* Revamping the signup modal */
 
 #signup__container {
     display: flex;
@@ -121,7 +121,7 @@ input[type="password"]
 
 .submit__button
 {
-    margin-bottom: 28px;
+    margin-bottom: 5px;
     width: 120px;
     height: 32px;
     background: #97BFB4;
@@ -129,7 +129,7 @@ input[type="password"]
     border-radius: 2px;
     color: #fff;
     font-weight: 500;
-    text-transform: uppercase;
+    text-transform: lowercase;
     transition: 0.2s ease;
 }
 
@@ -147,6 +147,12 @@ input[type="password"]
     background-image: url('https://media.discordapp.net/attachments/920474033932349511/926120945830207538/signup-right_pic.jpg');
     background-size: cover;
     background-position: center;
+}
+
+.login__footer {
+    width: 100%;
+    height: 400px;
+    
 }
 
 .signup__container__right__box .signinwith {
@@ -213,4 +219,5 @@ input[type="password"]
     margin: 0 0 1.5rem 6.5rem;
     font-weight: 450;
     font-size: 28px;
+    font-family: 'Pacifico', cursive;
 }
