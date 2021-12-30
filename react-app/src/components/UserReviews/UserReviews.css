@@ -9,10 +9,32 @@
 .userReviews_rating {
     display: flex;
     flex-direction: row;
+    padding: 0.25rem 0 0.25rem 0;
 }
 
 .userReviews__review {
     overflow-wrap: anywhere;
+}
+
+.userReviews__user > span, .usersReviews__date {
+    font-size: 0.85rem;
+    line-height: 20px;
+    color: #151515;
+}
+
+.userReviews__headline {
+    font-weight: 650;
+    padding-left: 1ch;
+}
+
+.usersReviews__verified {
+    font-weight: 800;
+    font-size: 0.7rem;
+    color: #67a796;
+}
+
+.userReviews__review__body {
+    font-size: 0.9rem;
 }
 
 .userReviews_review_buttons_delete {
