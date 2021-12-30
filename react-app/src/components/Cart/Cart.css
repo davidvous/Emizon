@@ -1,6 +1,5 @@
 .cart__fakeAd {
     width: 400px;
-    height: 100px;
     margin-bottom: 10px;
     mask-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0) 80%)
 }
@@ -31,11 +30,11 @@
     flex-direction: column;
     justify-content: space-between;
     width: 300px;
-    height: 100px;
     padding: 20px; 
     background-color: #f2f1ec;
     border: 1px solid #dddddd;
     border-radius: 3px;
+    gap: 1rem;
 }
 
 .subtotal__gift {
@@ -51,9 +50,9 @@
     background: #30475E;
     border-radius: 2px;
     width: 100%;
-    height: 30px;
     border: 1p solid;
     margin-top: 10px;
     border-color: #4F091D #000000 #4F091D;
     color: #FFF;
+    padding: 0.3rem
 }

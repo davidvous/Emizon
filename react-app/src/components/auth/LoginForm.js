@@ -7,15 +7,30 @@ import './LoginForm.css'
 import SignUpForm from './SignUpForm';
 
 const LoginForm = () => {
-  const [errors, setErrors] = useState([]);
+  let [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showModal, setShowModal] = useState(false);
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
+   const validate = () => {
+     const validationErrors = [];
+     if (
+       !/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
+         email
+       )
+     )
+       validationErrors.push("Please enter a valid e-mail");
+     if (!password) validationErrors.push("Please enter a password");
+
+     return validationErrors;
+   };
+
   const onLogin = async (e) => {
     e.preventDefault();
+    errors = validate();
+    if (errors.length > 0) return setErrors(errors);
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
@@ -45,13 +60,20 @@ const LoginForm = () => {
       <div className="login__container">
         <h1>Sign-in</h1>
         <form>
-          <div>
-            {errors.map((error, ind) => (
-              <div key={ind}>{error}</div>
-            ))}
+          <div className="validation__errors ">
+            <center>
+              {errors.map((error, ind) => (
+                <div key={ind}>
+                  {error.includes("password :")
+                    ? "This user does not exist"
+                    : error.includes("email")
+                    ? null
+                    : error}
+                </div>
+              ))}
+            </center>
           </div>
           <div>
-            <label htmlFor="email">Email</label>
             <input
               name="email"
               type="text"
@@ -61,7 +83,6 @@ const LoginForm = () => {
             />
           </div>
           <div>
-            <label htmlFor="password">Password</label>
             <input
               name="password"
               type="password"
@@ -69,16 +90,18 @@ const LoginForm = () => {
               value={password}
               onChange={updatePassword}
             />
-            <button
-              onClick={onLogin}
-              className="login__signInButton"
-              type="submit"
-            >
-              Login
-            </button>
-            <button onClick={demoLogin} className="login__demoButton pointer">
-              Demo User
-            </button>
+            <div className="login__buttons">
+              <button
+                onClick={onLogin}
+                className="submit__button pointer"
+                type="submit"
+              >
+                Login
+              </button>
+              <button onClick={demoLogin} className="submit__button pointer">
+                Demo User
+              </button>
+            </div>
           </div>
         </form>
         <p>
@@ -87,16 +110,14 @@ const LoginForm = () => {
           Notice.
         </p>
         <button
-          className="login_registerButton pointer"
+          className="login__signInButton pointer"
           onClick={() => setShowModal(true)}
         >
           Create Your Emizon account
         </button>
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
-            <SignUpForm
-              setShowModal={setShowModal}
-            />
+            <SignUpForm setShowModal={setShowModal} />
           </Modal>
         )}
       </div>

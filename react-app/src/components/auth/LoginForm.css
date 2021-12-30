@@ -1,14 +1,25 @@
 .login {
-    background-color: white;
-    height: 100vh;
+    background-color: #f2f1ec;
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100vh;
+}
+
+.login::after {
+    content: "";
+    height: 100vh;
+    width: 100%;
+    background-image: url('https://media.discordapp.net/attachments/920474033932349511/926138253873143858/edited_footer.png');
+    background-repeat: no-repeat;
+    background-size: 100% 80%;
+    background-position: bottom;
+    opacity: 0.30;
 }
 
 .login__container {
+    background: #fff;
     width: 300px;
-    height: fit-content;
     display: flex;
     flex-direction: column;
     border-radius: 5px;
@@ -33,34 +44,185 @@
     font-size: 12px;
 }
 
+
+
+/* Revamping the signup modal */
+/* Revamping the signup modal */
+/* Revamping the signup modal */
+/* Revamping the signup modal */
+/* Revamping the signup modal */
+/* Revamping the signup modal */
+/* Revamping the signup modal */
+
 .login__signInButton {
-    background: #FF6B6B;
+    background: #012443;
+    color: #fff;
+    font-weight: 500;
     border-radius: 2px;
     width: 100%;
     height: 30px;
     border: 1px solid;
     margin-top: 10px;
-    border-color: #4F091D #4F091D;
+    border-color: #d3cdcf #4F091D;
+    text-transform: lowercase;
+}
+
+.login__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+#signup__container {
+    display: flex;
+    flex-direction: row;
+    background: #fff;
+    box-shadow: 0 2px 4px rgb(0,0,0,0.6);
+    height: 572px;
+    margin: 5% auto;
+    color: #012443;
+    font-family: 'Pacifico', cursive;
+    font-weight: 300;
+}
+
+.validation__errors {
+    color:#619d8d;
+    font-family: 'Pacifico', cursive;
+}
+
+.signup__container__left__box {
+    /* position: absolute; */
+    /* top: 0;
+    left: 0; */
+    box-sizing: border-box;
+    padding: 3rem;
+    width: 572px;
+    height: 500px;
+}
+
+.signup__container__left__box > h1 {
+    margin: 0 0 0.9rem 0;
+    font-weight: 300;
+    font-size: 1.8rem;
+}
+
+.signup__container__left__box
+input[type="text"], .signup__container__left__box >
+input[type="password"]
+{
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    padding: 4px;
+    width: 220px;
+    height: 32px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #aaa;
+    font-weight: 400;
+    font-size: 15px;
+    transition: 0.2s ease;
+}
+
+.submit__button
+{
+    margin-bottom: 5px;
+    width: 120px;
+    height: 32px;
+    background: #97BFB4;
+    border:none;
+    border-radius: 2px;
+    color: #fff;
+    font-weight: 500;
+    text-transform: lowercase;
+    transition: 0.2s ease;
+}
+
+.submit__button:hover,
+.submit__button:focus {
+    background: #619d8d;
+    transition: 0.2s ease;
+}
+
+.signup__container__right__box {
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
+    height: 572px;
+    background-image: url('https://media.discordapp.net/attachments/920474033932349511/926120945830207538/signup-right_pic.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.login__footer {
+    width: 100%;
+    height: 400px;
     
 }
 
-.login__demoButton {
-    background: #eddcb1;
-    border-radius: 2px;
-    width: 100%;
-    height: 30px;
-    border: 1px solid;
-    margin-top: 10px;
-    border-color: #4F091D #4F091D;
-    
+.signup__container__right__box .signinwith {
+    display: block;
+    margin-bottom: 40px;
+    font-size: 2.1rem;
+    color: #012443;
+}
+
+@keyframes panInAndOut {
+    0% {
+        animation-timing-function: ease-in;
+        padding-left: 2rem;
+    }
+    50% {
+        animation-timing-function: ease-in;
+        padding-left: 17rem;
+    }
+    100% {
+        animation-timing-function: ease-out;
+        padding-left: 2rem;
+    }
+}
+
+.signup__headone {
+    color: #012443;
+    font-weight: 500;
+    font-size: 4rem;
+    padding-left: 2rem;
+    animation: 2.2s 0s 1 panInAndOut;
+}
+
+.signup__headtwo {
+    color: #97BFB4;
+    font-weight: 500;
+    font-size: 3.8rem;
+}
+
+.signup__tagline {
+    font-size: 1.5rem;
+    margin-left: 13rem;
 }
 
 
-.login__registerButton {
-    border-radius: 2px;
+.login__container > form > div >
+input[type="text"], .login__container > form > div >
+input[type="password"]
+{
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    padding: 4px;
     width: 100%;
-    height: 30px;
-    border: 1px solid;
-    margin-top: 10px;
-    border-color: darkgray;
+    height: 2rem;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #aaa;
+    font-weight: 400;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+.login__container > h1 {
+    margin: 0 0 1.5rem 6.5rem;
+    font-weight: 450;
+    font-size: 28px;
+    font-family: 'Pacifico', cursive;
 }

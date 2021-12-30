@@ -11,7 +11,12 @@ const LogoutButton = () => {
     history.push("/");
   };
 
-  return <button onClick={onLogout}>Logout</button>;
+  return (
+    <div onClick={onLogout} className="logout__container pointer">
+      <span className="header__metaLineOne">logout</span>
+      <i className="fas fa-sign-out-alt fa-lg fa-colored"> </i>
+    </div>
+  );
 };
 
 export default LogoutButton;

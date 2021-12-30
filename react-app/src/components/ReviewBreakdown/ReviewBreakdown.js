@@ -3,7 +3,6 @@ import './ReviewBreakdown.css'
 function ReviewBreakdown({review, averageRating}) {
     const ratingMap = {5: 0, 4: 0, 3: 0, 2: 0, 1:0}
     review.forEach((ele,i) => (ele.rating in ratingMap) ? ratingMap[ele.rating]++ : null)
-    console.log("DOES THE RATING EXISTS??!!???>>>", review)
 
     return (
       <div className="reviewBreakdown__container">
@@ -48,13 +47,13 @@ function ReviewBreakdown({review, averageRating}) {
                   <span
                     className="reviewBreakdown__indivBreakdown__innerProgress"
                     style={{
-                      width: `${(ratingMap[index + 1] / review.length) * 100}%`,
+                      width: `${((ratingMap[index + 1] / review.length) * 100).toFixed()}%`,
                     }}
                   ></span>
                 </div>
                 <span className="reviewBreakDown__smallText">
                   {review.length
-                    ? (ratingMap[index + 1] / review.length) * 100
+                    ? ( (ratingMap[index + 1] / review.length) * 100).toFixed()
                     : 0}{" "}
                   %
                 </span>

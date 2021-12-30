@@ -16,7 +16,7 @@ function ProductDetail() {
     const user = useSelector(state => state.session.user)
     const product = useSelector(state => state.products)
     const review = useSelector(state => Object.values(state.review))
-
+  
     useEffect(()=> {
         (async () => {
         await dispatch(getOneProduct(productId));
@@ -31,6 +31,7 @@ function ProductDetail() {
         return today.toLocaleDateString("en-US", options)
     }
     const currentUserHasReview = review?.some((ele) => ele.user_id === user?.id);
+
     const manAvgRating =
       review?.reduce(function (sum, value) {
         return sum + value.rating;
@@ -117,26 +118,34 @@ function ProductDetail() {
             <AddToCart user={user} productId={productId} />
           </div>
         </div>
-        <div className="product__detail__divider" />
+        <div className="product__detail__middle">
+        </div>
         <div className="product__detail__bottom">
           <div className="product__detail__bottom__left">
-            <ReviewBreakdown review={review} averageRating={manAvgRating}/>
+            <ReviewBreakdown review={review} averageRating={manAvgRating} />
             {user
               ? [
                   currentUserHasReview ? null : (
-                    <CreateReviewModal key={user.id} productId={productId} user={user} />
+                    <CreateReviewModal
+                      key={user.id}
+                      productId={productId}
+                      user={user}
+                    />
                   ),
                 ]
               : null}
           </div>
           <div className="product__detail__bottom__right">
-            {review.map((indiv, index) => (
-              <UserReviews
-                currentUserReview={indiv.user_id === user?.id}
-                key={indiv.user_id}
-                reviewInfo={indiv}
-              />
-            ))}
+            {review
+              .filter((ele) => ele.user_id === user?.id)
+              .concat(review.filter((ele) => ele.user_id !== user?.id))
+              .map((indiv, index) => (
+                <UserReviews
+                  currentUserReview={indiv.user_id === user?.id}
+                  key={indiv.user_id}
+                  reviewInfo={indiv}
+                />
+              ))}
           </div>
         </div>
       </div>
