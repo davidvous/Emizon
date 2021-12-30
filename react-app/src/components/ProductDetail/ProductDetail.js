@@ -118,7 +118,8 @@ function ProductDetail() {
             <AddToCart user={user} productId={productId} />
           </div>
         </div>
-        <div className="product__detail__divider" />
+        <div className="product__detail__middle">
+        </div>
         <div className="product__detail__bottom">
           <div className="product__detail__bottom__left">
             <ReviewBreakdown review={review} averageRating={manAvgRating} />
