@@ -42,7 +42,7 @@ function Home() {
                 name={each.name}
                 price={each.price}
                 product_url={each.product_url}
-                rating={each.average_rating}
+                rating={each.average_rating_length ? (each.average_rating_total / each.average_rating_length) : 0}
                 id={each.id}
               />
             ))}
@@ -54,7 +54,7 @@ function Home() {
                 name={each.name}
                 price={each.price}
                 product_url={each.product_url}
-                rating={each.average_rating}
+                rating={each.average_rating_length ? (each.average_rating_total / each.average_rating_length) : 0}
                 id={each.id}
               />
             ))}
@@ -66,7 +66,7 @@ function Home() {
                 name={each.name}
                 price={each.price}
                 product_url={each.product_url}
-                rating={each.average_rating}
+                rating={each.average_rating_length ? (each.average_rating_total / each.average_rating_length) : 0}
                 id={each.id}
               />
             ))}

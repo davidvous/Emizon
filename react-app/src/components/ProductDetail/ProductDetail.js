@@ -8,6 +8,7 @@ import './ProductDetail.css'
 import AddToCart from '../CartProduct/AddToCart'
 import UserReviews from '../UserReviews/UserReviews'
 import CreateReviewModal from '../UserReviews/CreateReviewModal/CreateReviewModal'
+import ReviewBreakdown from '../ReviewBreakdown/ReviewBreakdown'
 
 function ProductDetail() {
     const { productId } = useParams()
@@ -23,7 +24,6 @@ function ProductDetail() {
     })();
     },[dispatch, productId])
 
-    const averageRating = product?.[productId]?.average_rating
     const currentDate = () => {
         let today =  new Date();
         today.setDate(today.getDate() + 7);
@@ -31,7 +31,10 @@ function ProductDetail() {
         return today.toLocaleDateString("en-US", options)
     }
     const currentUserHasReview = review?.some((ele) => ele.user_id === user?.id);
-    console.log("DOES USER HAVE CURRENT REVIEW??!>>>", review?.some((ele) => ele.user_id === user?.id));
+    const manAvgRating =
+      review?.reduce(function (sum, value) {
+        return sum + value.rating;
+      }, 0) / review?.length;
 
     return (
       <div className="product__detail__container product__detail__price">
@@ -64,7 +67,7 @@ function ProductDetail() {
                           <i
                             key={i}
                             className={`fas fa-star ${
-                              currentRating <= averageRating
+                              currentRating <= manAvgRating
                                 ? `star-yellow`
                                 : `star-gray`
                             }`}
@@ -74,7 +77,7 @@ function ProductDetail() {
                     })}
                 </div>
                 <span className="product__detail__priceReturns">
-                  {product?.[productId]?.review?.length} ratings
+                  {review.length} ratings
                 </span>
               </div>
               <div className="product__detail__divider" />
@@ -114,16 +117,26 @@ function ProductDetail() {
             <AddToCart user={user} productId={productId} />
           </div>
         </div>
-        <div className="product__detail__divider"/>
+        <div className="product__detail__divider" />
         <div className="product__detail__bottom">
           <div className="product__detail__bottom__left">
-            Average Reviews and Such
-            {user ? <CreateReviewModal productId={productId} user={user}/> : null}
+            <ReviewBreakdown review={review} averageRating={manAvgRating}/>
+            {user
+              ? [
+                  currentUserHasReview ? null : (
+                    <CreateReviewModal key={user.id} productId={productId} user={user} />
+                  ),
+                ]
+              : null}
           </div>
           <div className="product__detail__bottom__right">
-              {review.map((indiv, index) => (
-                  <UserReviews currentUserReview={indiv.user_id === user?.id} key={indiv.user_id} reviewInfo={indiv}/>
-              ))}
+            {review.map((indiv, index) => (
+              <UserReviews
+                currentUserReview={indiv.user_id === user?.id}
+                key={indiv.user_id}
+                reviewInfo={indiv}
+              />
+            ))}
           </div>
         </div>
       </div>

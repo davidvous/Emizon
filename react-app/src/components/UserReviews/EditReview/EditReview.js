@@ -4,7 +4,7 @@ import { editReview } from "../../../store/review";
 import "../ReviewModal.css";
 
 function EditReview({ reviewInfo, setShowModal}) {
-  const [errors, setErrors] = useState([]);
+  let [errors, setErrors] = useState([]);
   const [headline, setHeadline] = useState(reviewInfo.headline);
   const [body, setBody] = useState(reviewInfo.body);
   const [rating, setRating] = useState(reviewInfo.rating);
@@ -22,7 +22,7 @@ function EditReview({ reviewInfo, setShowModal}) {
 
   const onEdit = async (e) => {
     e.preventDefault();
-    const errors = validate();
+    errors = validate();
     if (errors.length > 0) return setValidationErrors(errors);
     else {
       const data = await dispatch(
@@ -32,8 +32,8 @@ function EditReview({ reviewInfo, setShowModal}) {
           headline,
           body,
           rating
-        ))
-      setShowModal(false);
+        ));
+        setShowModal(false);
       if (data) {
         setErrors(data);
       }
@@ -96,7 +96,6 @@ function EditReview({ reviewInfo, setShowModal}) {
             placeholder="rating"
             min="1"
             max="5"
-            value="3"
             onChange={updateRating}
             value={rating}
           ></input>
