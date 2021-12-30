@@ -5,7 +5,7 @@ import { signUp } from '../../store/session';
 import '../../components/UserReviews/ReviewModal.css'
 
 const SignUpForm = ({setShowModal}) => {
-  const [errors, setErrors] = useState([]);
+  let [errors, setErrors] = useState([]);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState('');
@@ -14,14 +14,35 @@ const SignUpForm = ({setShowModal}) => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
+  const validate = () => {
+
+    const validationErrors = [];
+    if (!/^[a-z ,.'-]+$/i.test(firstName)) validationErrors.push("First name is invalid")
+    if (firstName.length > 50) validationErrors.push("First name too long");
+    if (!/^[a-z ,.'-]+$/i.test(lastName)) validationErrors.push("Last name is invalid")
+    if (lastName.length > 50) validationErrors.push("Last name too long");
+    if (
+      !/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
+        email
+      )
+    )
+      validationErrors.push("Please enter a valid e-mail");
+    if (!password) validationErrors.push("Please enter a password");
+    if (!repeatPassword) validationErrors.push("Please confirm password");
+    if (password !== repeatPassword) validationErrors.push("Passwords do not match")
+
+    return validationErrors;
+  };
+
   const onSignUp = async (e) => {
     e.preventDefault();
-    if (password === repeatPassword) {
+    errors = validate();
+    if (errors.length > 0) return setErrors(errors);
       const data = await dispatch(signUp(firstName, lastName, email, password));
       setShowModal(false)
       if (data) {
         setErrors(data)
-      }
+    
     }
   };
 
@@ -53,7 +74,7 @@ const SignUpForm = ({setShowModal}) => {
     <div id="signup__container">
       <div className="signup__container__left__box">
         <h1>Sign Up</h1>
-        <div>
+        <div className="signup__errors">
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
           ))}
@@ -96,7 +117,7 @@ const SignUpForm = ({setShowModal}) => {
         ></input>
         <button
           className="submit__button pointer"
-          onSubmit={onSignUp}
+          onClick={onSignUp}
           type="submit"
         >
           Sign Up
