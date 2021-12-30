@@ -48,13 +48,13 @@ function ReviewBreakdown({review, averageRating}) {
                   <span
                     className="reviewBreakdown__indivBreakdown__innerProgress"
                     style={{
-                      width: `${(ratingMap[index + 1] / review.length) * 100}%`,
+                      width: `${((ratingMap[index + 1] / review.length) * 100).toFixed()}%`,
                     }}
                   ></span>
                 </div>
                 <span className="reviewBreakDown__smallText">
                   {review.length
-                    ? (ratingMap[index + 1] / review.length) * 100
+                    ? ( (ratingMap[index + 1] / review.length) * 100).toFixed()
                     : 0}{" "}
                   %
                 </span>

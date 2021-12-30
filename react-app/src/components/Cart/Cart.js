@@ -63,7 +63,8 @@ function Cart() {
                         product_url={each.product_info.product_url}
                         name={each.product_info.name}
                         price={each.product_info.price}
-                        rating={each.product_info.average_rating}
+                        total_rating={each.product_info.average_rating_total}
+                        rating_length={each.product_info.average_rating_length}
                         quantity={each.quantity}
                         userId={user.id}
                       />
