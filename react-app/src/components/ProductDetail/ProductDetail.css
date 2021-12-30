@@ -9,8 +9,9 @@
 }
 
 .product__detail__image {
-    max-width: 500px;
-    height: 300px;
+    min-width: 15rem;
+    width: 20rem;
+    max-width: 25rem;
 }
 
 .product__detail__nav {
@@ -27,12 +28,17 @@
 .product_detail__top {
     display: flex;
     flex-direction: row;
+    width: 1125px;
+    gap: 1rem;
 }
 
 .product__detail__top__left {
+
 }
 
 .product__detail__top__middle {
+    width: 100%;
+    padding-left: 1rem;
 }
 
 .product__detail__top__right {
