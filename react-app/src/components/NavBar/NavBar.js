@@ -42,7 +42,6 @@ const NavBar = () => {
           <div className="header__metaBasket">
             <Link to="/cart" exact="true">
               <div className="header__basket__wrapper">
-              {/* <span className="header__metaLineTwo header__basketCount"> */}
                 <span className="header__basket__badge">
                 {user
                   ? Object.keys(cartItems).reduce(function (previous, key) {
