@@ -3,7 +3,6 @@ import './ReviewBreakdown.css'
 function ReviewBreakdown({review, averageRating}) {
     const ratingMap = {5: 0, 4: 0, 3: 0, 2: 0, 1:0}
     review.forEach((ele,i) => (ele.rating in ratingMap) ? ratingMap[ele.rating]++ : null)
-    console.log("DOES THE RATING EXISTS??!!???>>>", review)
 
     return (
       <div className="reviewBreakdown__container">

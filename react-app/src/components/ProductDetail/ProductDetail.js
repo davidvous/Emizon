@@ -32,8 +32,6 @@ function ProductDetail() {
     }
     const currentUserHasReview = review?.some((ele) => ele.user_id === user?.id);
 
-    console.log("TESTING PURPOSES>>>>", );
-
     const manAvgRating =
       review?.reduce(function (sum, value) {
         return sum + value.rating;
