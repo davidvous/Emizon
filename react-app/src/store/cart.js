@@ -1,7 +1,6 @@
 // constants
 const GET_CART = "cart/GET_CART";
 const ADD_ONE_CART = "cart/ADD_ONE_CART";
-const REMOVE_ONE_CART = "cart/REMOVE_ONE_CART";
 const REMOVE_ENTIRE_LINE_CART = "cart/REMOVE_ONE_LINE_CART";
 const UPDATE_CART = "cart/UPDATE_CART";
 
@@ -15,13 +14,6 @@ const addOneCart = (payload) => ({
     type: ADD_ONE_CART,
     payload,
   });
-
-const removeOneCart = (payload) => {
-  return {
-    type: REMOVE_ONE_CART,
-    payload
-  };
-};
 
 const removeEntireLine = (payload) => {
     return {
@@ -63,19 +55,8 @@ export const addCart = (user, item) => async (dispatch) => {
   }
 };
 
-export const deleteCart = (user, item, quantity) => async (dispatch) => {
-  const response = await fetch(`/api/${user}/cart/${item}/`, {
-    method: "DELETE",
-  });
-  if (quantity === 1) {
-    return dispatch(removeEntireLine(item));
-  }
-  const data = await response.json();
-  return dispatch(removeOneCart(data));
-};
-
 export const deleteCartLine = (user, item) => async (dispatch) => {
-  await fetch(`/api/${user}/cart/${item}/`, {
+  await fetch(`/api/${user}/cart/${item}/all/`, {
     method: "DELETE",
   });
   return dispatch(removeEntireLine(item));
@@ -117,10 +98,6 @@ export default function reducer(state = initialState, action) {
     case REMOVE_ENTIRE_LINE_CART:
       newState = { ...state };
       delete newState[action.payload]
-      return newState;
-    case REMOVE_ONE_CART:
-      const product = action.payload.Cart_item
-      newState = { ...state, [product.product_id]: product };
       return newState;
     case UPDATE_CART:
       newState = { ...state, [action.payload.product_id]: action.payload };
