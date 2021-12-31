@@ -1,12 +1,11 @@
-import { useSelector } from 'react-redux';
+function Category({departments}) {
 
-function Category() {
-    const categories = useSelector(state => Object.values(state.products))
-    const uniqueCategories = new Set(categories.map(each => each.department));
-    
-    return (
+    const uniqueDepartments = new Set(departments)
+    console.log(uniqueDepartments)
+
+    return (  
       <div className="category">
-          {[...uniqueCategories].map((each,idx) => 
+          {[...uniqueDepartments].map((each,idx) => 
               <span key={idx} className="category__heading">{each}</span>
           )}
       </div>
