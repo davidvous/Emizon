@@ -1,11 +1,12 @@
 from .db import db
+from sqlalchemy.dialects.postgresql import JSON
 
 class Order(db.Model):
     __tablename__ = "orders"
 
     id= db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    items = db.Column(db.Integer, nullable=False)
+    items = db.Column(JSON)
     address = db.Column(db.String(255), nullable=False)
     credit_card = db.Column(db.String(16), nullable=False)
     expiration_date = db.Column(db.String(4), nullable=False)
