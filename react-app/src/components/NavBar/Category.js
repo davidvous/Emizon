@@ -1,7 +1,6 @@
 function Category({departments}) {
 
     const uniqueDepartments = new Set(departments)
-    console.log(uniqueDepartments)
 
     return (  
       <div className="category">
