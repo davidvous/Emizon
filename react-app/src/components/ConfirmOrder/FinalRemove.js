@@ -1,6 +1,11 @@
 import './ConfirmOrder.css';
 
-function FinalRemove({cartItems, setShowModal, removeItem}) {
+function FinalRemove({cartItems, setShowModal, removeItem, setFlag}) {
+
+    const finalRemove = async () => {
+        await removeItem()
+        setFlag(false)
+    }
 
   return (
     <div id="final__remove__container" className="slideDownAnimation">
@@ -12,8 +17,8 @@ function FinalRemove({cartItems, setShowModal, removeItem}) {
         </div>
         <span>Removing this will take you back to the home page</span>
         <div>
-            <button>Back To Orders</button>
-            <button onClick={removeItem}>Yes</button>
+            <button className="pointer" onClick={() => setShowModal(false)}>Back To Orders</button>
+            <button className="pointer" onClick={finalRemove}>Yes</button>
         </div>
       </div>
     </div>

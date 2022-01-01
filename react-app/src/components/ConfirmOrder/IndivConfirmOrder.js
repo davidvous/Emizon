@@ -7,7 +7,7 @@ import { updateOneCart, deleteCartLine } from "../../store/cart";
 import { Modal } from "../../context/Modal";
 import FinalRemove from "./FinalRemove";
 
-function IndivConfirmOrder({cartInfo, userId}) {
+function IndivConfirmOrder({cartInfo, userId, setFlag}) {
   const dispatch = useDispatch();
   const cartItems = useSelector(state => Object.values(state.cart))
   const [itemQuantity, setItemQuantity] = useState(cartInfo.quantity);
@@ -117,6 +117,7 @@ function IndivConfirmOrder({cartInfo, userId}) {
                     cartItems={cartItems}
                     removeItem={removeItem}
                     setShowModal={setShowModal}
+                    setFlag={setFlag}
                   />
                 </Modal>
               )}

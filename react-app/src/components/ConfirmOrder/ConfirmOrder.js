@@ -8,6 +8,7 @@ import IndivConfirmOrder from './IndivConfirmOrder';
 function ConfirmOrder() {
       const user = useSelector((state) => state.session.user);
       const cartItems = useSelector((state) => Object.values(state.cart));
+      const [flag, setFlag] = useState(true)
       const [loaded, setLoaded] = useState(false);
       const dispatch = useDispatch();
 
@@ -23,7 +24,7 @@ function ConfirmOrder() {
         })();
       }, []);
 
-      if (!user || !cartItems.length) {
+      if (!user || !flag) {
         return <Redirect to="/login" />;
       }
 
@@ -42,6 +43,8 @@ function ConfirmOrder() {
       );
     },
     0.0);
+
+    console.log(">>>>>THE THE INFO WE NEED>>>>", user, flag)
 
     return (
       <div className="confirmOrder__master__container">
@@ -105,6 +108,7 @@ function ConfirmOrder() {
                       key={each.product_id}
                       userId={user.id}
                       cartInfo={each}
+                      setFlag={setFlag}
                     />
                   ))}
               </div>
