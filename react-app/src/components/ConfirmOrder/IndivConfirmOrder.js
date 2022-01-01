@@ -24,6 +24,10 @@ function IndivConfirmOrder({cartInfo, userId}) {
     dispatch(deleteCartLine(userId, cartInfo.product_id));
   };
 
+  const removeItemModal = () => {
+    console.log("This is the last item!")
+  };
+
   useEffect(() => {
     const validationErrors = [];
     if (!/^[1-9][0-9]*$/.test(itemQuantity))
@@ -94,7 +98,7 @@ function IndivConfirmOrder({cartInfo, userId}) {
                 onChange={changeQuantity}
                 value={itemQuantity}
               ></input>
-              <button className="pointer" onClick={removeItem}>
+              <button className="pointer" onClick={cartItems.length === 1 ? removeItemModal :removeItem}>
                 Remove from Cart
               </button>
             </div>

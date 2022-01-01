@@ -12,11 +12,8 @@ function ConfirmOrder() {
       const dispatch = useDispatch();
 
       const userCheck = () => {
-        if (!user) return <Redirect to="/login" />;
-        else {
           dispatch(getCart(user?.id));
           setLoaded(true);
-        }
       };
 
       
@@ -25,10 +22,7 @@ function ConfirmOrder() {
           await userCheck();
         })();
       }, []);
-      
-      if (!user || !cartItems.length) {
-        return <Redirect to="/login" />;
-      }
+
       const formatter = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
@@ -44,6 +38,9 @@ function ConfirmOrder() {
       );
     },
     0.0);
+
+    console.log("IS IT LOADED?!??!!?>>>>", loaded)
+    console.log("WHAT IS the VALUE OF cartITEMS RIGHT NO!??DS?FDS", cartItems)
 
 
     return (

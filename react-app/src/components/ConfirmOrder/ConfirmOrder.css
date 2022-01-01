@@ -26,6 +26,10 @@
     gap: 1ch;
 }
 
+.confirmOrder__shipping__info__address > h3 {
+    font-size: 1rem;
+}
+
 .confirmOrder__shipping__info__address > h3:first-child {
     color: green;
     flex: 0 0 20px;
@@ -39,12 +43,26 @@
 .confirmOrder__shipping__info__address__details {
     color: purple;
     flex: 0 0 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.confirmOrder__shipping__info__address__details span {
+    font-size: 0.8rem;
 }
 
 .confirmOrder__shipping__info__review {
     display: flex;
     flex-direction: row;
     gap: 1ch;
+}
+
+.confirmOrder__shipping__info__gift {
+    margin-left: 5px;
+}
+
+.confirmOrder__shipping__info__review > h3 {
+    font-size: 1rem;
 }
 
 .confirmOrder__shipping__info__review > h3:first-child {
@@ -187,12 +205,6 @@
 .confirmOrder__shipping__info__review__place {
     display: flex;
     flex-direction: row;
-}
-
-
-.confirmOrder__shipping__info__address__details {
-    display: flex;
-    flex-direction: column;
 }
 
 .confirmOrder__place__order {
