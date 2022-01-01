@@ -59,6 +59,22 @@
     gap: 0.5ch;
 }
 
+.confirmOrder__shipping__info__review__details > div > h3{
+    font-size: 1.1rem;
+}
+
+.confirmOrder__shipping__info__review__details > div > span{
+    font-size: 0.9rem;
+}
+
+.confirmOrder__shipping__info__review__details > div > span:nth-child(3){
+    color: red;
+}
+
+.confirmOrder__shipping__shippedFromEmizon {
+    font-size: 0.9rem;
+}
+
 .confirmOrder__shipping__info__review__container {
     margin: 10px 50px;
     border: 1px red solid;
@@ -90,12 +106,13 @@
 .confirmOrder__shipping__info__review__item__container {
     display: flex;
     flex-direction: row;
-    margin: 20px 10px;
+    margin: 20px 0px;
 }
 
-.confirmOrder__shipping__info__review__item__product > div {
-    color: red;
-    float: right;
+.confirmOrder__shipping__info__review__item__product {
+    display: flex;
+    flex-direction: row;
+    flex: 0 0 450px;
 }
 
 .confirmOrder__shipping__info__review__item__image {
@@ -107,11 +124,46 @@
 .confirmOrder__shipping__info__review__item__product__details {
     display: flex;
     flex-direction: column;
-    margin: 0px 10px;
+    margin: 0px 0px 0px 22px;
 }
+
+.confirmOrder__shipping__info__review__item__product__details h4 {
+    color: blue;
+    font-size: 0.8rem;
+}
+
+.cartProduct__remove__buttons {
+    display: flex;
+    gap: 0.5ch;
+    align-items: baseline;
+}
+
+.cartProduct__remove__buttons > input {
+    width: 50px;
+    background: rgb(237, 236, 236);
+    border: none;
+    border-radius: 5px;
+}
+
+.cartProduct__remove__buttons > input:focus {
+    border: rgb(183, 37, 37) 1px solid;
+    outline: none;
+}
+
+.cartProduct__remove__buttons > button {
+    background: #FF6B6B;
+    border: 1px solid;
+    border-color: #4F091D #000000 #4F091D;
+    border-radius: 2px;
+    color: rgb(255, 255, 255);
+    padding: 3px 0px;
+    width: 8rem;
+}
+
 
 .confirmOrder__shipping__info__review__item__product__details * {
     margin: 1px 0px;
+    font-size: 0.8rem;
 }
 
 .confirmOrder__shipping__info__review__item__product__details > button:nth-child(4) {
@@ -224,18 +276,30 @@
 
 .confirmOrder__place__order div span:first-child {
     color: rgb(3, 79, 36);
-    flex: 0 0 155px;
+}
+
+.confirmOrder__place__order div span:nth-child(2) {
+    margin-left: auto;
 }
 
 .confirmOrder__place__order div:nth-child(9) {
     display: flex;
     flex-direction: row;
+    align-items: flex-end;
+    gap: 3ch;
 }
 
-.confirmOrder__place__order div h4:first-child {
+.confirmOrder__place__order div h4:first-child,.confirmOrder__place__order div h4:nth-child(2) {
     color: rgb(3, 79, 36);
-    flex: 0 0 130px;
+    font-size: 0.8rem;
+    flex: 0 0 auto;
 }
+
+.confirmOrder__place__order div h4:nth-child(2) {
+    margin-left: auto;
+}
+
+
 
 .confirmOrder__place__order__bottom {
     background: purple;

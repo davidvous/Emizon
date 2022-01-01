@@ -2,7 +2,7 @@ import React from 'react'
 import './Cart.css'
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { getCart } from '../../store/cart'
 import CartProduct from '../CartProduct/CartProduct';
 
@@ -90,7 +90,9 @@ function Cart() {
               <input type="checkbox" />
               This order contains a gift
             </small>
-            <button>Proceed to Checkout</button>
+            {cartItems.length > 0 && <Link to="/confirmOrder">
+              <button>Proceed to Checkout</button>
+            </Link>}
           </div>
         </div>
       </div>

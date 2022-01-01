@@ -1,7 +1,51 @@
 import './ConfirmOrder.css'
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect, Link } from "react-router-dom";
+import { getCart } from "../../store/cart";
 import IndivConfirmOrder from './IndivConfirmOrder';
 
 function ConfirmOrder() {
+      const user = useSelector((state) => state.session.user);
+      const cartItems = useSelector((state) => Object.values(state.cart));
+      const [loaded, setLoaded] = useState(false);
+      const dispatch = useDispatch();
+
+      const userCheck = () => {
+        if (!user) return <Redirect to="/login" />;
+        else {
+          dispatch(getCart(user?.id));
+          setLoaded(true);
+        }
+      };
+
+      
+      useEffect(() => {
+        (async () => {
+          await userCheck();
+        })();
+      }, []);
+      
+      if (!user || !cartItems.length) {
+        return <Redirect to="/login" />;
+      }
+      const formatter = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      });
+
+    const cartSubTotal = Object.keys(cartItems).reduce(function (
+      previous,
+      key
+    ) {
+      return (
+        previous +
+        parseFloat(cartItems[key].product_info.price * cartItems[key].quantity)
+      );
+    },
+    0.0);
+
+
     return (
       <div className="confirmOrder__master__container">
         <nav></nav>
@@ -58,14 +102,19 @@ function ConfirmOrder() {
                     </span>
                   </div>
                 </div>
-                <IndivConfirmOrder />
-                <IndivConfirmOrder />
-                <IndivConfirmOrder />
+                {loaded &&
+                  cartItems.map((each, id) => (
+                    <IndivConfirmOrder
+                      key={each.product_id}
+                      userId={user.id}
+                      cartInfo={each}
+                    />
+                  ))}
               </div>
               <div className="confirmOrder__shipping__info__review__place">
                 <button>Place Your Order</button>
                 <div className="confirmOrder__shipping__info__review__place_total">
-                  <h3>Order total: $10.83</h3>
+                  <h3>Order total: {formatter.format(cartSubTotal)}</h3>
                   <span>
                     By placing your order, you agree to Emizon's privacy notice
                     and conditions of use.
@@ -87,22 +136,22 @@ function ConfirmOrder() {
               <h4>Order Summary</h4>
               <div>
                 <span>Items:</span>
-                <span>$9.99</span>
+                <span>{formatter.format(cartSubTotal)}</span>
               </div>
               <div>
                 <span>Shipping & Handling:</span> <span>$0.00</span>
               </div>
               <div>
                 <span>Total before tax:</span>
-                <span>$9.99</span>
+                <span>$0.00</span>
               </div>
               <div>
-                <span>Estimate tax to be collected:</span> <span>$0.84</span>
+                <span>Estimate tax to be collected:</span> <span>$0.00</span>
               </div>
               <hr></hr>
               <div>
                 <h4>Order total:</h4>
-                <h4>$10.83</h4>
+                <h4>{formatter.format(cartSubTotal)}</h4>
               </div>
             </div>
             <div className="confirmOrder__place__order__bottom">
