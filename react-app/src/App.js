@@ -10,6 +10,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import ProductDetail from './components/ProductDetail/ProductDetail';
+import ConfirmOrder from './components/ConfirmOrder/ConfirmOrder';
 import { authenticate } from './store/session';
 
 function App() {
@@ -48,6 +49,9 @@ function App() {
         </Route>
         <Route path="/cart" exact={true}>
           <Cart />
+        </Route>
+        <Route path="/confirmOrder" exact={true}>
+          <ConfirmOrder/>
         </Route>
         <Route path="/" exact={true}>
           <Home />
