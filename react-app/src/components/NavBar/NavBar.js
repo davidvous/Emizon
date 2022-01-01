@@ -42,9 +42,11 @@ const NavBar = () => {
             <span className="header__metaLineOne">Hello Guest!</span>
             <span className="header__metaLineTwo">Account & Lists</span>
           </div>
-          <div className="header__meta">
+          <div>
+            <Link to="/orders" exact="true">
             <span className="header__metaLineOne">Returns</span>
             <span className="header__metaLineTwo">& Orders</span>
+            </Link>
           </div>
           <div className="header__meta">
             <span className="header__metaLineOne">Your</span>
@@ -54,11 +56,11 @@ const NavBar = () => {
             <Link to="/cart" exact="true">
               <div className="header__basket__wrapper">
                 <span className="header__basket__badge">
-                {user
-                  ? Object.keys(cartItems).reduce(function (previous, key) {
-                    return previous + cartItems[key].quantity;
-                  }, 0)
-                  : 0}
+                  {user
+                    ? Object.keys(cartItems).reduce(function (previous, key) {
+                        return previous + cartItems[key].quantity;
+                      }, 0)
+                    : 0}
                 </span>
               </div>
             </Link>
