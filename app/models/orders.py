@@ -7,11 +7,14 @@ class Order(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     items = db.Column(JSON)
-    address = db.Column(db.String(255), nullable=False)
-    credit_card = db.Column(db.String(16), nullable=False)
-    expiration_date = db.Column(db.String(4), nullable=False)
-    first_name = db.Column(db.String(50), nullable=False)
-    last_name = db.Column(db.String(50), nullable=False)
+    address = db.Column(db.String(255))
+    city = db.Column(db.String(75))
+    state = db.Column(db.String(50))
+    zipCode = db.Column(db.String(5))
+    credit_card = db.Column(db.String(16))
+    expiration_date = db.Column(db.String(4))
+    first_name = db.Column(db.String(50))
+    last_name = db.Column(db.String(50))
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
@@ -23,6 +26,9 @@ class Order(db.Model):
             'user_id': self.user_id,
             'items': self.items,
             'address': self.address,
+            'city': self.city,
+            'state': self.state,
+            'zipCode': self.zipCode,
             'credit_card': self.credit_card,
             'expiration_date': self.expiration_date,
             'first_name': self.first_name,

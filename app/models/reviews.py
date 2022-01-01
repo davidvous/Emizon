@@ -8,6 +8,7 @@ class Review(db.Model):
     headline = db.Column(db.String(100), nullable=False)
     body = db.Column(db.Text, nullable=False)
     rating = db.Column(db.Integer, nullable=False, default=3)
+    ratingImg = db.Column(db.String(255))
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
@@ -23,6 +24,7 @@ class Review(db.Model):
             'headline': self.headline,
             'body': self.body,
             'rating': self.rating,
+            'ratingImg': self.ratingImg,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
