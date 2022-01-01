@@ -4,12 +4,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect} from "react-router-dom";
 import { getCart } from "../../store/cart";
 import IndivConfirmOrder from './IndivConfirmOrder';
+import { css } from "@emotion/react";
+import BounceLoader from "react-spinners/BounceLoader";
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
+
 
 function ConfirmOrder() {
       const user = useSelector((state) => state.session.user);
       const cartItems = useSelector((state) => Object.values(state.cart));
       const [flag, setFlag] = useState(true)
       const [loaded, setLoaded] = useState(false);
+      let [loading, setLoading] = useState(true);
+      let [color, setColor] = useState("red");
       const dispatch = useDispatch();
 
       const userCheck = () => {
@@ -43,8 +54,6 @@ function ConfirmOrder() {
       );
     },
     0.0);
-
-    console.log(">>>>>THE THE INFO WE NEED>>>>", user, flag)
 
     return (
       <div className="confirmOrder__master__container">
@@ -163,6 +172,15 @@ function ConfirmOrder() {
             </div>
           </div>
         </div>
+
+          <BounceLoader
+            color={color}
+            loading={loading}
+            size={60}
+            margin={2}
+            css={override}
+            speedMultiplier={1}
+          />
       </div>
     );
 }
