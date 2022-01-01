@@ -19,3 +19,19 @@ body {
 .pointer {
     cursor: pointer;
 }
+
+.slideDownAnimation {
+    animation: 0.7s 0s 1 slideDown;
+}
+
+@keyframes slideDown {
+	0% {
+		transform: translateY(-100%);
+	}
+	50%{
+		transform: translateY(8%);
+	}
+	100%{
+		transform: translateY(0%);
+	}	
+}

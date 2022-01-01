@@ -4,11 +4,14 @@ import { Link } from 'react-router-dom';
 import "./ConfirmOrder.css";
 import { useDispatch } from "react-redux";
 import { updateOneCart, deleteCartLine } from "../../store/cart";
+import { Modal } from "../../context/Modal";
+import FinalRemove from "./FinalRemove";
 
 function IndivConfirmOrder({cartInfo, userId}) {
-  const cartItems = useSelector(state => Object.values(state.cart))
   const dispatch = useDispatch();
+  const cartItems = useSelector(state => Object.values(state.cart))
   const [itemQuantity, setItemQuantity] = useState(cartInfo.quantity);
+  const [showModal, setShowModal] = useState(false);
   const [errors, setErrors] = useState([]);
 
   const updateItem = () => {
@@ -25,7 +28,7 @@ function IndivConfirmOrder({cartInfo, userId}) {
   };
 
   const removeItemModal = () => {
-    console.log("This is the last item!")
+    setShowModal(true)
   };
 
   useEffect(() => {
@@ -75,7 +78,11 @@ function IndivConfirmOrder({cartInfo, userId}) {
             />
           </Link>
           <div className="confirmOrder__shipping__info__review__item__product__details">
-            <h4><Link to={`/products/${cartInfo.product_id}`}>{cartInfo.product_info.name}</Link></h4>
+            <h4>
+              <Link to={`/products/${cartInfo.product_id}`}>
+                {cartInfo.product_info.name}
+              </Link>
+            </h4>
             <span>{cartInfo.product_info.department}</span>
             <div className="confirmOrder__shipping__info__review__item__product__details__price">
               <span>${cartInfo.product_info.price}</span>
@@ -98,9 +105,21 @@ function IndivConfirmOrder({cartInfo, userId}) {
                 onChange={changeQuantity}
                 value={itemQuantity}
               ></input>
-              <button className="pointer" onClick={cartItems.length === 1 ? removeItemModal :removeItem}>
+              <button
+                className="pointer"
+                onClick={cartItems.length === 1 ? removeItemModal : removeItem}
+              >
                 Remove from Cart
               </button>
+              {showModal && (
+                <Modal onClose={() => setShowModal(false)}>
+                  <FinalRemove
+                    cartItems={cartItems}
+                    removeItem={removeItem}
+                    setShowModal={setShowModal}
+                  />
+                </Modal>
+              )}
             </div>
             <span>Sold by: Emizon.com services LLC</span>
             <button>Add gift options</button>

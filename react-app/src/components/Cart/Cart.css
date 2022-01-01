@@ -52,7 +52,7 @@
     width: 100%;
     border: 1p solid;
     margin-top: 10px;
-    border-color: #4F091D #000000 #4F091D;
+    border: none;
     color: #FFF;
     padding: 0.3rem
 }

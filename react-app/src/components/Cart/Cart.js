@@ -91,7 +91,7 @@ function Cart() {
               This order contains a gift
             </small>
             {cartItems.length > 0 && <Link to="/confirmOrder">
-              <button>Proceed to Checkout</button>
+              <button className="pointer">Proceed to Checkout</button>
             </Link>}
           </div>
         </div>

@@ -1,7 +1,7 @@
 import './ConfirmOrder.css'
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect} from "react-router-dom";
 import { getCart } from "../../store/cart";
 import IndivConfirmOrder from './IndivConfirmOrder';
 
@@ -23,6 +23,10 @@ function ConfirmOrder() {
         })();
       }, []);
 
+      if (!user || !cartItems.length) {
+        return <Redirect to="/login" />;
+      }
+
       const formatter = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
@@ -38,10 +42,6 @@ function ConfirmOrder() {
       );
     },
     0.0);
-
-    console.log("IS IT LOADED?!??!!?>>>>", loaded)
-    console.log("WHAT IS the VALUE OF cartITEMS RIGHT NO!??DS?FDS", cartItems)
-
 
     return (
       <div className="confirmOrder__master__container">

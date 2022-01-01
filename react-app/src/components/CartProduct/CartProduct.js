@@ -48,7 +48,7 @@ function CartProduct({id:product_id, userId, product_url, name, price, total_rat
             product_id={product_id}
             quantity={quantity}
           />
-          <button onClick={removeItem}>Remove from Cart</button>
+          <button className="pointer" onClick={removeItem}>Remove from Cart</button>
         </div>
       </div>
     );
