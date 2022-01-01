@@ -15,6 +15,10 @@
     flex: 2;
 }
 
+.cart__left > div:nth-child(2) {
+    margin-left: 93px;
+}
+
 .cart__container {
     background-color: white;
 }

@@ -12,6 +12,7 @@ import User from './components/User';
 import ProductDetail from './components/ProductDetail/ProductDetail';
 import ConfirmOrder from './components/ConfirmOrder/ConfirmOrder';
 import { authenticate } from './store/session';
+import Orders from './components/Orders/Orders';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -51,7 +52,10 @@ function App() {
           <Cart />
         </Route>
         <Route path="/confirmOrder" exact={true}>
-          <ConfirmOrder/>
+          <ConfirmOrder />
+        </Route>
+        <Route path="/orders" exact={true}>
+          <Orders />
         </Route>
         <Route path="/" exact={true}>
           <Home />
