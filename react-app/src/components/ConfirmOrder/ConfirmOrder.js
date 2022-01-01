@@ -17,6 +17,7 @@ function ConfirmOrder() {
               </div>
               <h5>Change</h5>
             </div>
+            <hr></hr>
             <div className="confirmOrder__shipping__info__address">
               <h3>2</h3>
               <h3>Payment method</h3>
@@ -41,6 +42,7 @@ function ConfirmOrder() {
               </div>
               <h5>Change</h5>
             </div>
+            <hr></hr>
             <div className="confirmOrder__shipping__info__review">
               <h3>3</h3>
               <h3>Review items and shipping</h3>
@@ -59,34 +61,56 @@ function ConfirmOrder() {
                 <IndivConfirmOrder />
                 <IndivConfirmOrder />
                 <IndivConfirmOrder />
-                <div className="confirmOrder__shipping__info__review__place">
-                  <button>Place Your Order</button>
-                  <div className="confirmOrder__shipping__info__review__place_total">
-                    <h3>Order total: $10.83</h3>
-                    <span>
-                      {" "}
-                      By placing your order, you agree to Emizon's privacy
-                      notice and conditions of use.
-                    </span>
-                  </div>
+              </div>
+              <div className="confirmOrder__shipping__info__review__place">
+                <button>Place Your Order</button>
+                <div className="confirmOrder__shipping__info__review__place_total">
+                  <h3>Order total: $10.83</h3>
+                  <span>
+                    By placing your order, you agree to Emizon's privacy notice
+                    and conditions of use.
+                  </span>
                 </div>
               </div>
             </div>
           </div>
           <div className="confirmOrder__place__order">
-            <button>Place your order</button>
-            <span>
-              By placing your order, you agree to Emizon's privacy notice and
-              conditions of use.
-            </span>
-            <hr></hr>
-            <h3>Order Summary</h3>
-            <span>Items: $9.99</span>
-            <span>Shipping & Handling: $0.00</span>
-            <span>Total before tax: $9.99</span>
-            <span>Estimate tax to be collected: $0.84</span>
-            <hr></hr>
-            <h3>Order total: $10.83</h3>
+            <div className="confirmOrder__place__container">
+              <div className="confirmOrder__place__order__button">
+                <button>Place your order</button>
+                <span>
+                  By placing your order, you agree to Emizon's privacy notice
+                  and conditions of use.
+                </span>
+              </div>
+              <hr></hr>
+              <h4>Order Summary</h4>
+              <div>
+                <span>Items:</span>
+                <span>$9.99</span>
+              </div>
+              <div>
+                <span>Shipping & Handling:</span> <span>$0.00</span>
+              </div>
+              <div>
+                <span>Total before tax:</span>
+                <span>$9.99</span>
+              </div>
+              <div>
+                <span>Estimate tax to be collected:</span> <span>$0.84</span>
+              </div>
+              <hr></hr>
+              <div>
+                <h4>Order total:</h4>
+                <h4>$10.83</h4>
+              </div>
+            </div>
+            <div className="confirmOrder__place__order__bottom">
+              <span>How are shipping costs calculated?</span>
+              <span>
+                Smile shipping benefits have been applied to your order.
+              </span>
+            </div>
           </div>
         </div>
       </div>

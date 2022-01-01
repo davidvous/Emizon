@@ -9,8 +9,12 @@
     margin: 0 auto;
 }
 
+.confirmOrder__container hr {
+    margin: 10px 50px;
+}
+
 .confirmOrder__shipping__info {
-    width: 88%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     gap: 1ch;
@@ -151,4 +155,86 @@
     align-items: center;
     gap: 1ch;
     margin: 1ch 1ch;
+}
+
+.confirmOrder__shipping__info__review__place {
+    margin: 10px 50px;
+    border: 1px green solid;
+    border-radius: 10px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 1ch;
+}
+
+.confirmOrder__shipping__info__review__place > button {
+    width: 150px;
+    height: 55px;
+    border-radius: 2px;
+}
+
+.confirmOrder__shipping__info__review__place_total span {
+    font-size: 0.8rem;
+}
+
+.confirmOrder__place__order > span:nth-child(2) {
+    font-size: 0.6rem;
+    text-align: center;
+}
+
+.confirmOrder__place__order {
+    border: red solid 1px;
+    height: fit-content;
+}
+
+.confirmOrder__place__container {
+    padding: 8px;
+}
+
+.confirmOrder__place__order__button {
+    display: flex;
+    flex-direction: column;
+}
+
+.confirmOrder__place__order__button > button {
+    padding: 5px 50px;
+    font-size: 0.6rem;
+    margin: 5px 0px;
+}
+
+.confirmOrder__place__order__button span:nth-child(2) {
+    font-size: 0.6rem;
+    text-align: center;
+}
+
+.confirmOrder__place__order hr {
+    margin: 5px 10px;
+}
+
+.confirmOrder__place__order div:nth-child(4), .confirmOrder__place__order div:nth-child(5), .confirmOrder__place__order div:nth-child(6), .confirmOrder__place__order div:nth-child(7) {
+    display: flex;
+    flex-direction: row;
+    font-size: 0.6rem;
+}
+
+
+.confirmOrder__place__order div span:first-child {
+    color: rgb(3, 79, 36);
+    flex: 0 0 155px;
+}
+
+.confirmOrder__place__order div:nth-child(9) {
+    display: flex;
+    flex-direction: row;
+}
+
+.confirmOrder__place__order div h4:first-child {
+    color: rgb(3, 79, 36);
+    flex: 0 0 130px;
+}
+
+.confirmOrder__place__order__bottom {
+    background: purple;
+    padding: 10px;
+    font-size: 0.6rem;
 }
