@@ -11,10 +11,15 @@ import "react-credit-cards/es/styles-compiled.css";
 import { Modal } from '../../context/Modal';
 import ChangeAddress from './ChangeAddress/ChangeAddress';
 import CreditCard from './CreditCard/CreditCard';
+import FinalConfirm from './FinalConfirm/FinalConfirm';
 import { newOrderFinal } from '../../store/order';
+import { useHistory } from 'react-router-dom';
 
 const override = css`
   display: block;
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
   margin: 0 auto;
   border-color: red;
 `;
@@ -24,19 +29,18 @@ function ConfirmOrder() {
       const user = useSelector((state) => state.session.user);
       const cartItems = useSelector((state) => Object.values(state.cart));
       const userOrders = useSelector((state) => Object.values(state.order));
-      const latestOrder = userOrders[userOrders.length-1]
-      const [flag, setFlag] = useState(true)
+      const latestOrder = userOrders[userOrders.length-1];
+      const [flag, setFlag] = useState(true);
+      const [orderFinish, setOrderFinish] = useState(false);
       const [loaded, setLoaded] = useState(false);
       const [showAddressChange, setShowAddressChange] = useState(false);
       const [showCreditCard, setShowCreditCard] = useState(false);
+      const [showOrderError, setShowOrderError] = useState(false);
 
-      const [creditNum, setCreditNum] = useState(latestOrder?.credit_card)
-      const [creditDate, setCreditDate] = useState(latestOrder?.expiration_date)
-      const [creditCode, setCreditCode] = useState(latestOrder?.cc_code)
-
-      let [loading, setLoading] = useState(true);
-      let [color, setColor] = useState("red");
+      let [loading, setLoading] = useState(false);
+      let [color, setColor] = useState("grey");
       const dispatch = useDispatch();
+      const history = useHistory();
 
       const userCheck = () => {
           dispatch(getCart(user?.id));
@@ -71,6 +75,16 @@ function ConfirmOrder() {
     },
     0.0);
 
+    function sleep(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
+    const bodyOverlay = () => {
+      const overlay = document.createElement("div")
+      overlay.id = "overlay";
+      document.body.appendChild(overlay)
+    }
+
     const createOrder = async (e) => {
       e.preventDefault();
       const cartDict = {};
@@ -83,7 +97,18 @@ function ConfirmOrder() {
             cartDict
           )
       );
-      console.log('ORDER WAS ADDED!!!!!')
+      if (data) {
+        // Set the flag to false
+        setShowOrderError(true)
+        // history.push('/orders')
+      } else {
+        bodyOverlay();
+        setLoading(true);
+        await sleep(1200)
+        const overlay = document.getElementById('overlay')
+        document.body.removeChild(overlay)
+        setLoading(false);
+      }
     };
   
     return (
@@ -103,7 +128,13 @@ function ConfirmOrder() {
                 <span>
                   {latestOrder?.city ? `${latestOrder.city}, ` : null}
                   {latestOrder ? latestOrder.state : null}
-                  {latestOrder?.zipCode ? ` ${latestOrder.zipCode}` : <span key="shipping_check" style={{color: 'red'}}>Please enter shipping info</span>}
+                  {latestOrder?.zipCode ? (
+                    ` ${latestOrder.zipCode}`
+                  ) : (
+                    <span key="shipping_check" style={{ color: "red" }}>
+                      Please enter shipping info
+                    </span>
+                  )}
                 </span>
               </div>
               <button
@@ -131,14 +162,31 @@ function ConfirmOrder() {
                 <div className="confirmOrder__shipping__info__payment__cc">
                   <i className="far fa-credit-card"></i>
                   <span>
-                    {latestOrder?.credit_card
-                      ? (<span>Credit Card ending in {latestOrder.credit_card?.slice(-4)}</span>)
-                      : [creditNum ? creditNum.slice(-4) : <span style={{color: 'red'}}>Please enter payment method</span>]}
+                    {latestOrder?.credit_card ? (
+                      <span>
+                        Credit Card ending in{" "}
+                        {latestOrder.credit_card?.slice(-4)}
+                      </span>
+                    ) : (
+                      <span style={{ color: "red" }}>
+                        Please enter payment method
+                      </span>
+                    )}
                   </span>
                 </div>
                 <div className="confirmOrder__shipping__info__billing">
                   <span>Billing address: </span>
-                  <span><strong>{latestOrder?.address ? latestOrder.address : <span style={{color: 'red'}}>Please review shipping address</span>}</strong></span>
+                  <span>
+                    <strong>
+                      {latestOrder?.address ? (
+                        latestOrder.address
+                      ) : (
+                        <span style={{ color: "red" }}>
+                          Please review shipping address
+                        </span>
+                      )}
+                    </strong>
+                  </span>
                 </div>
                 <div className="confirmOrder__shipping__info__gift">
                   <span>^</span>
@@ -254,6 +302,13 @@ function ConfirmOrder() {
           css={override}
           speedMultiplier={1}
         />
+        {showOrderError && (
+          <Modal onClose={() => setShowOrderError(false)}>
+            <FinalConfirm
+              setShowOrderError={setShowOrderError}
+            />
+          </Modal>
+        )}
       </div>
     );
 }

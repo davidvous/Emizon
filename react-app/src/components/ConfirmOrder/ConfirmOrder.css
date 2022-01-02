@@ -241,7 +241,7 @@
     height: 30px;
     padding: 0 0;
     border-radius: 2px;
-    font-size: 0.6rem;
+    font-size: 0.8rem;
 }
 
 .confirmOrder__shipping__info__review__place_total span {
@@ -270,10 +270,11 @@
 }
 
 .confirmOrder__place__order__button > button {
-    padding: 5px 50px;
-    font-size: 0.6rem;
+    padding: 5px 30px;
+    font-size: 0.8rem;
     margin: 5px 0px;
     border-radius: 2px;
+    text-transform: capitalize;
 }
 
 .confirmOrder__place__order__button span:nth-child(2) {

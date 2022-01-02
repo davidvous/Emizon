@@ -143,7 +143,8 @@ export const newOrderFinal =
     });
     if (response.ok) {
       const data = await response.json();
-      return dispatch(addOrderFinal(data));
+      dispatch(addOrderFinal(data));
+      return null;
     } else if (response.status < 500) {
       const data = await response.json();
       if (data.error) {
