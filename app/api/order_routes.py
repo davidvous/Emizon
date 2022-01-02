@@ -12,5 +12,8 @@ def orders():
 
 @order_routes.route('/<int:id>/')
 def order(id):
-    order = Order.query.get(id)
+    order = Order.query.filter(Order.user_id == id).first()
+    if not order:
+        return 'This user does not have an order'
+    print("THIS IS THE ORDER MAN>>>>>", order)
     return order.to_dict()

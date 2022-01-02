@@ -1,8 +1,6 @@
-from typing import Text
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, TextAreaField
 from wtforms.validators import DataRequired
-from app.models import Review
 
 class ReviewForm(FlaskForm):
     user_id = IntegerField('user_id')
