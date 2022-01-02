@@ -124,7 +124,7 @@ function ConfirmOrder() {
                 </div>
                 <div className="confirmOrder__shipping__info__billing">
                   <span>Billing address: </span>
-                  <span>FILL IN LATER</span>
+                  <span><strong>Same as Shipping Address</strong></span>
                 </div>
                 <div className="confirmOrder__shipping__info__gift">
                   <span>^</span>

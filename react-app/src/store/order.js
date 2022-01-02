@@ -78,7 +78,6 @@ export const editOrderAddress =
         last_name,
       }),
     });
-    console.log("THIS IS THE RESPONSE of the address>>>>", response);
     if (response.ok) {
       const addressChange = await response.json();
       dispatch(updateOrderAddress(addressChange));
@@ -87,16 +86,16 @@ export const editOrderAddress =
   };
 
 export const newOrderPayment =
-  (user_id, creditNum, creditExp, creditSecure) =>
+  (user_id, credit_card, expiration_date, cc_code) =>
   async (dispatch) => {
     const response = await fetch(`/api/orders/${user_id}/new/payment/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         user_id,
-        creditNum,
-        creditExp,
-        creditSecure
+        credit_card,
+        expiration_date,
+        cc_code
       }),
     });
     if (response.ok) {
@@ -105,6 +104,26 @@ export const newOrderPayment =
     }
   };
 
+  export const editOrderPayment =
+    (user_id, credit_card, expiration_date, cc_code) => async (dispatch) => {
+      const response = await fetch(`/api/orders/${user_id}/new/payment/`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_id,
+          credit_card,
+          expiration_date,
+          cc_code
+        }),
+      });
+      if (response.ok) {
+        const payment = await response.json();
+        dispatch(updateOrderPayment(payment));
+        return payment;
+      }
+    };
 // reducer
 export default function reducer(state = initialState, action) {
   let newState;
@@ -124,6 +143,21 @@ export default function reducer(state = initialState, action) {
       newState = {
         ...state,
         [action.payload.Edited_Address.id]: action.payload.Edited_Address,
+      };
+      return newState;
+    case ADD_ORDER_PAYMENT:
+      newState = {};
+      newState = {
+        ...state,
+        [action.payload.Added_Payment.id]: action.payload.Added_Payment,
+      };
+      return newState;
+    case UPDATE_ORDER_PAYMENT:
+      newState = {}
+      console.log("THIS IS THE EDIT ASDADDDA>>>", action.payload)
+      newState = {
+        ...state,
+        [action.payload.Edited_Payment.id]: action.payload.Edited_Payment,
       };
       return newState;
     default:
