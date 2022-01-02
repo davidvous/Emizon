@@ -106,7 +106,7 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
   const validate = () => {
     const validateErrors = [];
 
-    // if (!headline) validateErrors.push("Please enter a title/headline");
+    if (!usState) validateErrors.push("Please check State");
     // if (!body) validateErrors.push("Please enter a review");
 
     return validateErrors;
@@ -165,7 +165,6 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
         <h2>{latestOrder ? `Edit Address` : `Add a new address`}</h2>
         {validationErrors.length > 0 && (
           <div className="validationErrors">
-            The following errors were found:
             <ul>
               {validationErrors.map((error) => (
                 <li key={error}>{error}</li>

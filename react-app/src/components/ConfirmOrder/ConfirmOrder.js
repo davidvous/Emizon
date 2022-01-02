@@ -11,6 +11,7 @@ import "react-credit-cards/es/styles-compiled.css";
 import { Modal } from '../../context/Modal';
 import ChangeAddress from './ChangeAddress/ChangeAddress';
 import CreditCard from './CreditCard/CreditCard';
+import { newOrderFinal } from '../../store/order';
 
 const override = css`
   display: block;
@@ -70,6 +71,21 @@ function ConfirmOrder() {
     },
     0.0);
 
+    const createOrder = async (e) => {
+      e.preventDefault();
+      const cartDict = {};
+      const cartAdder = await Object.values(cartItems).forEach(
+        (ele, index) => (cartDict[ele.product_id] = ele.quantity)
+      );
+      const data = await dispatch(
+          newOrderFinal(
+            user.id,
+            cartDict
+          )
+      );
+      console.log('ORDER WAS ADDED!!!!!')
+    };
+  
     return (
       <div className="confirmOrder__master__container">
         <nav></nav>
@@ -87,7 +103,7 @@ function ConfirmOrder() {
                 <span>
                   {latestOrder?.city ? `${latestOrder.city}, ` : null}
                   {latestOrder ? latestOrder.state : null}
-                  {latestOrder?.zipCode ? ` ${latestOrder.zipCode}` : <span style={{color: 'red'}}>Please enter shipping info</span>}
+                  {latestOrder?.zipCode ? ` ${latestOrder.zipCode}` : <span key="shipping_check" style={{color: 'red'}}>Please enter shipping info</span>}
                 </span>
               </div>
               <button
@@ -179,7 +195,7 @@ function ConfirmOrder() {
                   ))}
               </div>
               <div className="confirmOrder__shipping__info__review__place">
-                <button>Place Your Order</button>
+                <button onClick={createOrder}>Place Your Order</button>
                 <div className="confirmOrder__shipping__info__review__place_total">
                   <h3>Order total: {formatter.format(cartSubTotal)}</h3>
                   <span>
@@ -193,7 +209,7 @@ function ConfirmOrder() {
           <div className="confirmOrder__place__order">
             <div className="confirmOrder__place__container">
               <div className="confirmOrder__place__order__button">
-                <button>Place your order</button>
+                <button onClick={createOrder}>Place your order</button>
                 <span>
                   By placing your order, you agree to Emizon's privacy notice
                   and conditions of use.

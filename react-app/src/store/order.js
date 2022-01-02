@@ -4,6 +4,7 @@ const ADD_ORDER_ADDRESS = "orders/ADD_ORDER_ADDRESS";
 const UPDATE_ORDER_ADDRESS = "orders/UPDATE_ORDER_ADDRESS";
 const ADD_ORDER_PAYMENT = "orders/ADD_ORDER_PAYMENT";
 const UPDATE_ORDER_PAYMENT = "orders/UPDATE_ORDER_PAYMENT";
+const ADD_ORDER_FINAL = "orders/ADD_ORDER_FINAL";
 
 // action creators
 const showOrders = (orders) => ({
@@ -28,6 +29,11 @@ const addOrderPayment = (payload) => ({
 
 const updateOrderPayment = (payload) => ({
   type: UPDATE_ORDER_PAYMENT,
+  payload,
+});
+
+const addOrderFinal = (payload) => ({
+  type: ADD_ORDER_FINAL,
   payload,
 });
 
@@ -124,6 +130,31 @@ export const newOrderPayment =
         return payment;
       }
     };
+
+export const newOrderFinal =
+  (user_id, items) => async (dispatch) => {
+    const response = await fetch(`/api/orders/${user_id}/new/`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_id,
+        items
+      }),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      return dispatch(addOrderFinal(data));
+    } else if (response.status < 500) {
+      const data = await response.json();
+      if (data.error) {
+        return data.error;
+      }
+    } else {
+      return ["An error occurre with processing your order. Please try again."]
+    }
+  };
+
+
 // reducer
 export default function reducer(state = initialState, action) {
   let newState;
@@ -154,11 +185,14 @@ export default function reducer(state = initialState, action) {
       return newState;
     case UPDATE_ORDER_PAYMENT:
       newState = {}
-      console.log("THIS IS THE EDIT ASDADDDA>>>", action.payload)
       newState = {
         ...state,
         [action.payload.Edited_Payment.id]: action.payload.Edited_Payment,
       };
+      return newState;
+    case ADD_ORDER_FINAL:
+      newState = {}
+      newState = {...state, [action.payload.Added_Order.id] : action.payload.Added_Order}
       return newState;
     default:
       return state;

@@ -78,27 +78,18 @@ def newOrderPayment(id):
             return {'Edited_Payment': existingOrder.to_dict()}
     return "Order failed to add or edit payment!"
 
-@order_routes.route('/<int:id>/new/', methods=['POST'])
+@order_routes.route('/<int:id>/new/', methods=['PATCH'])
 def newOrder(id):
-    form = OrderForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        order = Order(
-            user_id=id,
-            items=form.data['items'],
-            address=form.data['address'],
-            city=form.data['city'],
-            state=form.data['state'],
-            zipCode=form.data['zipCode'],
-            credit_card=form.data['credit_card'],
-            expiration_date=form.data['expiration_date'],
-            first_name=form.data['first_name'],
-            last_name=form.data['last_name'],
-            cc_code=form.data['cc_code'],
-        )
-        db.session.add(order)
-        db.session.commit()
-        return {'Added_Order': order.to_dict()}
-    return 'Adding an order failed!'
+    existingOrder = Order.query.filter(Order.user_id == id).filter(Order.items == None).first()
+    if existingOrder:
+        form = OrderForm()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            existingOrder.items = form.data['items']
+            db.session.commit()
+            return {'Added_Order': existingOrder.to_dict()}
+        return 'Order did not validate!'
+    else:
+        return {'error': 'User does not have a current working order!'}, 401
 
 
