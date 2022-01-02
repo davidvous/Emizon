@@ -1,7 +1,9 @@
 // constants
 const GET_ORDERS = "orders/GET_ORDERS";
-const ADD_ORDER_ADDRESS = "orders/ADD_ORDER_ADDRESS"
+const ADD_ORDER_ADDRESS = "orders/ADD_ORDER_ADDRESS";
 const UPDATE_ORDER_ADDRESS = "orders/UPDATE_ORDER_ADDRESS";
+const ADD_ORDER_PAYMENT = "orders/ADD_ORDER_PAYMENT";
+const UPDATE_ORDER_PAYMENT = "orders/UPDATE_ORDER_PAYMENT";
 
 // action creators
 const showOrders = (orders) => ({
@@ -16,6 +18,16 @@ const addOrderAddress = (payload) => ({
 
 const updateOrderAddress = (payload) => ({
   type: UPDATE_ORDER_ADDRESS,
+  payload,
+});
+
+const addOrderPayment = (payload) => ({
+  type: ADD_ORDER_PAYMENT,
+  payload,
+});
+
+const updateOrderPayment = (payload) => ({
+  type: UPDATE_ORDER_PAYMENT,
   payload,
 });
 
@@ -71,6 +83,25 @@ export const editOrderAddress =
       const addressChange = await response.json();
       dispatch(updateOrderAddress(addressChange));
       return addressChange;
+    }
+  };
+
+export const newOrderPayment =
+  (user_id, creditNum, creditExp, creditSecure) =>
+  async (dispatch) => {
+    const response = await fetch(`/api/orders/${user_id}/new/payment/`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_id,
+        creditNum,
+        creditExp,
+        creditSecure
+      }),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      return dispatch(addOrderPayment(data));
     }
   };
 

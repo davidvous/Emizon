@@ -50,15 +50,6 @@ function ConfirmOrder() {
         })();
       }, []);
 
-      // useEffect(() => {
-      //   latestOrder ? setFirstName(latestOrder.first_name) : setFirstName(user.first_name);
-      //   latestOrder ? setLastName(latestOrder.last_name) : setLastName(user.last_name);
-      //   setAddress(latestOrder?.address);
-      //   setCity(latestOrder?.city);
-      //   setUsState(latestOrder?.state);
-      //   setZipCode(latestOrder?.zipCode)
-      // }, [latestOrder?.first_name, latestOrder?.last_name, latestOrder?.address, latestOrder?.city, latestOrder?.state, latestOrder?.zipCode]);
-
       if (!user || !flag) {
         return <Redirect to="/login" />;
       }
@@ -79,9 +70,6 @@ function ConfirmOrder() {
     },
     0.0);
 
-    console.log("DOES THIS EXIST??!", latestOrder)
-    console.log("CAN I DO THIS?!?", latestOrder ? Object.values(latestOrder).includes(null) : 'IT DOESNT EXIST')
-    
     return (
       <div className="confirmOrder__master__container">
         <nav></nav>
@@ -157,15 +145,10 @@ function ConfirmOrder() {
                 <Modal onClose={() => setShowCreditCard(false)}>
                   <CreditCard
                     setShowCreditCard={setShowCreditCard}
-                    creditNum={creditNum}
-                    setCreditNum={setCreditNum}
-                    creditDate={creditDate}
-                    setCreditDate={setCreditDate}
-                    creditCode={creditCode}
-                    setCreditCode={setCreditCode}
                     currentFirstName={user?.first_name}
                     currentLastName={user?.last_name}
                     userId={user.id}
+                    latestOrder={latestOrder}
                   />
                 </Modal>
               )}
@@ -190,6 +173,7 @@ function ConfirmOrder() {
                   cartItems.map((each, id) => (
                     <IndivConfirmOrder
                       key={each.product_id}
+                      latestOrder={latestOrder}
                       userId={user.id}
                       cartInfo={each}
                       setFlag={setFlag}

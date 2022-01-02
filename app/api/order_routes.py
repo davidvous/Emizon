@@ -66,6 +66,17 @@ def newOrderPayment(id):
             db.session.add(order)
             db.session.commit()
             return {'Added_Payment': order.to_dict()}
+    elif request.method == 'PATCH':
+        form = OrderForm()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            existingOrder.user_id = id
+            existingOrder.credit_card = form.data['credit_card']
+            existingOrder.expiration_date = form.data['expiration_date']
+            existingOrder.cc_code = form.data['cc_code']
+            db.session.commit()
+            return {'Edited_Payment': existingOrder.to_dict()}
+    return "Order failed to add or edit payment!"
 
 @order_routes.route('/<int:id>/new/', methods=['POST'])
 def newOrder(id):

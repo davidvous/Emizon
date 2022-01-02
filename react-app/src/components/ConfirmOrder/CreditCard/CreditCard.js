@@ -2,9 +2,12 @@ import "./CreditCard.css";
 import Cards from "react-credit-cards";
 import { useState } from 'react';
 
-function CreditCard({setShowCreditCard, creditNum, setCreditNum, creditDate, setCreditDate, creditCode, setCreditCode, firstName, lastName
+function CreditCard({setShowCreditCard, currentFirstName, currentLastName, userId, latestOrder
 }) {
     const [focus, setFocus] = useState('')
+    const [creditNum, setCreditNum] = useState(latestOrder?.credit_card);
+    const [creditDate, setCreditDate] = useState(latestOrder?.expiration_date);
+    const [creditCode, setCreditCode] = useState(latestOrder?.cc_code);
 
   const updateCCNumber = (e) => {
     setCreditNum(e.target.value);
@@ -21,6 +24,8 @@ function CreditCard({setShowCreditCard, creditNum, setCreditNum, creditDate, set
   const handleInputFocus = (e) => {
     setFocus(e.target.name)
   }
+
+  console.log("IS THE CODE NOT THERE?", creditCode, latestOrder)
 
   return (
     <div className="credit__card__container slideDownAnimation">
@@ -54,7 +59,7 @@ function CreditCard({setShowCreditCard, creditNum, setCreditNum, creditDate, set
                   onChange={updateCCDate}
                   onFocus={(e) => handleInputFocus(e)}
                 ></input>
-                <input type="text" placeholder="CVC" maxLength="3"></input>
+                <input type="text" placeholder="CVC" maxLength="3" name="cc_code" value={creditCode} onChange={updateSecureCode}></input>
               </div>
               <div className="credit__card__default__payment">
                 <i className="far fa-check-square"></i>
@@ -68,7 +73,7 @@ function CreditCard({setShowCreditCard, creditNum, setCreditNum, creditDate, set
           <Cards
             cvc="123"
             expiry={creditDate ? creditDate : `0000`}
-            name={`${firstName} ${lastName}`}
+            name={latestOrder ? `${latestOrder.first_name} ${latestOrder.last_name}` : `${currentFirstName} ${currentLastName}`}
             number={creditNum ? creditNum : `0000000000000000`}
             focused={focus}
           />
@@ -76,8 +81,8 @@ function CreditCard({setShowCreditCard, creditNum, setCreditNum, creditDate, set
       </div>
       <div className="credit__card__bottom">
         <div className="credit__card__bottom__buttons">
-          <button>Cancel</button>
-          <button>Add your card</button>
+          <button className="pointer" onClick={() => setShowCreditCard(false)}>Cancel</button>
+          <button className="pointer">Add your card</button>
         </div>
       </div>
     </div>
