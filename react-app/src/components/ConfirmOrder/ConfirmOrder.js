@@ -85,9 +85,9 @@ function ConfirmOrder() {
                 </span>
                 <span>{latestOrder ? latestOrder.address : null}</span>
                 <span>
-                  {latestOrder ? `${latestOrder.city}, ` : null}
+                  {latestOrder?.city ? `${latestOrder.city}, ` : null}
                   {latestOrder ? latestOrder.state : null}
-                  {latestOrder ? ` ${latestOrder.zipCode}` : null}
+                  {latestOrder?.zipCode ? ` ${latestOrder.zipCode}` : <span style={{color: 'red'}}>Please enter shipping info</span>}
                 </span>
               </div>
               <button
@@ -114,17 +114,15 @@ function ConfirmOrder() {
               <div className="confirmOrder__shipping__info__address__details">
                 <div className="confirmOrder__shipping__info__payment__cc">
                   <i className="far fa-credit-card"></i>
-                  <span>Credit Card</span>
                   <span>
-                    ending in{" "}
-                    {latestOrder
-                      ? latestOrder.credit_card?.slice(-4)
-                      : [creditNum ? creditNum.slice(-4) : `0000`]}
+                    {latestOrder?.credit_card
+                      ? (<span>Credit Card ending in {latestOrder.credit_card?.slice(-4)}</span>)
+                      : [creditNum ? creditNum.slice(-4) : <span style={{color: 'red'}}>Please enter payment method</span>]}
                   </span>
                 </div>
                 <div className="confirmOrder__shipping__info__billing">
                   <span>Billing address: </span>
-                  <span><strong>Same as Shipping Address</strong></span>
+                  <span><strong>{latestOrder?.address ? latestOrder.address : <span style={{color: 'red'}}>Please review shipping address</span>}</strong></span>
                 </div>
                 <div className="confirmOrder__shipping__info__gift">
                   <span>^</span>
