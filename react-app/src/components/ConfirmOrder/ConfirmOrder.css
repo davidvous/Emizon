@@ -179,6 +179,10 @@
     width: 8rem;
 }
 
+.confirmOrder__shipping__info__payment__cc span {
+    margin-right: 0.5ch;
+}
+
 
 .confirmOrder__shipping__info__review__item__product__details * {
     margin: 1px 0px;

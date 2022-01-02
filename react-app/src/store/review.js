@@ -78,6 +78,7 @@ export const editReview = (item, user, headline, body, rating) => async (dispatc
     },
     body: JSON.stringify({product_id:item, user_id:user, headline, body, rating} ),
   });
+  console.log("THIS IS THE RESPONSE>>>>", response)
   if (response.ok) {
     const review = await response.json();
     dispatch(updateReview(review));
@@ -107,6 +108,7 @@ export default function reducer(state = initialState, action) {
       delete newState[action.payload]
       return newState;
     case UPDATE_REVIEW:
+      console.log(">>>this is the action", action.payload.Edited_Review)
       newState = { ...state, [action.payload.Edited_Review.user_id]: action.payload.Edited_Review };
       return newState;
     default:

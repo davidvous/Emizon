@@ -3,9 +3,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect} from "react-router-dom";
 import { getCart } from "../../store/cart";
+import { getOrders } from '../../store/order';
 import IndivConfirmOrder from './IndivConfirmOrder';
 import { css } from "@emotion/react";
 import BounceLoader from "react-spinners/BounceLoader";
+import Cards from "react-credit-cards";
+import "react-credit-cards/es/styles-compiled.css";
 
 const override = css`
   display: block;
@@ -17,6 +20,8 @@ const override = css`
 function ConfirmOrder() {
       const user = useSelector((state) => state.session.user);
       const cartItems = useSelector((state) => Object.values(state.cart));
+      const userOrders = useSelector((state) => Object.values(state.order));
+      const latestOrder = userOrders[userOrders.length-1]
       const [flag, setFlag] = useState(true)
       const [loaded, setLoaded] = useState(false);
       let [loading, setLoading] = useState(true);
@@ -25,6 +30,7 @@ function ConfirmOrder() {
 
       const userCheck = () => {
           dispatch(getCart(user?.id));
+          dispatch(getOrders(user?.id));
           setLoaded(true);
       };
 
@@ -55,6 +61,7 @@ function ConfirmOrder() {
     },
     0.0);
 
+    console.log("This is the user's latest ORDER>>>>>", latestOrder)
     return (
       <div className="confirmOrder__master__container">
         <nav></nav>
@@ -64,9 +71,14 @@ function ConfirmOrder() {
               <h3>1</h3>
               <h3>Shipping Address</h3>
               <div className="confirmOrder__shipping__info__address__details">
-                <span>Demo User</span>
-                <span>123 Demo Lane</span>
-                <span>City, State Zip Code</span>
+                <span>
+                  {latestOrder?.first_name} {latestOrder?.last_name}
+                </span>
+                <span>{latestOrder?.address}</span>
+                <span>
+                  {latestOrder?.city}, {latestOrder?.state}{" "}
+                  {latestOrder?.zipCode}
+                </span>
               </div>
               <h5>Change</h5>
             </div>
@@ -76,9 +88,15 @@ function ConfirmOrder() {
               <h3>Payment method</h3>
               <div className="confirmOrder__shipping__info__address__details">
                 <div className="confirmOrder__shipping__info__payment__cc">
+                  <Cards
+                    cvc="123"
+                    expiry="10/20"
+                    name="John Smith"
+                    number="5066 9911 1111 1118"
+                  />
                   <h3>[CCPic]</h3>
-                  <span>MasterCard</span>
-                  <span>ending in 9999</span>
+                  <span>Credit Card</span>
+                  <span>ending in {latestOrder?.credit_card.slice(-4)}</span>
                 </div>
                 <div className="confirmOrder__shipping__info__billing">
                   <span>Billing address:</span>
@@ -173,14 +191,14 @@ function ConfirmOrder() {
           </div>
         </div>
 
-          <BounceLoader
-            color={color}
-            loading={loading}
-            size={60}
-            margin={2}
-            css={override}
-            speedMultiplier={1}
-          />
+        <BounceLoader
+          color={color}
+          loading={loading}
+          size={60}
+          margin={2}
+          css={override}
+          speedMultiplier={1}
+        />
       </div>
     );
 }

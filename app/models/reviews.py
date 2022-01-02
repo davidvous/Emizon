@@ -24,7 +24,7 @@ class Review(db.Model):
             'headline': self.headline,
             'body': self.body,
             'rating': self.rating,
-            'reviewImg': self.ratingImg,
+            'reviewImg': self.reviewImg,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }

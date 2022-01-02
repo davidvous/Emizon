@@ -16,7 +16,7 @@ def order(id):
     orders = Order.query.filter(Order.user_id == id).all()
     return {'user_orders': [order.to_dict() for order in orders]}
 
-@order_routes.route('/<int:id>/new', methods=['POST'])
+@order_routes.route('/<int:id>/new/', methods=['POST'])
 def newOrder(id):
     form = OrderForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -36,7 +36,6 @@ def newOrder(id):
         )
         db.session.add(order)
         db.session.commit()
-        print("THIS IS THE OBJECT>>>>>", order.items['3'])
         return {'Added_Order': order.to_dict()}
     return 'Adding an order failed!'
 
