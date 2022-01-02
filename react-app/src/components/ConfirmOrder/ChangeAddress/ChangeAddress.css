@@ -9,6 +9,7 @@
     background: #edecec;
     padding: 15px;
     border-radius: 10px 10px 0px 0px;
+    border-bottom: rgb(211, 207, 207) 1px solid;
 }
 
 .change__address__heading > h4 {

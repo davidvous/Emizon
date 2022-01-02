@@ -159,7 +159,7 @@ function ChangeAddress({setFirstName, firstName, lastName, setLastName, address,
               name="zipCode"
               value={zipCode}
               onChange={updateZipCode}
-              maxlength="5"
+              maxLength="5"
             ></input>
           </div>
         </div>

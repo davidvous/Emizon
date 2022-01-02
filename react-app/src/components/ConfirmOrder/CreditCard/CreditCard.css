@@ -1,0 +1,123 @@
+.credit__card__container {
+    background-color: white;
+    border-radius: 10px;
+    width: fit-content;
+    height: fit-content;
+}
+
+.credit__card__top__heading {
+    background: #edecec;
+    padding: 15px;
+    border-radius: 10px 10px 0px 0px;
+    border-bottom: rgb(211, 207, 207) 1px solid;
+}
+
+.credit__card__top__heading > h4 {
+    font-size: 0.9rem;
+}
+
+.credit__card__middle {
+    display: flex;
+    margin: 10px 10px 10px 0px;
+}
+
+.credit__card__middle__details {
+    display: flex;
+    flex-direction: column;
+    gap: 1ch;
+}
+
+.credit__card__middle__details > div {
+    margin-left: 53px;
+    display: flex;
+
+}
+
+.credit__card__middle input {
+    border: 0.75px rgb(172, 172, 172) solid;
+    border-radius: 3px;
+    line-height: 1.25rem;
+    padding-left: 1ch;
+}
+
+.credit__card__middle input:focus {
+    outline: none;
+}
+
+
+.credit__card__middle__details > div > span:first-child {
+    color: black;
+    font-weight: bold;
+    font-size: 0.9rem;
+    flex: 0 0 120px;
+}
+
+.credit__card__expiration, .credit__card_number {
+    display: flex;
+}
+
+.credit__card__expiration__dates {
+    display: flex;
+    flex-direction: column;
+    gap: 1ch;
+}
+
+.credit__card__expiration__dates__monthyear {
+    display: flex;
+    gap: 1ch;
+}
+
+.credit__card__expiration__dates__monthyear > input {
+    width: 50px;
+}
+
+.credit__card__default__payment {
+    width: 275px;
+    display: flex;
+    gap: 0.5ch;
+    align-items: baseline;
+}
+
+.credit__card__default__payment > span {
+    font-size: 0.9rem;
+}
+
+.credit__card__middle__sugoi {
+    border-left: #edecec 1px solid;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1ch;
+}
+
+.credit__card__middle__sugoi > span {
+    font-size: 0.9rem;
+}
+
+.credit__card__bottom {
+    background: #edecec;
+    padding: 15px;
+    border-radius: 0px 0px 10px 10px;
+    border-top: rgb(211, 207, 207) 1px solid;
+}
+
+.credit__card__bottom__buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5ch;
+}
+
+.credit__card__bottom__buttons > button {
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 2px 3px rgb(211 207 207);
+    padding: 0.5rem;
+}
+
+.credit__card__bottom__buttons > button:first-child {
+    background: #FFF;
+}
+
+.credit__card__bottom__buttons > button:nth-child(2) {
+    background: #FDD2BF;
+}

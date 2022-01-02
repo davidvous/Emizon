@@ -54,8 +54,8 @@ function ConfirmOrder() {
       }, []);
 
       useEffect(() => {
-        setFirstName(latestOrder?.first_name);
-        setLastName(latestOrder?.last_name);
+        latestOrder ? setFirstName(latestOrder.first_name) : setFirstName(user.first_name);
+        latestOrder ? setLastName(latestOrder.last_name) : setLastName(user.last_name);
         setAddress(latestOrder?.address);
         setCity(latestOrder?.city);
         setUsState(latestOrder?.state);
@@ -92,19 +92,20 @@ function ConfirmOrder() {
               <h3>Shipping Address</h3>
               <div className="confirmOrder__shipping__info__address__details">
                 <span>
-                  {latestOrder?.first_name} {latestOrder?.last_name}
+                  {latestOrder ? latestOrder.first_name : user.first_name}{" "}
+                  {latestOrder ? latestOrder.first_name : user.last_name}
                 </span>
-                <span>{latestOrder?.address}</span>
+                <span>{latestOrder ? latestOrder.address : null}</span>
                 <span>
-                  {latestOrder?.city}, {latestOrder?.state}{" "}
-                  {latestOrder?.zipCode}
+                  {latestOrder ? `${latestOrder.city}, ` : null }{latestOrder ? latestOrder.state : null}
+                  {latestOrder ? ` ${latestOrder.zipCode}` : null}
                 </span>
               </div>
               <button
                 className="pointer order__change__button"
                 onClick={() => setShowAddressChange(true)}
               >
-                Change
+                {address ? `Change` : `Add Info`} 
               </button>
               {showAddressChange && (
                 <Modal onClose={() => setShowAddressChange(false)}>
@@ -157,9 +158,7 @@ function ConfirmOrder() {
               </button>
               {showCreditCard && (
                 <Modal onClose={() => setShowCreditCard(false)}>
-                  <CreditCard
-                    setShowCreditCard={setShowCreditCard}
-                  />
+                  <CreditCard setShowCreditCard={setShowCreditCard} />
                 </Modal>
               )}
             </div>
