@@ -28,13 +28,6 @@ function ConfirmOrder() {
       const [loaded, setLoaded] = useState(false);
       const [showAddressChange, setShowAddressChange] = useState(false);
       const [showCreditCard, setShowCreditCard] = useState(false);
-      
-      const [firstName, setFirstName] = useState('')
-      const [lastName, setLastName] = useState('');
-      const [address, setAddress] = useState(latestOrder?.address);
-      const [city, setCity] = useState(latestOrder?.city);
-      const [usState, setUsState] = useState(latestOrder?.state);
-      const [zipCode, setZipCode] = useState(latestOrder?.zipCode);
 
       const [creditNum, setCreditNum] = useState(latestOrder?.credit_card)
       const [creditDate, setCreditDate] = useState(latestOrder?.expiration_date)
@@ -57,14 +50,14 @@ function ConfirmOrder() {
         })();
       }, []);
 
-      useEffect(() => {
-        latestOrder ? setFirstName(latestOrder.first_name) : setFirstName(user.first_name);
-        latestOrder ? setLastName(latestOrder.last_name) : setLastName(user.last_name);
-        setAddress(latestOrder?.address);
-        setCity(latestOrder?.city);
-        setUsState(latestOrder?.state);
-        setZipCode(latestOrder?.zipCode)
-      }, [latestOrder?.first_name, latestOrder?.last_name, latestOrder?.address, latestOrder?.city, latestOrder?.state, latestOrder?.zipCode]);
+      // useEffect(() => {
+      //   latestOrder ? setFirstName(latestOrder.first_name) : setFirstName(user.first_name);
+      //   latestOrder ? setLastName(latestOrder.last_name) : setLastName(user.last_name);
+      //   setAddress(latestOrder?.address);
+      //   setCity(latestOrder?.city);
+      //   setUsState(latestOrder?.state);
+      //   setZipCode(latestOrder?.zipCode)
+      // }, [latestOrder?.first_name, latestOrder?.last_name, latestOrder?.address, latestOrder?.city, latestOrder?.state, latestOrder?.zipCode]);
 
       if (!user || !flag) {
         return <Redirect to="/login" />;
@@ -100,7 +93,7 @@ function ConfirmOrder() {
               <div className="confirmOrder__shipping__info__address__details">
                 <span>
                   {latestOrder ? latestOrder.first_name : user.first_name}{" "}
-                  {latestOrder ? latestOrder.first_name : user.last_name}
+                  {latestOrder ? latestOrder.last_name : user.last_name}
                 </span>
                 <span>{latestOrder ? latestOrder.address : null}</span>
                 <span>
@@ -113,7 +106,7 @@ function ConfirmOrder() {
                 className="pointer order__change__button"
                 onClick={() => setShowAddressChange(true)}
               >
-                {address ? `Change` : `Add Info`}
+                {latestOrder?.address ? `Change` : `Add Info`}
               </button>
               {showAddressChange && (
                 <Modal onClose={() => setShowAddressChange(false)}>
@@ -121,7 +114,7 @@ function ConfirmOrder() {
                     setShowAddressChange={setShowAddressChange}
                     currentFirstName={user?.first_name}
                     currentLastName={user?.last_name}
-                    userId = {user.id}
+                    userId={user.id}
                   />
                 </Modal>
               )}
@@ -143,11 +136,7 @@ function ConfirmOrder() {
                 </div>
                 <div className="confirmOrder__shipping__info__billing">
                   <span>Billing address: </span>
-                  <span>
-                    {latestOrder
-                      ? ` ${latestOrder.city}, ${latestOrder.state} ${latestOrder.zipCode}`
-                      : `${city}, ${usState} ${zipCode}`}
-                  </span>
+                  <span>FILL IN LATER</span>
                 </div>
                 <div className="confirmOrder__shipping__info__gift">
                   <span>^</span>
@@ -174,8 +163,9 @@ function ConfirmOrder() {
                     setCreditDate={setCreditDate}
                     creditCode={creditCode}
                     setCreditCode={setCreditCode}
-                    firstName={firstName}
-                    lastName={lastName}
+                    currentFirstName={user?.first_name}
+                    currentLastName={user?.last_name}
+                    userId={user.id}
                   />
                 </Modal>
               )}

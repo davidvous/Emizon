@@ -1,15 +1,15 @@
 import "./ChangeAddress.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { newOrderAddress } from "../../../store/order";
+import { newOrderAddress, editOrderAddress } from "../../../store/order";
 
 function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName, userId}) {
   
   let [errors, setErrors] = useState([]);
   const userOrders = useSelector((state) => Object.values(state.order));
   const latestOrder = userOrders[userOrders.length - 1];
-  const [firstName, setFirstName] = useState(currentFirstName);
-  const [lastName, setLastName] = useState(currentLastName);
+  const [firstName, setFirstName] = useState(latestOrder ? latestOrder.first_name : currentFirstName);
+  const [lastName, setLastName] = useState(latestOrder ? latestOrder.last_name : currentLastName);
   const [address, setAddress] = useState(latestOrder?.address);
   const [city, setCity] = useState(latestOrder?.city);
   const [usState, setUsState] = useState(latestOrder?.state);
@@ -118,7 +118,7 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
     if (errors.length > 0) return setValidationErrors(errors);
     else {
       const data = await dispatch(
-        newOrderAddress(userId, address, city, usState, zipCode, currentFirstName, currentLastName)
+        newOrderAddress(userId, address, city, usState, zipCode, firstName, lastName)
       );
       setShowAddressChange(false);
       if (data) {
@@ -126,7 +126,32 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
       }
     }
   };
-  console.log("This the latest order>>>>", latestOrder)
+
+  const onEdit = async (e) => {
+    e.preventDefault();
+    errors = validate();
+    if (errors.length > 0) return setValidationErrors(errors);
+    else {
+      const data = await dispatch(
+        editOrderAddress(
+          userId,
+          address,
+          city,
+          usState,
+          zipCode,
+          firstName,
+          lastName
+        )
+      );
+      setShowAddressChange(false);
+      if (data) {
+        setErrors(data);
+      }
+    }
+  };
+
+
+
   return (
     <div className="change__address__container slideDownAnimation">
       <div className="change__address__heading">
@@ -219,7 +244,7 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
           <i className="far fa-check-square"></i>
           <span>Make this my default address</span>
         </div>
-        <button onClick={Object.values(latestOrder)?.includes(null) ? onCreate : () => console.log("THIS IS THE PATCH ROUTE!!!!!!>>>PATCH")} className="pointer">Use this address</button>
+        <button onClick={Object.values(latestOrder)?.includes(null) ? onEdit : onCreate } className="pointer">Use this address</button>
       </div>
     </div>
   );

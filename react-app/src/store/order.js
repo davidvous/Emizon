@@ -1,6 +1,7 @@
 // constants
 const GET_ORDERS = "orders/GET_ORDERS";
 const ADD_ORDER_ADDRESS = "orders/ADD_ORDER_ADDRESS"
+const UPDATE_ORDER_ADDRESS = "orders/UPDATE_ORDER_ADDRESS";
 
 // action creators
 const showOrders = (orders) => ({
@@ -10,6 +11,11 @@ const showOrders = (orders) => ({
 
 const addOrderAddress = (payload) => ({
   type: ADD_ORDER_ADDRESS,
+  payload,
+});
+
+const updateOrderAddress = (payload) => ({
+  type: UPDATE_ORDER_ADDRESS,
   payload,
 });
 
@@ -36,10 +42,35 @@ export const newOrderAddress =
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ user_id, address, city, state, zipCode, first_name, last_name }),
     });
-    console.log("THIS IS THE RESPONSE>>>>>>", response)
     if (response.ok) {
       const data = await response.json();
       return dispatch(addOrderAddress(data));
+    }
+  };
+
+export const editOrderAddress =
+  (user_id, address, city, state, zipCode, first_name, last_name) =>
+  async (dispatch) => {
+    const response = await fetch(`/api/orders/${user_id}/new/address/`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id,
+        address,
+        city,
+        state,
+        zipCode,
+        first_name,
+        last_name,
+      }),
+    });
+    console.log("THIS IS THE RESPONSE of the address>>>>", response);
+    if (response.ok) {
+      const addressChange = await response.json();
+      dispatch(updateOrderAddress(addressChange));
+      return addressChange;
     }
   };
 
@@ -56,6 +87,12 @@ export default function reducer(state = initialState, action) {
       newState = {
         ...state,
         [action.payload.Added_Address.id]: action.payload.Added_Address,
+      };
+      return newState;
+    case UPDATE_ORDER_ADDRESS:
+      newState = {
+        ...state,
+        [action.payload.Edited_Address.id]: action.payload.Edited_Address,
       };
       return newState;
     default:

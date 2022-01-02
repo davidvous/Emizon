@@ -35,16 +35,37 @@ def newOrderAddress(id):
             db.session.add(order)
             db.session.commit()
             return {'Added_Address': order.to_dict()}
-    print('WE FELL OUT OF THE LOOPDFSFSDFSDFSFDS>>>>')
+    elif request.method == 'PATCH':
+        form = OrderForm()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            existingOrder.user_id = id
+            existingOrder.address = form.data['address']
+            existingOrder.city = form.data['city']
+            existingOrder.state = form.data['state']
+            existingOrder.zipCode = form.data['zipCode']
+            existingOrder.first_name = form.data['first_name']
+            existingOrder.last_name = form.data['last_name']
+            db.session.commit()
+            return {'Edited_Address': existingOrder.to_dict()}
+    return "Order failed to add or edit address!"
 
-
-
-    # if existingOrder:
-    #     if existingOrder.items:
-    #         return print("ORDER EXISTS, ITEMS WERE ADDED, HERE IT IS", existingOrder.items)
-    #     return print("THIS ORDER EXISTS FOR THIS USER", existingOrder)
-    # else:
-    #     print("THIS ORDER NOOOOOO EXIST")
+@order_routes.route('/<int:id>/new/payment/', methods=['POST','PATCH'])
+def newOrderPayment(id):    
+    existingOrder = Order.query.filter(Order.user_id == id).order_by(Order.id.desc()).first()
+    if request.method == 'POST':
+        form = OrderForm()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            order = Order(
+                user_id=id,
+                credit_card=form.data['credit_card'],
+                expiration_date=form.data['expiration_date'],
+                cc_code=form.data['cc_code'],
+            )
+            db.session.add(order)
+            db.session.commit()
+            return {'Added_Payment': order.to_dict()}
 
 @order_routes.route('/<int:id>/new/', methods=['POST'])
 def newOrder(id):
