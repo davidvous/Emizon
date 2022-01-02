@@ -413,3 +413,11 @@
     padding: 0.3rem
 }
 
+.order__change__button {
+    border: none;
+    height: fit-content;
+    width: fit-content;
+    font-weight: bold;
+    background-color: transparent;
+}
+

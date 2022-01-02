@@ -7,8 +7,10 @@ import { getOrders } from '../../store/order';
 import IndivConfirmOrder from './IndivConfirmOrder';
 import { css } from "@emotion/react";
 import BounceLoader from "react-spinners/BounceLoader";
-import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
+import { Modal } from '../../context/Modal';
+import ChangeAddress from './ChangeAddress/ChangeAddress';
+import CreditCard from './CreditCard/CreditCard';
 
 const override = css`
   display: block;
@@ -24,6 +26,16 @@ function ConfirmOrder() {
       const latestOrder = userOrders[userOrders.length-1]
       const [flag, setFlag] = useState(true)
       const [loaded, setLoaded] = useState(false);
+      const [showAddressChange, setShowAddressChange] = useState(false);
+      const [showCreditCard, setShowCreditCard] = useState(false);
+      
+      const [firstName, setFirstName] = useState('')
+      const [lastName, setLastName] = useState('');
+      const [address, setAddress] = useState(latestOrder?.address);
+      const [city, setCity] = useState(latestOrder?.city);
+      const [usState, setUsState] = useState(latestOrder?.state);
+      const [zipCode, setZipCode] = useState(latestOrder?.zipCode);
+
       let [loading, setLoading] = useState(true);
       let [color, setColor] = useState("red");
       const dispatch = useDispatch();
@@ -40,6 +52,15 @@ function ConfirmOrder() {
           await userCheck();
         })();
       }, []);
+
+      useEffect(() => {
+        setFirstName(latestOrder?.first_name);
+        setLastName(latestOrder?.last_name);
+        setAddress(latestOrder?.address);
+        setCity(latestOrder?.city);
+        setUsState(latestOrder?.state);
+        setZipCode(latestOrder?.zipCode)
+      }, [latestOrder?.first_name, latestOrder?.last_name, latestOrder?.address, latestOrder?.city, latestOrder?.state, latestOrder?.zipCode]);
 
       if (!user || !flag) {
         return <Redirect to="/login" />;
@@ -60,8 +81,7 @@ function ConfirmOrder() {
       );
     },
     0.0);
-
-    console.log("This is the user's latest ORDER>>>>>", latestOrder)
+    
     return (
       <div className="confirmOrder__master__container">
         <nav></nav>
@@ -80,7 +100,31 @@ function ConfirmOrder() {
                   {latestOrder?.zipCode}
                 </span>
               </div>
-              <h5>Change</h5>
+              <button
+                className="pointer order__change__button"
+                onClick={() => setShowAddressChange(true)}
+              >
+                Change
+              </button>
+              {showAddressChange && (
+                <Modal onClose={() => setShowAddressChange(false)}>
+                  <ChangeAddress
+                    setShowAddressChange={setShowAddressChange}
+                    setFirstName={setFirstName}
+                    firstName={firstName}
+                    setLastName={setLastName}
+                    lastName={lastName}
+                    address={address}
+                    setAddress={setAddress}
+                    city={city}
+                    setCity={setCity}
+                    usState={usState}
+                    setUsState={setUsState}
+                    zipCode={zipCode}
+                    setZipCode={setZipCode}
+                  />
+                </Modal>
+              )}
             </div>
             <hr></hr>
             <div className="confirmOrder__shipping__info__address">
@@ -88,12 +132,6 @@ function ConfirmOrder() {
               <h3>Payment method</h3>
               <div className="confirmOrder__shipping__info__address__details">
                 <div className="confirmOrder__shipping__info__payment__cc">
-                  <Cards
-                    cvc="123"
-                    expiry="10/20"
-                    name="John Smith"
-                    number="5066 9911 1111 1118"
-                  />
                   <h3>[CCPic]</h3>
                   <span>Credit Card</span>
                   <span>ending in {latestOrder?.credit_card.slice(-4)}</span>
@@ -111,7 +149,19 @@ function ConfirmOrder() {
                   <button>Apply</button>
                 </div>
               </div>
-              <h5>Change</h5>
+              <button
+                className="pointer order__change__button"
+                onClick={() => setShowCreditCard(true)}
+              >
+                Change
+              </button>
+              {showCreditCard && (
+                <Modal onClose={() => setShowCreditCard(false)}>
+                  <CreditCard
+                    setShowCreditCard={setShowCreditCard}
+                  />
+                </Modal>
+              )}
             </div>
             <hr></hr>
             <div className="confirmOrder__shipping__info__review">
