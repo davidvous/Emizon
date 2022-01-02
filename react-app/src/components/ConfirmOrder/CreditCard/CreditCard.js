@@ -1,32 +1,26 @@
 import "./CreditCard.css";
 import Cards from "react-credit-cards";
+import { useState } from 'react';
 
-function CreditCard({
-  setFirstName,
-  firstName,
-  lastName,
-  setLastName,
-  address,
-  setAddress,
-  city,
-  setCity,
-  usState,
-  setUsState,
-  zipCode,
-  setZipCode,
+function CreditCard({setShowCreditCard, creditNum, setCreditNum, creditDate, setCreditDate, creditCode, setCreditCode, firstName, lastName
 }) {
+    const [focus, setFocus] = useState('')
 
   const updateCCNumber = (e) => {
-    setFirstName(e.target.value);
+    setCreditNum(e.target.value);
   };
 
   const updateCCDate = (e) => {
-    setLastName(e.target.value);
+    setCreditDate(e.target.value);
   };
 
   const updateSecureCode = (e) => {
-    setAddress(e.target.value);
+    setCreditCode(e.target.value);
   };
+
+  const handleInputFocus = (e) => {
+    setFocus(e.target.name)
+  }
 
   return (
     <div className="credit__card__container slideDownAnimation">
@@ -37,14 +31,30 @@ function CreditCard({
         <div className="credit__card__middle__details">
           <div className="credit__card__number">
             <span>Card Number</span>
-            <input type="text" maxLength="16"></input>
+            <input
+              type="text"
+              maxLength="16"
+              name="credit_card"
+              placeholder={creditNum ? creditNum : `0000000000000000`}
+              value={creditNum}
+              onChange={updateCCNumber}
+              onFocus={(e) => handleInputFocus(e)}
+            ></input>
           </div>
           <div className="credit__card__expiration">
             <span>Expiration date</span>
             <div className="credit__card__expiration__dates">
               <div className="credit__card__expiration__dates__monthyear">
-                <input type="text" placeholder="MM" maxLength="2"></input>
-                <input type="text" placeholder="YYYY" maxLength="4"></input>
+                <input
+                  type="text"
+                  placeholder="MMYY"
+                  maxLength="4"
+                  name="expiration_date"
+                  value={creditDate}
+                  onChange={updateCCDate}
+                  onFocus={(e) => handleInputFocus(e)}
+                ></input>
+                <input type="text" placeholder="CVC" maxLength="3"></input>
               </div>
               <div className="credit__card__default__payment">
                 <i className="far fa-check-square"></i>
@@ -57,9 +67,10 @@ function CreditCard({
           <span>Emizon accepts all major credit and debit cards.</span>
           <Cards
             cvc="123"
-            expiry="10/20"
-            name="John Smith"
-            number="5066 9911 1111 1118"
+            expiry={creditDate ? creditDate : `0000`}
+            name={`${firstName} ${lastName}`}
+            number={creditNum ? creditNum : `0000000000000000`}
+            focused={focus}
           />
         </div>
       </div>

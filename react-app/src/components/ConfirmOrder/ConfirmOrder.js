@@ -36,6 +36,10 @@ function ConfirmOrder() {
       const [usState, setUsState] = useState(latestOrder?.state);
       const [zipCode, setZipCode] = useState(latestOrder?.zipCode);
 
+      const [creditNum, setCreditNum] = useState(latestOrder?.credit_card)
+      const [creditDate, setCreditDate] = useState(latestOrder?.expiration_date)
+      const [creditCode, setCreditCode] = useState(latestOrder?.cc_code)
+
       let [loading, setLoading] = useState(true);
       let [color, setColor] = useState("red");
       const dispatch = useDispatch();
@@ -97,7 +101,8 @@ function ConfirmOrder() {
                 </span>
                 <span>{latestOrder ? latestOrder.address : null}</span>
                 <span>
-                  {latestOrder ? `${latestOrder.city}, ` : null }{latestOrder ? latestOrder.state : null}
+                  {latestOrder ? `${latestOrder.city}, ` : null}
+                  {latestOrder ? latestOrder.state : null}
                   {latestOrder ? ` ${latestOrder.zipCode}` : null}
                 </span>
               </div>
@@ -105,24 +110,14 @@ function ConfirmOrder() {
                 className="pointer order__change__button"
                 onClick={() => setShowAddressChange(true)}
               >
-                {address ? `Change` : `Add Info`} 
+                {address ? `Change` : `Add Info`}
               </button>
               {showAddressChange && (
                 <Modal onClose={() => setShowAddressChange(false)}>
                   <ChangeAddress
                     setShowAddressChange={setShowAddressChange}
-                    setFirstName={setFirstName}
-                    firstName={firstName}
-                    setLastName={setLastName}
-                    lastName={lastName}
-                    address={address}
-                    setAddress={setAddress}
-                    city={city}
-                    setCity={setCity}
-                    usState={usState}
-                    setUsState={setUsState}
-                    zipCode={zipCode}
-                    setZipCode={setZipCode}
+                    currentFirstName={user?.first_name}
+                    currentLastName={user?.last_name}
                   />
                 </Modal>
               )}
@@ -133,13 +128,22 @@ function ConfirmOrder() {
               <h3>Payment method</h3>
               <div className="confirmOrder__shipping__info__address__details">
                 <div className="confirmOrder__shipping__info__payment__cc">
-                  <h3>[CCPic]</h3>
+                  <i className="far fa-credit-card"></i>
                   <span>Credit Card</span>
-                  <span>ending in {latestOrder?.credit_card.slice(-4)}</span>
+                  <span>
+                    ending in{" "}
+                    {latestOrder
+                      ? latestOrder.credit_card.slice(-4)
+                      : [creditNum ? creditNum.slice(-4) : `0000`]}
+                  </span>
                 </div>
                 <div className="confirmOrder__shipping__info__billing">
-                  <span>Billing address:</span>
-                  <span>City, State Zip Code</span>
+                  <span>Billing address: </span>
+                  <span>
+                    {latestOrder
+                      ? ` ${latestOrder.city}, ${latestOrder.state} ${latestOrder.zipCode}`
+                      : `${city}, ${usState} ${zipCode}`}
+                  </span>
                 </div>
                 <div className="confirmOrder__shipping__info__gift">
                   <span>^</span>
@@ -158,7 +162,17 @@ function ConfirmOrder() {
               </button>
               {showCreditCard && (
                 <Modal onClose={() => setShowCreditCard(false)}>
-                  <CreditCard setShowCreditCard={setShowCreditCard} />
+                  <CreditCard
+                    setShowCreditCard={setShowCreditCard}
+                    creditNum={creditNum}
+                    setCreditNum={setCreditNum}
+                    creditDate={creditDate}
+                    setCreditDate={setCreditDate}
+                    creditCode={creditCode}
+                    setCreditCode={setCreditCode}
+                    firstName={firstName}
+                    lastName={lastName}
+                  />
                 </Modal>
               )}
             </div>

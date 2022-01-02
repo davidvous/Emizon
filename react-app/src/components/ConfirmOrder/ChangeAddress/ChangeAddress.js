@@ -1,7 +1,14 @@
 import "./ChangeAddress.css";
 import { useState } from "react";
 
-function ChangeAddress({setFirstName, firstName, lastName, setLastName, address, setAddress, city, setCity, usState, setUsState, zipCode, setZipCode}) {
+function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName}) {
+
+  const [firstName, setFirstName] = useState(currentFirstName);
+  const [lastName, setLastName] = useState(currentLastName);
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [usState, setUsState] = useState('');
+  const [zipCode, setZipCode] = useState('');
 
   const states = {
     AL: "Alabama",
@@ -167,7 +174,7 @@ function ChangeAddress({setFirstName, firstName, lastName, setLastName, address,
           <i className="far fa-check-square"></i>
           <span>Make this my default address</span>
         </div>
-        <button>Use this address</button>
+        <button className="pointer">Use this address</button>
       </div>
     </div>
   );
