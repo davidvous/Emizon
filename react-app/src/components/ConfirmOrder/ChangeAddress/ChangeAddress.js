@@ -1,14 +1,21 @@
 import "./ChangeAddress.css";
 import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { newOrderAddress } from "../../../store/order";
 
-function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName}) {
-
+function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName, userId}) {
+  
+  let [errors, setErrors] = useState([]);
+  const userOrders = useSelector((state) => Object.values(state.order));
+  const latestOrder = userOrders[userOrders.length - 1];
   const [firstName, setFirstName] = useState(currentFirstName);
   const [lastName, setLastName] = useState(currentLastName);
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [usState, setUsState] = useState('');
-  const [zipCode, setZipCode] = useState('');
+  const [address, setAddress] = useState(latestOrder?.address);
+  const [city, setCity] = useState(latestOrder?.city);
+  const [usState, setUsState] = useState(latestOrder?.state);
+  const [zipCode, setZipCode] = useState(latestOrder?.zipCode);
+  const [validationErrors, setValidationErrors] = useState([]);
+  const dispatch = useDispatch()
 
   const states = {
     AL: "Alabama",
@@ -96,13 +103,51 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName}
     setZipCode(e.target.value);
   };
 
+  const validate = () => {
+    const validateErrors = [];
+
+    // if (!headline) validateErrors.push("Please enter a title/headline");
+    // if (!body) validateErrors.push("Please enter a review");
+
+    return validateErrors;
+  };
+
+  const onCreate = async (e) => {
+    e.preventDefault();
+    errors = validate();
+    if (errors.length > 0) return setValidationErrors(errors);
+    else {
+      const data = await dispatch(
+        newOrderAddress(userId, address, city, usState, zipCode, currentFirstName, currentLastName)
+      );
+      setShowAddressChange(false);
+      if (data) {
+        setErrors(data);
+      }
+    }
+  };
+  console.log("This the latest order>>>>", latestOrder)
   return (
     <div className="change__address__container slideDownAnimation">
       <div className="change__address__heading">
-        <h4>Enter a new shipping address</h4>
+        <h4>
+          {latestOrder
+            ? `Edit Shipping Address`
+            : `Enter a new shipping address`}
+        </h4>
       </div>
       <div className="change__address__form">
-        <h2>Add a new address</h2>
+        <h2>{latestOrder ? `Edit Address` : `Add a new address`}</h2>
+        {validationErrors.length > 0 && (
+          <div className="validationErrors">
+            The following errors were found:
+            <ul>
+              {validationErrors.map((error) => (
+                <li key={error}>{error}</li>
+              ))}
+            </ul>
+          </div>
+        )}
         <div className="change__address__country">
           <span>Country/Region</span>
           <select id="country" className="general__button">
@@ -151,7 +196,7 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName}
           </div>
           <div className="change__address__meta__state general__button">
             <span>State</span>
-            <select id="state">
+            <select id="state" onChange={updateUsState} defaultValue={usState}>
               {Object.keys(states).map((each, idx) => (
                 <option value={each} key={idx}>
                   {each}
@@ -174,7 +219,7 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName}
           <i className="far fa-check-square"></i>
           <span>Make this my default address</span>
         </div>
-        <button className="pointer">Use this address</button>
+        <button onClick={Object.values(latestOrder)?.includes(null) ? onCreate : () => console.log("THIS IS THE PATCH ROUTE!!!!!!>>>PATCH")} className="pointer">Use this address</button>
       </div>
     </div>
   );

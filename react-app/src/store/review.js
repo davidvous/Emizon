@@ -108,7 +108,6 @@ export default function reducer(state = initialState, action) {
       delete newState[action.payload]
       return newState;
     case UPDATE_REVIEW:
-      console.log(">>>this is the action", action.payload.Edited_Review)
       newState = { ...state, [action.payload.Edited_Review.user_id]: action.payload.Edited_Review };
       return newState;
     default:

@@ -85,6 +85,9 @@ function ConfirmOrder() {
       );
     },
     0.0);
+
+    console.log("DOES THIS EXIST??!", latestOrder)
+    console.log("CAN I DO THIS?!?", latestOrder ? Object.values(latestOrder).includes(null) : 'IT DOESNT EXIST')
     
     return (
       <div className="confirmOrder__master__container">
@@ -118,6 +121,7 @@ function ConfirmOrder() {
                     setShowAddressChange={setShowAddressChange}
                     currentFirstName={user?.first_name}
                     currentLastName={user?.last_name}
+                    userId = {user.id}
                   />
                 </Modal>
               )}
@@ -133,7 +137,7 @@ function ConfirmOrder() {
                   <span>
                     ending in{" "}
                     {latestOrder
-                      ? latestOrder.credit_card.slice(-4)
+                      ? latestOrder.credit_card?.slice(-4)
                       : [creditNum ? creditNum.slice(-4) : `0000`]}
                   </span>
                 </div>
