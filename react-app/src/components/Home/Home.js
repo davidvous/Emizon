@@ -16,7 +16,7 @@ function Home() {
       setLoaded(true);
     })();
   }, [dispatch])
-
+  
   const products = useSelector(state => Object.values(state.products));
 
   if (!loaded) {

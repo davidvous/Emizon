@@ -42,7 +42,7 @@ def upgrade():
     op.create_table('orders',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.Column('items', sa.Integer(), nullable=False),
+    sa.Column('items', sa.JSON, nullable=False),
     sa.Column('address', sa.String(length=255), nullable=False),
     sa.Column('credit_card', sa.String(length=16), nullable=False),
     sa.Column('expiration_date', sa.String(length=4), nullable=False),

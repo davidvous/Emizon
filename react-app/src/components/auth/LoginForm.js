@@ -17,7 +17,7 @@ const LoginForm = () => {
    const validate = () => {
      const validationErrors = [];
      if (
-       !/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
+       !/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i.test(
          email
        )
      )
@@ -65,9 +65,9 @@ const LoginForm = () => {
               {errors.map((error, ind) => (
                 <div key={ind}>
                   {error.includes("password :")
-                    ? "This user does not exist"
+                    ? error.substr(10,error.length-1)
                     : error.includes("email")
-                    ? null
+                    ? error.substr(7,error.length-1)
                     : error}
                 </div>
               ))}

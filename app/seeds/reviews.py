@@ -16,7 +16,7 @@ def seed_reviews():
     review7 = Review(user_id=1, product_id=5, headline="This light is awesome! I can't believe how cool it is!", body="Zenitsu is the best character in Demon Slayer and I love this light. It makes me feel like I can do Thunder Breathing too.",
     rating=1)
     review8 = Review(user_id=1, product_id=6, headline="Kaneki! Or can I believe it?", body="Such a cool figurine! I have it next to my Zenitsu light and no monsters will dare come out to attack me.",
-    rating=1)
+    rating=1, reviewImg='https://media.discordapp.net/attachments/917541871457275925/918846475897798727/default-user.jpeg')
 
     db.session.add(review1)
     db.session.add(review2)

@@ -1,0 +1,422 @@
+.confirmOrder__master__container {
+    background: white;
+    height: 100%;
+}
+.confirmOrder__container {
+    display: flex;
+    flex-direction: row;
+    width: 1000px;
+    margin: 0 auto;
+    padding-top: 15px;
+}
+
+.confirmOrder__container hr {
+    margin: 10px 50px;
+}
+
+.confirmOrder__shipping__info {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 1ch;
+}
+
+.confirmOrder__shipping__info__address {
+    display: flex;
+    flex-direction: row;
+    gap: 1ch;
+}
+
+.confirmOrder__shipping__info__address > h3 {
+    font-size: 1rem;
+}
+
+.confirmOrder__shipping__info__address > h3:first-child {
+    color: green;
+    flex: 0 0 20px;
+}
+
+.confirmOrder__shipping__info__address > h3:nth-child(2) {
+    color:red;
+    flex: 0 0 200px;
+}
+
+.confirmOrder__shipping__info__address__details {
+    color: purple;
+    flex: 0 0 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.confirmOrder__shipping__info__address__details span {
+    font-size: 0.8rem;
+}
+
+.confirmOrder__shipping__info__review {
+    display: flex;
+    flex-direction: row;
+    gap: 1ch;
+}
+
+.confirmOrder__shipping__info__gift {
+    margin-left: 5px;
+}
+
+.confirmOrder__shipping__info__review > h3 {
+    font-size: 1rem;
+}
+
+.confirmOrder__shipping__info__review > h3:first-child {
+    color: rgb(135, 28, 92);
+    flex: 0 0 20px;
+}
+
+.confirmOrder__shipping__info__review__details div {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 0.5ch;
+}
+
+.confirmOrder__shipping__info__review__details > div > h3{
+    font-size: 1.1rem;
+}
+
+.confirmOrder__shipping__info__review__details > div > span{
+    font-size: 0.9rem;
+}
+
+.confirmOrder__shipping__info__review__details > div > span:nth-child(3){
+    color: red;
+}
+
+.confirmOrder__shipping__shippedFromEmizon {
+    font-size: 0.9rem;
+}
+
+.confirmOrder__shipping__info__review__container {
+    margin: 10px 50px;
+    border: 1px red solid;
+    border-radius: 10px;
+    padding: 10px 15px;
+}
+
+.confirmOrder__shipping__info__review__headline {
+    padding: 0px 0px 10px 0px;
+}
+
+.confirmOrder__shipping__info__review__headline__box {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgb(255, 0, 255);
+}
+
+.confirmOrder__shipping__info__review__headline__box > span {
+    margin-left: 7px;    
+}
+
+.confirmOrder__shipping__info__review__headline__border {
+    content:"dsfsdfsd";
+    background-color: rgb(242, 0, 255);
+    width: 10px;
+    height: 40px;
+}
+
+.confirmOrder__shipping__info__review__item__container {
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0px;
+}
+
+.confirmOrder__shipping__info__review__item__product {
+    display: flex;
+    flex-direction: row;
+    flex: 0 0 450px;
+}
+
+.confirmOrder__shipping__info__review__item__image {
+    object-fit: contain;
+    height: 100px;
+    width: 100px;
+}
+
+.confirmOrder__shipping__info__review__item__product__details {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 0px 0px 22px;
+}
+
+.confirmOrder__shipping__info__review__item__product__details h4 {
+    color: blue;
+    font-size: 0.8rem;
+}
+
+.cartProduct__remove__buttons {
+    display: flex;
+    gap: 0.5ch;
+    align-items: baseline;
+}
+
+.cartProduct__remove__buttons > input {
+    width: 50px;
+    background: rgb(237, 236, 236);
+    border: none;
+    border-radius: 5px;
+}
+
+.cartProduct__remove__buttons > input:focus {
+    border: rgb(183, 37, 37) 1px solid;
+    outline: none;
+}
+
+.cartProduct__remove__buttons > button {
+    background: #FF6B6B;
+    border: 1px solid;
+    border: none;
+    border-radius: 2px;
+    color: rgb(255, 255, 255);
+    padding: 3px 0px;
+    width: 8rem;
+}
+
+.confirmOrder__shipping__info__payment__cc span {
+    margin-left: 0.5ch;
+}
+
+
+.confirmOrder__shipping__info__review__item__product__details * {
+    margin: 1px 0px;
+    font-size: 0.8rem;
+}
+
+.confirmOrder__shipping__info__review__item__product__details > button:nth-child(4) {
+    color: purple;
+    flex: 0 0 auto;
+    width: 70px;
+}
+
+.confirmOrder__shipping__info__review__item__product__details > button:nth-child(6) {
+    color: purple;
+    flex: 0 0 auto;
+    width: 150px;
+}
+
+.confirmOrder__shipping__info__review__item__product__details__price {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5ch;
+}
+
+.confirmOrder__shipping__info__review__place {
+    display: flex;
+    flex-direction: row;
+}
+
+.confirmOrder__place__order {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}
+
+.confirmOrder__shipping__info__review__item__delivery > div:nth-child(2) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1ch;
+    margin: 1ch 1ch;
+}
+
+.confirmOrder__shipping__info__review__place {
+    margin: 10px 50px;
+    border: 1px green solid;
+    border-radius: 10px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 1ch;
+}
+
+.confirmOrder__shipping__info__review__place > button {
+    width: 150px;
+    height: 30px;
+    padding: 0 0;
+    border-radius: 2px;
+    font-size: 0.6rem;
+}
+
+.confirmOrder__shipping__info__review__place_total span {
+    font-size: 0.8rem;
+}
+
+.confirmOrder__place__order > span:nth-child(2) {
+    font-size: 0.6rem;
+    text-align: center;
+}
+
+.confirmOrder__place__order {
+    border: rgb(211, 207, 207) solid 1px;
+    height: fit-content;
+    border-radius: 5px;
+}
+
+.confirmOrder__place__container {
+    padding: 8px;
+}
+
+.confirmOrder__place__order__button {
+    display: flex;
+    flex-direction: column;
+    border-radius: 2px;
+}
+
+.confirmOrder__place__order__button > button {
+    padding: 5px 50px;
+    font-size: 0.6rem;
+    margin: 5px 0px;
+    border-radius: 2px;
+}
+
+.confirmOrder__place__order__button span:nth-child(2) {
+    font-size: 0.6rem;
+    text-align: center;
+}
+
+.confirmOrder__place__order hr {
+    margin: 5px 10px;
+}
+
+.confirmOrder__place__order div:nth-child(4), .confirmOrder__place__order div:nth-child(5), .confirmOrder__place__order div:nth-child(6), .confirmOrder__place__order div:nth-child(7) {
+    display: flex;
+    flex-direction: row;
+    font-size: 0.6rem;
+}
+
+
+.confirmOrder__place__order div span:first-child {
+    color: rgb(3, 79, 36);
+}
+
+.confirmOrder__place__order div span:nth-child(2) {
+    margin-left: auto;
+}
+
+.confirmOrder__place__order div:nth-child(9) {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 3ch;
+}
+
+.confirmOrder__place__order div h4:first-child,.confirmOrder__place__order div h4:nth-child(2) {
+    color: rgb(3, 79, 36);
+    font-size: 0.8rem;
+    flex: 0 0 auto;
+}
+
+.confirmOrder__place__order div h4:nth-child(2) {
+    margin-left: auto;
+}
+
+
+
+.confirmOrder__place__order__bottom {
+    height: 35px;
+    width: 180px;
+    border-top: rgb(211, 207, 207) 1px solid;
+    border-right:rgb(211, 207, 207) 1px solid;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background: #edecec;
+    padding: 10px;
+    font-size: 0.6rem;
+}
+
+#final__remove__container {
+    background-color: white;
+    border-radius: 5px;
+    width: fit-content;
+    height: fit-content;
+    padding: 19px;
+}
+
+.final__remove__contents {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.final__remove__contents > h2 {
+    text-align: center;
+}
+
+.final__remove__contents > div {
+    width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 19px 0px;
+}
+
+.final__remove__contents img {
+    object-fit: contain;
+    height: 100px;
+    width: 100px;
+    flex: 0 0 auto;
+}
+
+.final__remove__contents > span {
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.final__remove__contents > div > span {
+    color: red;
+    flex: 0 0 200px;
+    text-align: center;
+}
+
+
+.final__remove__contents > div:nth-child(4) {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+}
+
+.final__remove__contents button:first-child {
+    height: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background: #30475E;
+    border-radius: 2px;
+    width: 100%;
+    border: 1p solid;
+    margin-top: 10px;
+    border: none;
+    color: #FFF;
+    padding: 0.3rem
+}
+
+.final__remove__contents button:nth-child(2) {
+    height: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background: #FF6B6B;
+    border-radius: 2px;
+    width: 100%;
+    border: 1p solid;
+    margin-top: 10px;
+    border: none;
+    color: #FFF;
+    padding: 0.3rem
+}
+
+.order__change__button {
+    border: none;
+    height: fit-content;
+    width: fit-content;
+    font-weight: bold;
+    background-color: transparent;
+}

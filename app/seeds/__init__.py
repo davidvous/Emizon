@@ -11,14 +11,14 @@ seed_commands = AppGroup('seed')
 def seed():
     seed_users()
     seed_products()
-    seed_orders()
     seed_cart_items()
     seed_reviews()
+    seed_orders()
 
 @seed_commands.command('undo')
 def undo():
     undo_users()
     undo_products()
-    undo_orders()
     undo_cart_items()
     undo_reviews()
+    undo_orders()

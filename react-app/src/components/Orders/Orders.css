@@ -1,0 +1,131 @@
+.order__master__container {
+    background: white;
+    height: 100%;
+}
+
+.order__content__container {
+    width: 1000px;
+    margin: 0 auto;
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 1ch;
+}
+
+.order__current__links {
+    display: flex;
+    gap: 1ch;
+    font-size: 0.7rem;
+}
+
+.order__tagline__searchbar {
+    display: flex;
+}
+
+.order__tagline__searchbar > h3 {
+    flex: 0 0 150px;
+}
+
+.order__tagline__searchbar > div {
+    margin-left: auto;
+    display: flex;
+    gap: 0.5ch;
+}
+
+.order__navBar {
+    margin: 0px 1rem;
+    display: flex;
+    gap: 0.6ch;
+    border-bottom: rgb(162, 162, 162) 1px solid;
+}
+
+.order__navBar > span {
+    margin: 0 auto;
+    border-bottom: red 2px solid;
+    padding: 6px 13px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.order__all__tally {
+    display: flex;
+    gap: 0.5ch;
+    margin: 0px 0px 10px 0px;
+    align-items: flex-start;
+}
+
+.order__all__tally span {
+    font-size: 0.85rem;
+}
+
+.order__all__tally span:first-child {
+    font-weight: bold;
+}
+
+
+.order__all__tally > select{
+    border-radius: 5px;
+    border-color: rgb(211, 207, 207);
+    background: #edecec;
+    text-align: center;
+    box-shadow: 2px 2px 3px rgb(211, 207, 207);
+}
+
+.order__all__tally > select:focus{
+    outline: none;
+}
+
+.order__item__container {
+    /* border: rgb(211, 207, 207) 3px solid; */
+}
+
+.order__item__meta__container {
+    background: red;
+    /* border: rgb(211, 207, 207) 3px solid; */
+}
+
+.order__item__meta__headlines {
+    display: flex;
+    gap: 3ch;
+}
+
+.order__item__meta__headlines > div {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 5px;
+}
+
+.order__item__meta__headlines > div:nth-child(4) {
+    margin-left: auto;
+    color: red;
+}
+
+.order__item__meta__order__number {
+    text-align:right;
+}
+
+.order__item__meta__order__number__split {
+    display: flex;
+    gap: 4ch;
+}
+
+.order__item__product__container {
+    display: flex;
+    padding: 15px 15px;
+    border-bottom: 1px rgb(255, 0, 217) solid;
+    border-left: 1px rgb(255, 0, 217) solid;
+    border-right: 1px rgb(255, 0, 183) solid;
+}
+
+.order__item__product__left {
+    flex: 2 0;
+}
+
+.order__item__product__right {
+    margin-left: auto;
+}
+
+.order__item__product__right {
+    display: flex;
+    flex-direction: column;
+}

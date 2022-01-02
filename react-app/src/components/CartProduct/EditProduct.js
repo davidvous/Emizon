@@ -39,7 +39,7 @@ function EditProduct({userId, product_id, quantity}) {
           <div className="cartProduct__remove__container">
             <span className="cartProduct__remove__quantity">Quantity: </span>
             <input
-                className="cartProduct__remove__input"
+                className="cartProduct__remove__input pointer"
                 type="number"
                 name="item_quantity"
                 required

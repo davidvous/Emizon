@@ -22,7 +22,7 @@ const SignUpForm = ({setShowModal}) => {
     if (!/^[a-z ,.'-]+$/i.test(lastName)) validationErrors.push("Last name is invalid")
     if (lastName.length > 50) validationErrors.push("Last name too long");
     if (
-      !/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
+      !/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i.test(
         email
       )
     )

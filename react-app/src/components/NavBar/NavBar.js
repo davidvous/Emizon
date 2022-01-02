@@ -1,20 +1,31 @@
 
-import React, { useEffect} from 'react';
+import React, { useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import LogoutButton from '../auth/LogoutButton';
 import Category from './Category';
 import './NavBar.css'
 import { getCart } from '../../store/cart';
+import { getProducts } from '../../store/products';
 
 const NavBar = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const cartItems = useSelector((state) => Object.values(state.cart));
-  const dispatch = useDispatch();
+  const [departments, setDepartments] = useState('');
 
   useEffect(() => {
-    dispatch(getCart(user?.id))
+    (async () => { 
+      await dispatch(getCart(user?.id))
+    })()
   },[dispatch, user])
+
+  useEffect(() => {
+    (async () => {
+      const data = await dispatch(getProducts());
+      setDepartments(Object.values(data).map(each => each.department))
+    })();
+  },[]);
 
   return (
     <nav>
@@ -31,9 +42,11 @@ const NavBar = () => {
             <span className="header__metaLineOne">Hello Guest!</span>
             <span className="header__metaLineTwo">Account & Lists</span>
           </div>
-          <div className="header__meta">
+          <div>
+            <Link to="/orders" exact="true">
             <span className="header__metaLineOne">Returns</span>
             <span className="header__metaLineTwo">& Orders</span>
+            </Link>
           </div>
           <div className="header__meta">
             <span className="header__metaLineOne">Your</span>
@@ -42,13 +55,12 @@ const NavBar = () => {
           <div className="header__metaBasket">
             <Link to="/cart" exact="true">
               <div className="header__basket__wrapper">
-              {/* <span className="header__metaLineTwo header__basketCount"> */}
                 <span className="header__basket__badge">
-                {user
-                  ? Object.keys(cartItems).reduce(function (previous, key) {
-                    return previous + cartItems[key].quantity;
-                  }, 0)
-                  : 0}
+                  {user
+                    ? Object.keys(cartItems).reduce(function (previous, key) {
+                        return previous + cartItems[key].quantity;
+                      }, 0)
+                    : 0}
                 </span>
               </div>
             </Link>
@@ -59,7 +71,7 @@ const NavBar = () => {
           {user?.id && <LogoutButton />}
         </div>
       </div>
-      <Category />
+      <Category departments={departments} />
     </nav>
   );
 }
