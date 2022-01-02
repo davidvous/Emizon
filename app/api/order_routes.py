@@ -1,5 +1,6 @@
-from flask import Blueprint, jsonify
-from app.models import Order
+from flask import Blueprint, jsonify, request
+from app.models import Order, db
+from app.forms.orders_form import OrderForm
 
 order_routes = Blueprint('orders', __name__)
 
@@ -12,8 +13,30 @@ def orders():
 
 @order_routes.route('/<int:id>/')
 def order(id):
-    order = Order.query.filter(Order.user_id == id).first()
-    if not order:
-        return 'This user does not have an order'
-    print("THIS IS THE ORDER MAN>>>>>", order)
-    return order.to_dict()
+    orders = Order.query.filter(Order.user_id == id).all()
+    return {'user_orders': [order.to_dict() for order in orders]}
+
+@order_routes.route('/<int:id>/new', methods=['POST'])
+def newOrder(id):
+    form = OrderForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        order = Order(
+            user_id=id,
+            items=form.data['items'],
+            address=form.data['address'],
+            city=form.data['city'],
+            state=form.data['state'],
+            zipCode=form.data['zipCode'],
+            credit_card=form.data['credit_card'],
+            expiration_date=form.data['expiration_date'],
+            first_name=form.data['first_name'],
+            last_name=form.data['last_name'],
+            cc_code=form.data['cc_code'],
+        )
+        db.session.add(order)
+        db.session.commit()
+        print("THIS IS THE OBJECT>>>>>", order.items['3'])
+        return {'Added_Order': order.to_dict()}
+    return 'Adding an order failed!'
+

@@ -34,7 +34,27 @@ class Order(db.Model):
             'expiration_date': self.expiration_date,
             'first_name': self.first_name,
             'last_name': self.last_name,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+        }
+    
+    def to_dictionary(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'items': self.items,
+            'address': self.address,
+            'city': self.city,
+            'state': self.state,
+            'zipCode': self.zipCode,
+            'credit_card': self.credit_card,
+            'expiration_date': self.expiration_date,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
             'user_meta': {'fName': self.users.first_name, 'lName': self.users.last_name},
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
+
+
+
