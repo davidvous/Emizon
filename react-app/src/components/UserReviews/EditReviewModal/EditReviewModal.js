@@ -8,7 +8,7 @@ function EditReviewModal({ reviewInfo }) {
 
   return (
     <>
-      <button className="userReviews_review_buttons_edit" onClick={() => setShowModal(true)}>
+      <button className="userReviews_review_buttons_edit pointer" onClick={() => setShowModal(true)}>
         Edit Your Review
       </button>
       {showModal && (

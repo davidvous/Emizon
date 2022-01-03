@@ -106,7 +106,8 @@ export const newOrderPayment =
     });
     if (response.ok) {
       const data = await response.json();
-      return dispatch(addOrderPayment(data));
+      dispatch(addOrderPayment(data));
+      return null;
     }
   };
 
@@ -127,7 +128,7 @@ export const newOrderPayment =
       if (response.ok) {
         const payment = await response.json();
         dispatch(updateOrderPayment(payment));
-        return payment;
+        return null;
       }
     };
 

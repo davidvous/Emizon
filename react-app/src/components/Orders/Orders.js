@@ -46,7 +46,7 @@ function Orders() {
               <option value="last7days">past week</option>
             </select>
           </div>
-          {eachOrder.map((ele,idx) => 
+          {eachOrder.sort((a,b) => b.id-a.id).map((ele,idx) => 
             <IndivOrder order={ele} key={ele.id}/>
             )}
       

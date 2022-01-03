@@ -106,7 +106,16 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
   const validate = () => {
     const validateErrors = [];
 
+    if (!/^[a-z ,.'-]+$/i.test(firstName) || firstName === null)
+      validateErrors.push("Please check First Name");
+    if (!/^[a-z ,.'-]+$/i.test(lastName) || lastName === null)
+        validateErrors.push("Please check Last Name");
+    if (!address)
+      validateErrors.push("Please check Address");
+      if (!/^[a-z ,.'-]+$/i.test(city) || lastName === null) validateErrors.push("Please check City");
     if (!usState) validateErrors.push("Please check State");
+     if (!/\d{3}/i.test(zipCode))
+       validateErrors.push("Please check Zip Code (XXXXX)");
 
 
     return validateErrors;
@@ -120,10 +129,10 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
       const data = await dispatch(
         newOrderAddress(userId, address, city, usState, zipCode, firstName, lastName)
       );
-      setShowAddressChange(false);
       if (data) {
         setErrors(data);
       }
+      setShowAddressChange(false);
     }
   };
 
@@ -132,7 +141,6 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
     errors = validate();
     if (errors.length > 0) return setValidationErrors(errors);
     else {
-      console.log("WJAT OS TJE STATE?>>>>", usState);
       const data = await dispatch(
         editOrderAddress(
           userId,
@@ -144,16 +152,12 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
           lastName
         )
       );
-      setShowAddressChange(false);
       if (data) {
         setErrors(data);
       }
+      setShowAddressChange(false);
     }
   };
-
-  
-  console.log("WHAT ARE WE CHECKING AGAIN>!?!?", latestOrder)
-
 
   return (
     <div className="change__address__container slideDownAnimation">
@@ -164,17 +168,17 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
             : `Enter a new shipping address`}
         </h4>
       </div>
+      {validationErrors.length > 0 && (
+        <div className="addressErrors">
+          <ul>
+            {validationErrors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        </div>
+      )}
       <div className="change__address__form">
         <h2>{latestOrder ? `Edit Address` : `Add a new address`}</h2>
-        {validationErrors.length > 0 && (
-          <div className="validationErrors">
-            <ul>
-              {validationErrors.map((error) => (
-                <li key={error}>{error}</li>
-              ))}
-            </ul>
-          </div>
-        )}
         <div className="change__address__country">
           <span>Country/Region</span>
           <select id="country" className="general__button">
@@ -188,6 +192,7 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
               type="text"
               name="first_name"
               value={firstName}
+              placeholder="First Name"
               onChange={updateFirstName}
             ></input>
           </div>
@@ -197,12 +202,13 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
               type="text"
               name="last_name"
               value={lastName}
+              placeholder="Last Name"
               onChange={updateLastName}
             ></input>
           </div>
         </div>
         <div className="change__address__address">
-          <span>Address</span>
+          <span className="change__address__span">Address</span>
           <input
             type="text"
             placeholder="Street address or P.O. Box"
@@ -218,6 +224,7 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
               type="text"
               name="city"
               value={city}
+              placeholder="City"
               onChange={updateCity}
             ></input>
           </div>
@@ -238,6 +245,7 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
               name="zipCode"
               value={zipCode}
               onChange={updateZipCode}
+              placeholder="Zip Code"
               maxLength="5"
             ></input>
           </div>
@@ -246,17 +254,21 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
           <i className="far fa-check-square"></i>
           <span>Make this my default address</span>
         </div>
-        {
-          (() => {
-            if (latestOrder)
-              if (Object.values(latestOrder).includes(null))
-                return <button onClick={onEdit} className="pointer">Use this address</button> 
+        {(() => {
+          if (latestOrder)
+            if (Object.values(latestOrder).includes(null))
+              return (
+                <button onClick={onEdit} className="pointer">
+                  Use this address
+                </button>
+              );
             else
-              console.log("IT DOESNT EXIST RIGHT HELLO?@??!") 
-              return <button onClick={onCreate} className="pointer">Use this address</button> 
-
-          })()
-        }
+              return (
+                <button onClick={onCreate} className="pointer">
+                  Use this address
+                </button>
+              );
+        })()}
       </div>
     </div>
   );

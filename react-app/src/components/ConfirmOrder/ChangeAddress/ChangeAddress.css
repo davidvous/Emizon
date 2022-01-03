@@ -104,3 +104,15 @@
     border-radius: 5px;
     box-shadow: 0px 2px 3px rgb(211 207 207);
 }
+
+.change__address__span {
+    font-weight: bold;
+    font-size: 0.8rem;
+    margin-bottom: 0.5ch;
+}
+
+.addressErrors > ul {
+  list-style: none;
+  color: rgb(185, 69, 69);
+  padding-top: 8px;
+}

@@ -71,6 +71,10 @@
     width: 50px;
 }
 
+.credit__card__expiration__dates > button {
+    width: 128px;
+}
+
 .credit__card__default__payment {
     width: 275px;
     display: flex;
@@ -121,3 +125,4 @@
 .credit__card__bottom__buttons > button:nth-child(2) {
     background: #FDD2BF;
 }
+

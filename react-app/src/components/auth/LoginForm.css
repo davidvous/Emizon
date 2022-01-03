@@ -17,6 +17,10 @@
     opacity: 0.30;
 }
 
+.login > img {
+    margin-bottom: 14px;
+}
+
 .login__container {
     background: #fff;
     width: 300px;
