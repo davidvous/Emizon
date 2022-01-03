@@ -159,8 +159,6 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
     }
   };
 
-  console.log(">>>>>", latestOrder)
-
   return (
     <div className="change__address__container slideDownAnimation">
       <div className="change__address__heading">
