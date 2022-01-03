@@ -56,7 +56,7 @@ const LoginForm = () => {
 
   return (
     <div className="login">
-      <h1>LOGO GOES HERE BRUH</h1>
+      <img alt="emizon_logo" src="https://cdn.discordapp.com/attachments/920474033932349511/927560040309751828/emizon_logo.png"/>
       <div className="login__container">
         <h1>Sign-in</h1>
         <form>

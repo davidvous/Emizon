@@ -49,7 +49,7 @@ function UserReviews({currentUserReview, reviewInfo}) {
         {currentUserReview ? (
           <div className="userReviews_review_buttons">
             <button
-              className="userReviews_review_buttons_delete"
+              className="userReviews_review_buttons_delete pointer"
               onClick={onDeleteReview}
               type="submit"
             >

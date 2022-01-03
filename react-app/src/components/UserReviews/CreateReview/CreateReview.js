@@ -53,7 +53,6 @@ function CreateReview({ productId, user, setShowModal }) {
         <h1>Leave a Review!</h1>
         {validationErrors.length > 0 && (
           <div className="validationErrors">
-            The following errors were found:
             <ul>
               {validationErrors.map((error) => (
                 <li key={error}>{error}</li>

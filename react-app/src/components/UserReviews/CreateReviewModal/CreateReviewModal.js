@@ -15,7 +15,7 @@ function CreateReviewModal({productId, user}) {
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <CreateReview
+          <CreateReview className="pointer"
             productId={productId}
             user={user}
             setShowModal={setShowModal}

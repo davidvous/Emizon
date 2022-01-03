@@ -55,7 +55,7 @@ function EditReview({ reviewInfo, setShowModal}) {
     <form className="signUpForm">
       <img
         alt="userlogo"
-        src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png"
+        src="https://cdn.discordapp.com/attachments/920474033932349511/927560040309751828/emizon_logo.png"
       />
       <div className="signUpContent">
         <h1>Edit Review</h1>
