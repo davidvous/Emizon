@@ -78,7 +78,12 @@ function CreditCard({setShowCreditCard, currentFirstName, currentLastName, userI
     if (!/^(0[1-9]|1[0-2])\/?([0-9]{2})$/i.test(creditDate)) validateErrors.push("Please enter MM-YY exp date");
     if (!/\d{3}/i.test(creditCode))
       validateErrors.push("Please enter security code");
-    if (Number(creditDate.slice(-2)) < 22) validateErrors.push("Please check YY on exp date")
+    if (!creditDate) {
+      validateErrors.push("Please enter MM-YY date")
+
+    } else {
+      if (Number(creditDate.slice(-2)) < 22) validateErrors.push("Please check YY on exp date")
+    }
     return validateErrors;
   };
 

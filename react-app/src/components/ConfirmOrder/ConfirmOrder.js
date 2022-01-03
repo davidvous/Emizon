@@ -14,6 +14,7 @@ import CreditCard from './CreditCard/CreditCard';
 import FinalConfirm from './FinalConfirm/FinalConfirm';
 import { newOrderFinal } from '../../store/order';
 import { useHistory } from 'react-router-dom';
+import { deleteCartLine } from '../../store/cart';
 
 const override = css`
   display: block;
@@ -103,6 +104,9 @@ function ConfirmOrder() {
         setLoading(true);
         await sleep(1300);
         const overlay = document.getElementById("overlay");
+        await Object.values(cartItems).forEach((each) =>
+          dispatch(deleteCartLine(each.user_id, each.product_id))
+        );
         await document.body.removeChild(overlay);
         await setLoading(false);
         history.push("/orders");
