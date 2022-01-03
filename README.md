@@ -29,6 +29,7 @@
 <img src="https://cdn.discordapp.com/attachments/920474033932349511/927574005156810752/review__function.gif">
 
 <img src="https://cdn.discordapp.com/attachments/920474033932349511/927577941678899300/tech__stack.png">
+
 ### Technologies Used
 
 > #### Libraries
