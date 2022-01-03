@@ -194,7 +194,7 @@ function ConfirmOrder() {
                 </div>
                 <div className="confirmOrder__shipping__info__gift">
                   <input type="text" placeholder="Enter code"></input>
-                  <button>Apply</button>
+                  <button className="disabled general__button">Apply</button>
                 </div>
               </div>
               <button
@@ -243,7 +243,7 @@ function ConfirmOrder() {
                   ))}
               </div>
               <div className="confirmOrder__shipping__info__review__place">
-                <button onClick={createOrder}>Place Your Order</button>
+                <button className="pointer general__button" onClick={createOrder}>Place Your Order</button>
                 <div className="confirmOrder__shipping__info__review__place_total">
                   <h3>Order total: {formatter.format(cartSubTotal)}</h3>
                   <span>
@@ -257,7 +257,7 @@ function ConfirmOrder() {
           <div className="confirmOrder__place__order">
             <div className="confirmOrder__place__container">
               <div className="confirmOrder__place__order__button">
-                <button onClick={createOrder}>Place your order</button>
+                <button className="general__button pointer" onClick={createOrder}>Place your order</button>
                 <span>
                   By placing your order, you agree to Emizon's privacy notice
                   and conditions of use.

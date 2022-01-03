@@ -1,15 +1,10 @@
 import './Orders.css';
 import IndivOrderItem from './IndivOrderItem';
-import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
-import { getProducts } from '../../store/products';
+import { useSelector} from 'react-redux';
 
 function IndivOrder({order}) {
   
   const products = useSelector(state => state.products)
-  const [loaded, isLoaded] = useState(false);
-  const [filteredOrders, setFilteredOrders] = useState('')
-  const dispatch = useDispatch();
   const ordersReparse = {};
   const newDict = () => {
     for (let key in order.items) {

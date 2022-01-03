@@ -32,24 +32,37 @@
 }
 
 .confirmOrder__shipping__info__address > h3:first-child {
-    color: green;
+    color: #012443;
     flex: 0 0 20px;
 }
 
 .confirmOrder__shipping__info__address > h3:nth-child(2) {
-    color:red;
+    color:#012443;
     flex: 0 0 200px;
 }
 
 .confirmOrder__shipping__info__address__details {
-    color: purple;
+    color: #012443;
     flex: 0 0 400px;
     display: flex;
     flex-direction: column;
+    gap: 0.25ch;
 }
 
 .confirmOrder__shipping__info__address__details span {
     font-size: 0.8rem;
+}
+
+.confirmOrder__shipping__info__address__details > div:nth-child(4) {
+    display: flex;
+    gap: 0.5ch;
+}
+
+.confirmOrder__shipping__info__address__details > div:nth-child(4) > input {
+    background: rgb(237, 236, 236);
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .confirmOrder__shipping__info__review {
@@ -59,15 +72,16 @@
 }
 
 .confirmOrder__shipping__info__gift {
-    margin-left: 5px;
+    margin-left: 0px;
 }
 
 .confirmOrder__shipping__info__review > h3 {
     font-size: 1rem;
+    color: #012443;
 }
 
 .confirmOrder__shipping__info__review > h3:first-child {
-    color: rgb(135, 28, 92);
+    color:#012443;
     flex: 0 0 20px;
 }
 
@@ -96,7 +110,7 @@
 
 .confirmOrder__shipping__info__review__container {
     margin: 10px 50px;
-    border: 1px red solid;
+    border: rgb(211, 207, 207) 1px solid;
     border-radius: 10px;
     padding: 10px 15px;
 }
@@ -108,19 +122,32 @@
 .confirmOrder__shipping__info__review__headline__box {
     display: flex;
     align-items: center;
-    border: 1px solid rgb(255, 0, 255);
+    border: 1px solid rgb(211, 207, 207);
 }
 
 .confirmOrder__shipping__info__review__headline__box > span {
     margin-left: 7px;    
+    font-size: 0.9rem;
 }
 
 .confirmOrder__shipping__info__review__headline__border {
-    content:"dsfsdfsd";
-    background-color: rgb(242, 0, 255);
+    content: "";
+    background-color: #edecec;
     width: 10px;
     height: 40px;
 }
+
+/* .confirmOrder__place__order__bottom {
+  height: 35px;
+  width: 180px;
+  border-top: rgb(211, 207, 207) 1px solid;
+  border-right: rgb(211, 207, 207) 1px solid;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background: #edecec;
+  padding: 10px;
+  font-size: 0.6rem;
+} */
 
 .confirmOrder__shipping__info__review__item__container {
     display: flex;
@@ -186,17 +213,19 @@
 
 .confirmOrder__shipping__info__review__item__product__details * {
     margin: 1px 0px;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: black;
 }
 
 .confirmOrder__shipping__info__review__item__product__details > button:nth-child(4) {
-    color: purple;
+    color: black;
     flex: 0 0 auto;
     width: 70px;
 }
 
 .confirmOrder__shipping__info__review__item__product__details > button:nth-child(6) {
-    color: purple;
+    color: black;
     flex: 0 0 auto;
     width: 150px;
 }
@@ -228,13 +257,15 @@
 
 .confirmOrder__shipping__info__review__place {
     margin: 10px 50px;
-    border: 1px green solid;
+    border: rgb(211, 207, 207) 1px solid;
     border-radius: 10px;
     padding: 10px 15px;
     display: flex;
     align-items: center;
     gap: 1ch;
 }
+
+
 
 .confirmOrder__shipping__info__review__place > button {
     width: 150px;
@@ -294,7 +325,7 @@
 
 
 .confirmOrder__place__order div span:first-child {
-    color: rgb(3, 79, 36);
+    color: #565959;
 }
 
 .confirmOrder__place__order div span:nth-child(2) {
@@ -309,7 +340,7 @@
 }
 
 .confirmOrder__place__order div h4:first-child,.confirmOrder__place__order div h4:nth-child(2) {
-    color: rgb(3, 79, 36);
+    color: black;
     font-size: 0.8rem;
     flex: 0 0 auto;
 }

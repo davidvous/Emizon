@@ -123,7 +123,7 @@ function IndivConfirmOrder({cartInfo, userId, setFlag}) {
               )}
             </div>
             <span>Sold by: Emizon.com services LLC</span>
-            <button>Add gift options</button>
+            <button className="general__button disabled general__link">Add gift options</button>
           </div>
         </div>
         <div className="confirmOrder__shipping__info__review__item__delivery">
