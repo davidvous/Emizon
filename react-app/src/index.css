@@ -28,7 +28,19 @@ body {
     border: none;
     border-radius: 5px;
     box-shadow: 0px 2px 3px rgb(211 207 207);
+    padding: 0.5rem;
 }
+
+.general__link {
+    text-decoration: none;
+    color: #012443;
+}
+
+.general__link:visited {
+    text-decoration: none;
+}
+
+
 
 @keyframes slideDown {
 	0% {
@@ -49,4 +61,8 @@ body {
     position: fixed;
     right: 0;
     top: 0;
+}
+
+.disabled {
+    cursor: not-allowed;
 }

@@ -1,27 +1,50 @@
 import './Orders.css';
 import IndivOrderItem from './IndivOrderItem';
+import { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import { getProducts } from '../../store/products';
 
-function IndivOrder() {
+function IndivOrder({order}) {
+  
+  const products = useSelector(state => state.products)
+  const [loaded, isLoaded] = useState(false);
+  const [filteredOrders, setFilteredOrders] = useState('')
+  const dispatch = useDispatch();
+  const ordersReparse = {};
+  const newDict = () => {
+    for (let key in order.items) {
+      ordersReparse[key] = { ...products[key], quantity: order.items[key] };
+    }
+  };
+  newDict();
+    
+
+  const deliveryDate = () => {
+    let orderDate = new Date(order.created_at);
+    const options = { month: "long", day: "numeric", year:"numeric"};
+    return orderDate.toLocaleDateString("en-US", options);
+  };
+
     return (
       <div className="order__item__container">
         <div className="order__item__meta__container">
           <div className="order__item__meta__headlines">
             <div>
               <span>ORDER PLACED</span>
-              <span>December 21, 2021</span>
+              <span>{deliveryDate()}</span>
             </div>
             <div>
-              <span>TOTAL</span>
-              <span>$38.99</span>
+              <span>{null}</span>
+              <span>{null}</span>
             </div>
             <div>
               <span>SHIP TO</span>
-              <span>Username</span>
+              <span>{`${order.first_name} ${order.last_name}`}</span>
             </div>
             <div>
               <div className="order__item__meta__order__number">
                 <span>ORDER #</span>
-                <span>123423423423234</span>
+                <span>{order.id}</span>
               </div>
               <div className="order__item__meta__order__number__split">
                 <span>View Order Details</span>
@@ -30,10 +53,9 @@ function IndivOrder() {
             </div>
           </div>
         </div>
-        <IndivOrderItem />
-        <IndivOrderItem />
-        <IndivOrderItem />
-        <IndivOrderItem />
+        {Object.values(ordersReparse).map((ele,idx) => (
+          <IndivOrderItem key={ele.id} indivOrder={ele}/>
+      ))}
       </div>
     );
 }

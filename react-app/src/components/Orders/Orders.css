@@ -16,10 +16,26 @@
     display: flex;
     gap: 1ch;
     font-size: 0.7rem;
+    color: #565959;
+}
+
+.order__current__links > span:first-child {
+    text-decoration: underline;
 }
 
 .order__tagline__searchbar {
     display: flex;
+}
+
+.order__tagline__searchbar > div > input {
+    border: 0.75px rgb(172, 172, 172) solid;
+    border-radius: 3px;
+    line-height: 1.25rem;
+    padding-left: 1ch;
+}
+
+.order__tagline__searchbar > div > input:focus {
+    outline: none;
 }
 
 .order__tagline__searchbar > h3 {
@@ -80,8 +96,10 @@
 }
 
 .order__item__meta__container {
-    background: red;
-    /* border: rgb(211, 207, 207) 3px solid; */
+    background: #edecec;
+    border-radius: 10px 10px 0px 0px;
+    padding: 10px;
+    border-left: rgb(211, 207, 207) 1px solid;
 }
 
 .order__item__meta__headlines {
@@ -95,9 +113,16 @@
     margin: 0px 5px;
 }
 
+.order__item__meta__headlines > div > span:nth-child(2) {
+    font-weight: bold;
+}
+
 .order__item__meta__headlines > div:nth-child(4) {
     margin-left: auto;
-    color: red;
+}
+
+.order__item__meta__headlines > div:nth-child(4) > div:nth-child(2) {
+    font-weight: bold;
 }
 
 .order__item__meta__order__number {
@@ -112,20 +137,50 @@
 .order__item__product__container {
     display: flex;
     padding: 15px 15px;
-    border-bottom: 1px rgb(255, 0, 217) solid;
-    border-left: 1px rgb(255, 0, 217) solid;
-    border-right: 1px rgb(255, 0, 183) solid;
+    border-bottom: rgb(211, 207, 207) 1px solid;
+    border-left: rgb(211, 207, 207) 1px solid;
+    border-right: rgb(211, 207, 207) 1px solid;
 }
 
 .order__item__product__left {
     flex: 2 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5ch;
 }
+
+.order__item__product__left > div > img {
+    object-fit: contain;
+    height: 100px;
+    width: 100px;
+}
+
+.order__item__product__left > div > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5ch;
+}
+
+.order__item__product__left > div > div > span:first-child {
+    color: #012443;
+    font-weight: bold;
+}
+
+.order__item__product__left > div > div > span:nth-child(2) {
+    color: red;
+}
+
+.order__item__product__left > div > div > div button {
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 2px 3px rgb(211 207 207);
+    padding: 0.5rem;
+}
+
 
 .order__item__product__right {
     margin-left: auto;
-}
-
-.order__item__product__right {
     display: flex;
     flex-direction: column;
+    gap: 1ch;
 }

@@ -27,6 +27,7 @@ const NavBar = () => {
     })();
   },[]);
 
+
   return (
     <nav>
       <div className="header">
