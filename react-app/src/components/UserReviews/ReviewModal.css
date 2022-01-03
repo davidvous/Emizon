@@ -76,6 +76,8 @@
 
 .validationErrors > ul {
     list-style: none;
+    padding-left: 0;
+    color: rgb(185, 69, 69);
 }
 
 .numeric__ratings {

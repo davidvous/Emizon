@@ -30,33 +30,26 @@ function CreditCard({setShowCreditCard, currentFirstName, currentLastName, userI
     setFocus(e.target.name)
   }
 
-  const validate = () => {
-    const validateErrors = [];
-
-    // if (!headline) validateErrors.push("Please enter a title/headline");
-    // if (!body) validateErrors.push("Please enter a review");
-
-    return validateErrors;
-  };
+  const demoCard = () => {
+    setCreditNum("4352890012472141");
+    setCreditCode("123");
+    setCreditDate("2021")
+  }
 
   const onCreate = async (e) => {
     e.preventDefault();
     errors = validate();
     if (errors.length > 0) return setValidationErrors(errors);
-    else {
       const data = await dispatch(
         newOrderPayment(
           userId,
           creditNum,
           creditDate,
-          creditCode
-        )
-      );
-      setShowCreditCard(false);
+          creditCode));
       if (data) {
-        setErrors(data);
+        return setErrors(data);
       }
-    }
+      setShowCreditCard(false);
   };
 
   const onEdit = async (e) => {
@@ -69,14 +62,24 @@ function CreditCard({setShowCreditCard, currentFirstName, currentLastName, userI
           userId,
           creditNum,
           creditDate,
-          creditCode,
-        )
-      );
-      setShowCreditCard(false);
+          creditCode));
       if (data) {
-        setErrors(data);
+        return setErrors(data);
       }
+      setShowCreditCard(false);
     }
+  };
+
+  const validate = () => {
+    const validateErrors = [];
+
+    if (!/\d{16}/i.test(creditNum))
+      validateErrors.push("Please enter 16 digit card number");
+    if (!/^(0[1-9]|1[0-2])\/?([0-9]{2})$/i.test(creditDate)) validateErrors.push("Please enter MM-YY exp date");
+    if (!/\d{3}/i.test(creditCode))
+      validateErrors.push("Please enter security code");
+    if (Number(creditDate.slice(-2)) < 22) validateErrors.push("Please check YY on exp date")
+    return validateErrors;
   };
 
   return (
@@ -91,6 +94,7 @@ function CreditCard({setShowCreditCard, currentFirstName, currentLastName, userI
             <input
               type="text"
               maxLength="16"
+              minLength="16"
               name="credit_card"
               placeholder={creditNum ? creditNum : `0000000000000000`}
               value={creditNum}
@@ -120,32 +124,22 @@ function CreditCard({setShowCreditCard, currentFirstName, currentLastName, userI
                   onChange={updateSecureCode}
                 ></input>
               </div>
+              <button onClick={demoCard} className="general__button pointer">Use Demo Card</button>
               <div className="credit__card__default__payment">
                 <i className="far fa-check-square"></i>
                 <span>Set as default payment method.</span>
               </div>
+              {validationErrors.length > 0 && (
+                <div className="validationErrors">
+                  <ul>
+                    {validationErrors.map((error,idx) => (
+                      <li key={error}>{error}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
-          {validationErrors.length > 0 && (
-            <div className="validationErrors">
-              The following errors were found:
-              <ul>
-                {validationErrors.map((error) => (
-                  <li key={error}>{error}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-          {validationErrors.length > 0 && (
-            <div className="validationErrors">
-              The following errors were found:
-              <ul>
-                {validationErrors.map((error) => (
-                  <li key={error}>{error}</li>
-                ))}
-              </ul>
-            </div>
-          )}
         </div>
         <div className="credit__card__middle__sugoi">
           <span>Emizon accepts all major credit and debit cards.</span>
@@ -153,7 +147,7 @@ function CreditCard({setShowCreditCard, currentFirstName, currentLastName, userI
             cvc="123"
             expiry={creditDate ? creditDate : `0000`}
             name={
-              latestOrder
+              latestOrder?.first_name
                 ? `${latestOrder.first_name} ${latestOrder.last_name}`
                 : `${currentFirstName} ${currentLastName}`
             }
@@ -170,12 +164,10 @@ function CreditCard({setShowCreditCard, currentFirstName, currentLastName, userI
           <button
             className="pointer"
             onClick={
-              Object.values(latestOrder)?.includes(null)
-                ? onEdit
-                : onCreate
+              Object.values(latestOrder)?.includes(null) ? onEdit : onCreate
             }
           >
-            {Object.values(latestOrder)?.includes(null) ? `Edit your card` : `Add your card`}
+            Add your card
           </button>
         </div>
       </div>

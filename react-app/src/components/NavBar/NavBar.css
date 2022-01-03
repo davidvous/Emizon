@@ -8,6 +8,10 @@
     padding-bottom: 5px;
 }
 
+.header > a {
+    margin-left: 280px;
+}
+
 .header__title {
     font-family: 'Pacifico', cursive;
     padding: 5px;
@@ -23,7 +27,6 @@
 
 .header__search {
     display: flex;
-    flex: 1;
     align-items: center;
     border-radius: 24px;
 }
@@ -33,12 +36,19 @@
     padding: 10px;
     border: none;
     border-radius: 10px 0px 0px 10px;
-    width: 100%;
+    width: 525px;
+    font-weight: bold;
+    letter-spacing: 0.2ch;
+    text-align: center;
+}
+
+.header__searchInput:focus {
+    outline: none;
 }
 
 .header__searchIcon {
     padding: 5px;
-    height: 25px !important;
+    height: 23px !important;
     background-color: #F5EEDC;
     border-radius: 0px 10px 10px 0px;
 }
@@ -124,12 +134,41 @@
     color: #012443;
 }
 
-.header__nav > div:nth-child(2) > a {
+.header__nav > div:nth-child(3) > a {
     display: flex;
     flex-direction: column;
     text-decoration: none;
 }
 
-.header__nav > div:nth-child(2) > a:visited {
+.header__nav > div:nth-child(3) > a:visited {
     color: #012443;
+}
+
+.aboutMe__container {
+    height: 100%;
+    display: flex;
+}
+
+.aboutMe {
+    display: flex;
+    align-items: flex-end;
+}
+
+.aboutMe > div > span > a {
+    font-style: italic;
+    text-decoration: none;
+    color: rgb(98, 60, 60);
+    font-weight: bold;
+}
+
+.aboutMe > div:first-child {
+    display: flex;
+    gap: 0.3ch;
+    font-size: 0.7rem;
+}
+
+.aboutMe > div > a > img {
+    object-fit: contain;
+    height: 35px;
+    margin: 0.5px 2ch 3px;
 }
