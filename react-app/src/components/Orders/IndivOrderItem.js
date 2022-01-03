@@ -3,11 +3,19 @@ import { Link } from 'react-router-dom'
 
 function IndivOrderItem({indivOrder}) {
 
+  const deliveryDate = () => {
+    let orderDate = new Date(indivOrder.created_at);
+    const newDate = orderDate.setDate(orderDate.getDate() + 7)
+    const nextWeek = new Date(newDate)
+    const options = { month: "long", day: "numeric", year: "numeric" };
+    return nextWeek.toLocaleDateString("en-US", options);
+  };
+
 
     return (
       <div className="order__item__product__container">
         <div className="order__item__product__left">
-          <h3>Delivered December 22</h3>
+          <h3>Estimated delivery: {deliveryDate()}</h3>
           <span>Your package was left near the front door porch</span>
           <div>
             <img alt="product image" src={indivOrder.product_url}></img>

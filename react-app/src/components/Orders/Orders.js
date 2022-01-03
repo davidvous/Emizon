@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getOrders } from '../../store/order';
 import { getProducts } from "../../store/products";
+import { Redirect } from 'react-router-dom';
 
 function Orders() {
 
@@ -17,6 +18,8 @@ function Orders() {
   },[])
 
   const eachOrder = Object.values(orders)
+
+  if (!user) return <Redirect to="/login" />;
 
     return loaded && (
       <div className="order__master__container">

@@ -98,16 +98,15 @@ function ConfirmOrder() {
           )
       );
       if (data) {
-        // Set the flag to false
-        setShowOrderError(true)
-        // history.push('/orders')
+        setShowOrderError(true);
       } else {
         bodyOverlay();
         setLoading(true);
-        await sleep(1200)
-        const overlay = document.getElementById('overlay')
-        document.body.removeChild(overlay)
-        setLoading(false);
+        await sleep(1300);
+        const overlay = document.getElementById("overlay");
+        await document.body.removeChild(overlay);
+        await setLoading(false);
+        history.push("/orders");
       }
     };
   
