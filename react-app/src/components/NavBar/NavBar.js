@@ -49,7 +49,9 @@ const NavBar = () => {
           <div className="aboutMe">
             <div>
               <span>By</span>
-              <span><a href={aboutLinks["github"][0]}>David Le</a></span>
+              <span>
+                <a href={aboutLinks["github"][0]}>David Le</a>
+              </span>
             </div>
             <div>
               <a href={aboutLinks["linkedin"][0]}>
@@ -64,17 +66,17 @@ const NavBar = () => {
           </div>
         </div>
         <div className="header__search">
-          <input className="header__searchInput" type="text" />
-          <i className="fas fa-search header__searchIcon"></i>
+          <input className="header__searchInput disabled" type="text" />
+          <i className="fas fa-search header__searchIcon disabled"></i>
         </div>
         <div className="header__nav">
           <div className="header__meta">
-            <span className="header__metaLineOne">Hello {user ? user.first_name : null}!</span>
-            <span className="header__metaLineTwo">Explore Around</span>
-          </div>
-          <div className="header__meta">
-            <span className="header__metaLineOne">Your</span>
-            <span className="header__metaLineTwo">Smile</span>
+            <span className="header__metaLineOne">
+              Hello {user ? user.first_name : null}!
+            </span>
+            <span className="header__metaLineTwo">
+              {!user?.id && <Link className="general__link" to="/login">Login Here</Link>}
+            </span>
           </div>
           <div>
             <Link to="/orders" exact="true">

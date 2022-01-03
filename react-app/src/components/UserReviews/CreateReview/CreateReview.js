@@ -48,7 +48,10 @@ function CreateReview({ productId, user, setShowModal }) {
 
   return (
     <form className="signUpForm">
-      <img alt="userlogo" src={true} />
+      <img
+        alt="userlogo"
+        src="https://cdn.discordapp.com/attachments/920474033932349511/927560040309751828/emizon_logo.png"
+      />
       <div className="signUpContent">
         <h1>Leave a Review!</h1>
         {validationErrors.length > 0 && (
@@ -79,6 +82,13 @@ function CreateReview({ productId, user, setShowModal }) {
           ></textarea>
         </div>
         <div>
+          <div className="numeric__ratings">
+            {Array(5)
+              .fill()
+              .map((_, i) => (
+                <span key={i}>{i + 1}</span>
+              ))}
+          </div>
           <input
             type="range"
             name="rating"

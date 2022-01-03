@@ -31,7 +31,6 @@ function ConfirmOrder() {
       const userOrders = useSelector((state) => Object.values(state.order));
       const latestOrder = userOrders[userOrders.length-1];
       const [flag, setFlag] = useState(true);
-      const [orderFinish, setOrderFinish] = useState(false);
       const [loaded, setLoaded] = useState(false);
       const [showAddressChange, setShowAddressChange] = useState(false);
       const [showCreditCard, setShowCreditCard] = useState(false);

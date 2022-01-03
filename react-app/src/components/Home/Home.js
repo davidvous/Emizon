@@ -23,9 +23,11 @@ function Home() {
     return null;
   }
 
-  const topRowProducts = products.slice(0,2)
-  const midRowProducts = products.slice(2,5)
-  const botRowProducts = products.slice(5,6)
+  const topRowProducts = products.slice(0,2);
+  const topRowProducts2 = products.slice(2,6);
+  const midRowProducts = products.slice(7,10);
+  const botRowProducts = products.slice(10,11);
+  const botRowProducts2 = products.slice(11, 15);
 
     return (
       <div className="home">
@@ -42,7 +44,27 @@ function Home() {
                 name={each.name}
                 price={each.price}
                 product_url={each.product_url}
-                rating={each.average_rating_length ? (each.average_rating_total / each.average_rating_length) : 0}
+                rating={
+                  each.average_rating_length
+                    ? each.average_rating_total / each.average_rating_length
+                    : 0
+                }
+                id={each.id}
+              />
+            ))}
+          </div>
+          <div className="home__row">
+            {topRowProducts2.map((each) => (
+              <Product
+                key={each.id}
+                name={each.name}
+                price={each.price}
+                product_url={each.product_url}
+                rating={
+                  each.average_rating_length
+                    ? each.average_rating_total / each.average_rating_length
+                    : 0
+                }
                 id={each.id}
               />
             ))}
@@ -54,7 +76,11 @@ function Home() {
                 name={each.name}
                 price={each.price}
                 product_url={each.product_url}
-                rating={each.average_rating_length ? (each.average_rating_total / each.average_rating_length) : 0}
+                rating={
+                  each.average_rating_length
+                    ? each.average_rating_total / each.average_rating_length
+                    : 0
+                }
                 id={each.id}
               />
             ))}
@@ -66,7 +92,28 @@ function Home() {
                 name={each.name}
                 price={each.price}
                 product_url={each.product_url}
-                rating={each.average_rating_length ? (each.average_rating_total / each.average_rating_length) : 0}
+                rating={
+                  each.average_rating_length
+                    ? each.average_rating_total / each.average_rating_length
+                    : 0
+                }
+                id={each.id}
+              />
+            ))}
+          </div>
+
+          <div className="home__row">
+            {botRowProducts2.map((each) => (
+              <Product
+                key={each.id}
+                name={each.name}
+                price={each.price}
+                product_url={each.product_url}
+                rating={
+                  each.average_rating_length
+                    ? each.average_rating_total / each.average_rating_length
+                    : 0
+                }
                 id={each.id}
               />
             ))}

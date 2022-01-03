@@ -18,7 +18,7 @@ function IndivOrderItem({indivOrder}) {
           <h3>Estimated delivery: {deliveryDate()}</h3>
           <span>Your package was left near the front door porch</span>
           <div>
-            <img alt="product image" src={indivOrder.product_url}></img>
+            <img alt="product" src={indivOrder.product_url}></img>
             <div>
               <span>{indivOrder.name}</span>
               <span>Return or replace items: Eligibe through +30 days</span>
