@@ -22,7 +22,7 @@ function IndivOrderItem({indivOrder}) {
             <div>
               <span>{indivOrder.name}</span>
               <span>
-                Return or replace items: Eligibe until {deliveryDate(30)} days
+                Return or replace items: Eligibe until {deliveryDate(30)}
               </span>
               <div>
                 <button className="disabled">Buy it again</button>
