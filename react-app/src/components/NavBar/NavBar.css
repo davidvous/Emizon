@@ -134,13 +134,13 @@
     color: #012443;
 }
 
-.header__nav > div:nth-child(3) > a {
+.header__nav > div:nth-child(2) > a {
     display: flex;
     flex-direction: column;
     text-decoration: none;
 }
 
-.header__nav > div:nth-child(3) > a:visited {
+.header__nav > div:nth-child(2) > a:visited {
     color: #012443;
 }
 
