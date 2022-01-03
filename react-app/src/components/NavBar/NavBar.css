@@ -6,10 +6,11 @@
     position: sticky;
     top: 0;
     padding-bottom: 5px;
+    justify-content: center;
 }
 
 .header > a {
-    margin-left: 280px;
+    /* margin-left: 280px; */
 }
 
 .header__title {
