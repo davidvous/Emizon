@@ -124,7 +124,9 @@ function CreditCard({setShowCreditCard, currentFirstName, currentLastName, userI
                   onChange={updateSecureCode}
                 ></input>
               </div>
-              <button onClick={demoCard} className="general__button pointer">Use Demo Card</button>
+              <button onClick={demoCard} className="general__button pointer">
+                Use Demo Card
+              </button>
               <div className="credit__card__default__payment">
                 <i className="far fa-check-square"></i>
                 <span>Set as default payment method.</span>
@@ -132,7 +134,7 @@ function CreditCard({setShowCreditCard, currentFirstName, currentLastName, userI
               {validationErrors.length > 0 && (
                 <div className="validationErrors">
                   <ul>
-                    {validationErrors.map((error,idx) => (
+                    {validationErrors.map((error, idx) => (
                       <li key={error}>{error}</li>
                     ))}
                   </ul>
@@ -161,14 +163,27 @@ function CreditCard({setShowCreditCard, currentFirstName, currentLastName, userI
           <button className="pointer" onClick={() => setShowCreditCard(false)}>
             Cancel
           </button>
-          <button
-            className="pointer"
-            onClick={
-              Object.values(latestOrder)?.includes(null) ? onEdit : onCreate
-            }
-          >
-            Add your card
-          </button>
+            {(() => {
+              if (latestOrder)
+                if (Object.values(latestOrder).includes(null))
+                  return (
+                    <button onClick={onEdit} className="pointer">
+                      Add your card
+                    </button>
+                  );
+                else
+                  return (
+                    <button onClick={onCreate} className="pointer">
+                      Add your card
+                    </button>
+                  );
+              else
+                return (
+                  <button onClick={onCreate} className="pointer">
+                    Add your card
+                  </button>
+                );
+            })()}
         </div>
       </div>
     </div>

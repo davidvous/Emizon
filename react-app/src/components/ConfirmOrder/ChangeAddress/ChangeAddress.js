@@ -159,6 +159,8 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
     }
   };
 
+  console.log(">>>>>", latestOrder)
+
   return (
     <div className="change__address__container slideDownAnimation">
       <div className="change__address__heading">
@@ -268,6 +270,12 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
                   Use this address
                 </button>
               );
+          else
+          return (
+            <button onClick={onCreate} className="pointer">
+              Use this address
+            </button>
+          ); 
         })()}
       </div>
     </div>
