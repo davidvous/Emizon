@@ -107,7 +107,7 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
     const validateErrors = [];
 
     if (!usState) validateErrors.push("Please check State");
-    // if (!body) validateErrors.push("Please enter a review");
+
 
     return validateErrors;
   };
@@ -132,6 +132,7 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
     errors = validate();
     if (errors.length > 0) return setValidationErrors(errors);
     else {
+      console.log("WJAT OS TJE STATE?>>>>", usState);
       const data = await dispatch(
         editOrderAddress(
           userId,
@@ -150,6 +151,8 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
     }
   };
 
+  
+  console.log("WHAT ARE WE CHECKING AGAIN>!?!?", latestOrder)
 
 
   return (
@@ -218,7 +221,7 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
               onChange={updateCity}
             ></input>
           </div>
-          <div className="change__address__meta__state general__button">
+          <div className="change__address__meta__state">
             <span>State</span>
             <select id="state" onChange={updateUsState} defaultValue={usState}>
               {Object.keys(states).map((each, idx) => (
@@ -243,7 +246,17 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
           <i className="far fa-check-square"></i>
           <span>Make this my default address</span>
         </div>
-        <button onClick={Object.values(latestOrder)?.includes(null) ? onEdit : onCreate } className="pointer">Use this address</button>
+        {
+          (() => {
+            if (latestOrder)
+              if (Object.values(latestOrder).includes(null))
+                return <button onClick={onEdit} className="pointer">Use this address</button> 
+            else
+              console.log("IT DOESNT EXIST RIGHT HELLO?@??!") 
+              return <button onClick={onCreate} className="pointer">Use this address</button> 
+
+          })()
+        }
       </div>
     </div>
   );

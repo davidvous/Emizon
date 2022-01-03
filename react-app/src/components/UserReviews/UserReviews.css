@@ -40,9 +40,9 @@
 .userReviews_review_buttons_delete {
     background: #FF6B6B;
     border: 1px solid;
-    margin: 10px 1px 0px 0px;
-    border-color: #4F091D #000000 #4F091D;
+    margin-top: 10px;
     border-radius: 2px;
+    border: none;
     padding: 5px;
     color: rgb(255, 255, 255);
     width: 10rem;
@@ -50,10 +50,13 @@
 
 .userReviews_review_buttons_edit {
     background: #30475E;
-    border: 1px solid;
     margin-top: 10px;
     border-color: #4F091D #000000 #4F091D;
     border-radius: 2px;
+    padding: 5px;
+    color: rgb(255, 255, 255);
+    width: 10rem;
+    border: none;
     padding: 5px;
     color: rgb(255, 255, 255);
     width: 10rem;

@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from app.models import Order, db
 from app.forms.orders_form import OrderForm
+from sqlalchemy import or_
 
 order_routes = Blueprint('orders', __name__)
 
@@ -80,16 +81,39 @@ def newOrderPayment(id):
 
 @order_routes.route('/<int:id>/new/', methods=['PATCH'])
 def newOrder(id):
-    existingOrder = Order.query.filter(Order.user_id == id).filter(Order.items == None).first()
-    if existingOrder:
-        form = OrderForm()
-        form['csrf_token'].data = request.cookies['csrf_token']
-        if form.validate_on_submit():
-            existingOrder.items = form.data['items']
-            db.session.commit()
-            return {'Added_Order': existingOrder.to_dict()}
-        return 'Order did not validate!'
-    else:
-        return {'error': 'User does not have a current working order!'}, 401
-
-
+        existingOrder = Order.query.filter(Order.user_id == id).filter(Order.items == None).first()
+        if existingOrder:
+            nullShipNullPay = Order.query.filter(Order.user_id == id).filter(or_(Order.address == None, Order.credit_card == None)).all()
+            if not nullShipNullPay:
+                form = OrderForm()
+                form['csrf_token'].data = request.cookies['csrf_token']
+                if form.validate_on_submit():
+                    existingOrder.items = form.data['items']
+                    db.session.commit()
+                    return {'Added_Order': existingOrder.to_dict()}
+            else:
+                return {'error': 'User needs to fill out shipping or payment first!'}, 401
+        else:
+            nullCheck = Order.query.filter(Order.user_id == id).filter(or_(Order.address != None, Order.credit_card != None, Order.items != None)).order_by(Order.id.desc()).first()
+            if nullCheck:
+                form = OrderForm()
+                form['csrf_token'].data = request.cookies['csrf_token']
+                if form.validate_on_submit():
+                    print(">>>>>>>>>", form.data, nullCheck.address)
+                    order = Order(
+                            user_id=id,
+                            address=nullCheck.address,
+                            city=nullCheck.city,
+                            state=nullCheck.state,
+                            zipCode=nullCheck.zipCode,
+                            first_name=nullCheck.first_name,
+                            last_name=nullCheck.last_name,
+                            items=form.data['items'],
+                            credit_card=nullCheck.credit_card,
+                            expiration_date=nullCheck.expiration_date,
+                            cc_code=nullCheck.cc_code
+                            )
+                    db.session.add(order)
+                    db.session.commit()
+                    return {'Added_Order': order.to_dict()}
+            return {'error': 'User does not have a current working order!'}, 401

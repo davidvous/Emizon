@@ -53,7 +53,10 @@ function EditReview({ reviewInfo, setShowModal}) {
 
   return (
     <form className="signUpForm">
-      <img alt="userlogo" src={true} />
+      <img
+        alt="userlogo"
+        src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png"
+      />
       <div className="signUpContent">
         <h1>Edit Review</h1>
         {validationErrors.length > 0 && (
@@ -86,9 +89,11 @@ function EditReview({ reviewInfo, setShowModal}) {
         </div>
         <div>
           <div className="numeric__ratings">
-            {Array(5).fill().map((_,i) => (
-              <span key={i}>{i+1}</span>
-            ))}
+            {Array(5)
+              .fill()
+              .map((_, i) => (
+                <span key={i}>{i + 1}</span>
+              ))}
           </div>
           <input
             type="range"

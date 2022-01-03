@@ -1,0 +1,32 @@
+.final__confirm__container {
+    background-color: white;
+    border-radius: 10px;
+    width: fit-content;
+    height: fit-content;
+}
+
+.final__confirm__heading {
+    background: #edecec;
+    padding: 15px;
+    border-radius: 10px 10px 0px 0px;
+    border-bottom: rgb(211, 207, 207) 1px solid;
+}
+
+.final__confirm__heading > h4 {
+    font-size: 0.9rem;
+}
+
+.final__confirm__middle {
+    display: flex;
+    margin: 10px 10px 10px 0px;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.final__confirm__bottom {
+    background: #edecec;
+    padding: 15px;
+    border-radius: 0px 0px 10px 10px;
+    border-top: rgb(211, 207, 207) 1px solid;
+}
+

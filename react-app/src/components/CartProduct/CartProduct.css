@@ -41,7 +41,7 @@
 
 .cartProduct__remove__error {
     font-size: 0.9rem;
-    color: red;
+    color: red!important;
     padding-bottom: 0.3rem;
 }
 

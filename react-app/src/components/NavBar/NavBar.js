@@ -27,10 +27,11 @@ const NavBar = () => {
     })();
   },[]);
 
+
   return (
     <nav>
       <div className="header">
-        <Link to="/" exact="true">
+        <Link className="general__link" to="/" exact="true">
           <h1 className="header__title">Emizon</h1>
         </Link>
         <div className="header__search">

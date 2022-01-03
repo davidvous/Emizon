@@ -1,8 +1,27 @@
 import './Orders.css'
 import IndivOrder from './IndivOrder';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getOrders } from '../../store/order';
+import { getProducts } from "../../store/products";
+import { Redirect } from 'react-router-dom';
 
 function Orders() {
-    return (
+
+  const [loaded, setLoaded] = useState(false);
+  const user = useSelector(state => state.session.user);
+  const orders = useSelector(state => state.order)
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(getProducts()).then(() => dispatch(getOrders(user?.id))).then(() => setLoaded(true))
+  },[])
+
+  const eachOrder = Object.values(orders)
+
+  if (!user) return <Redirect to="/login" />;
+
+    return loaded && (
       <div className="order__master__container">
         <div className="order__content__container">
           <div className="order__current__links">
@@ -14,26 +33,23 @@ function Orders() {
             <h3>Your Orders</h3>
             <div>
               <input type="text"></input>
-              <button>Search Orders</button>
+              <button className="general__button disabled">Search Orders</button>
             </div>
           </div>
           <div className="order__navBar">
             <span>Orders</span>
           </div>
           <div className="order__all__tally">
-            <span>11 orders</span>
+            <span>{`${eachOrder.length} orders`}</span>
             <span>placed in</span>
             <select name="order__months" id="order__months__select">
               <option value="last7days">past week</option>
-              <option value="last30days">past month</option>
-              <option value="last90days">past 3 months</option>
             </select>
           </div>
-          <IndivOrder />
-          <IndivOrder />
-          <IndivOrder />
-          <IndivOrder />
-          <IndivOrder />
+          {eachOrder.map((ele,idx) => 
+            <IndivOrder order={ele} key={ele.id}/>
+            )}
+      
         </div>
       </div>
     );
