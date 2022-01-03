@@ -30,7 +30,7 @@ def seed_products():
     price="17.16", department="Health", product_url="https://cdn.discordapp.com/attachments/927581171016138842/927585087044878357/constipation.jpg")
     product14 = Product(name='Leowefowa Koi Fish And Sakura Flower Canvas', description="High definition picture photo prints on canvas with vivid color using fade-resistant inks on thick high quality canvas. The finishing artwork is durable, moisture resistant and color fade-resistant.",
     price="13.98", department="Art", product_url="https://cdn.discordapp.com/attachments/927581171016138842/927585510174625872/koifish.jpg")
-    product14 = Product(name='Exodus by Hikaru Utada', description="2004-10-05 Single Set",
+    product15 = Product(name='Exodus by Hikaru Utada', description="2004-10-05 Single Set",
     price="12.98", department="Music", product_url="https://cdn.discordapp.com/attachments/927581171016138842/927586249861103637/utada.jpeg")
 
     db.session.add(product1)

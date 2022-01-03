@@ -66,8 +66,8 @@ const NavBar = () => {
           </div>
         </div>
         <div className="header__search">
-          <input className="header__searchInput" type="text" />
-          <i className="fas fa-search header__searchIcon"></i>
+          <input className="header__searchInput disabled" type="text" />
+          <i className="fas fa-search header__searchIcon disabled"></i>
         </div>
         <div className="header__nav">
           <div className="header__meta">
