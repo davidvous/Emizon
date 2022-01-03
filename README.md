@@ -4,7 +4,7 @@
 
 <img src="https://cdn.discordapp.com/attachments/920474033932349511/927572944857735208/logo_whitebg.png">
 
-[Emizon](https://emizon.herokuapp.com/) is a marketplace inspired largely from Amazon. It can handle product display, addition to carts, and order processing with a seamless tie-in to 3rd party payment processing.
+[Emizon](https://emizon.herokuapp.com/) is a marketplace inspired largely from Amazon. It can handle product display, addition to carts, order processing, reviews, and ratings with a seamless tie-in to 3rd party payment processing.
 
 [Live Site](https://emizon.herokuapp.com/)
 
