@@ -115,7 +115,7 @@ function ChangeAddress({setShowAddressChange, currentFirstName, currentLastName,
       if (!/^[a-z ,.'-]+$/i.test(city) || lastName === null) validateErrors.push("Please check City");
     if (!usState) validateErrors.push("Please check State");
      if (!/\d{3}/i.test(zipCode))
-       validateErrors.push("Please check Zip Code");
+       validateErrors.push("Please check Zip Code (XXXXX)");
 
 
     return validateErrors;

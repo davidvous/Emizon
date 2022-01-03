@@ -31,9 +31,9 @@ function CreditCard({setShowCreditCard, currentFirstName, currentLastName, userI
   }
 
   const demoCard = () => {
-    setCreditNum("4352890012472141");
+    setCreditNum("3432890012472141");
     setCreditCode("123");
-    setCreditDate("2021")
+    setCreditDate("1222")
   }
 
   const onCreate = async (e) => {
