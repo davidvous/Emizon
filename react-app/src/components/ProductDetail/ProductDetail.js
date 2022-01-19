@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getOneProduct } from '../../store/products'
+import { getProducts } from '../../store/products'
 import { getOneReview } from '../../store/review'
 import './ProductDetail.css'
 import AddToCart from '../CartProduct/AddToCart'
@@ -19,7 +19,7 @@ function ProductDetail() {
   
     useEffect(()=> {
         (async () => {
-        await dispatch(getOneProduct(productId));
+        await dispatch(getProducts());
         await dispatch(getOneReview(productId));
     })();
     },[dispatch, productId])

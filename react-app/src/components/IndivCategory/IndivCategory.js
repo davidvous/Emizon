@@ -10,7 +10,7 @@ function IndivCategory() {
     return (
       <div className="category__content">
         <div className="category__content__container">
-            <div className="home__row">
+            <div className="category__row">
                 {products.filter(each => each.department === category).map((each) => (
                 <Product
                 key={each.id}
