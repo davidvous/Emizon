@@ -90,6 +90,10 @@
     gap: 72px;
 }
 
+.reviewImgText {
+    color:#0d1230;
+}
+
 @keyframes slideDown2 {
 	0% {
 		transform: translateY(-100%);

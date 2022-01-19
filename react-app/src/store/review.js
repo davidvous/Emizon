@@ -33,6 +33,7 @@ const updateReview = (payload) => ({
   payload,
 });
 
+
 //
 
 const initialState = {};
@@ -84,6 +85,28 @@ export const editReview = (item, user, headline, body, rating) => async (dispatc
     return review;
   }
 };
+
+export const uploadFile =
+  (product_id, user_id, headline, body, rating, reviewImg) => async (dispatch) => {
+
+    const form = new FormData();
+    form.append("product_id", product_id);
+    form.append("user_id", user_id);
+    form.append("headline", headline);
+    form.append("body", body);
+    form.append("rating", rating);
+    form.append("file", reviewImg);
+
+    const response = await fetch(`/api/products/${product_id}/reviews/new/`, {
+      method: "POST",
+      body: form,
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      return dispatch(addReview(data));
+    }
+  };
 
 
 // reducer
