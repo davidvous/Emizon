@@ -26,33 +26,12 @@ def review(id):
     allReviewsOneProduct = Review.query.filter(Review.product_id == id).order_by(Review.updated_at.desc()).all()
     return {'specificProdReview': [indivReview.to_dict() for indivReview in allReviewsOneProduct]}
 
-# @product_routes.route('/<int:id>/reviews/new/', methods=['POST'])
-# def addReview(id):
-#     form = ReviewForm()
-#     form['csrf_token'].data = request.cookies['csrf_token']
-#     if form.validate_on_submit():
-#         review = Review(
-#             user_id=form.data['user_id'],
-#             product_id=form.data['product_id'],
-#             headline=form.data['headline'],
-#             body=form.data['body'],
-#             rating=form.data['rating'],
-#         )
-#         db.session.add(review)
-#         db.session.commit()
-#         return {'Added_Review': review.to_dict()}
-#     return 'This failed!'
-
 @product_routes.route('/<int:id>/reviews/new/', methods=['POST'])
-def upload_file(id):
-    print("HELLO>>>>>>>>>@#$@#$@$@", request.form)
-    print("HDOES request.files exist????@#@#", request.files)
-    
+def addReviewWithFile(id):
+
     if "file" not in request.files:
-        print("DOES THIS FILE EXIST??>>!@##!@#@!#!#!@ IT DOESNT")
         return "No user_file key in request.files"
 
-    print("CHECKING IF FILE>>>", request.files["file"] )
     file = request.files["file"]
 
     if file:
@@ -74,6 +53,8 @@ def upload_file(id):
 @product_routes.route('/<int:id>/reviews/<int:userId>/delete/', methods=['DELETE'])
 def deleteReview(id, userId):
     review = Review.query.filter(Review.product_id == id, Review.user_id == userId).first()
+    reviewKey = str(review.reviewImg[37:])
+    delete_s3_file(Config.S3_BUCKET, reviewKey)
     db.session.delete(review)
     db.session.commit()
     return {'Message': f"Review {id} was deleted!"}

@@ -29,3 +29,15 @@ def upload_file_to_s3(file, bucket_name, acl="public-read"):
         return e
 
     return f"{Config.S3_LOCATION}{file.filename}"
+
+def delete_s3_file(bucket_name, key):
+    try:
+        s3.delete_object(
+            Bucket=bucket_name,
+            Key=key
+        )
+        
+    except Exception as e:
+        print("S3 Bucket Delete Operation Failed! ", e)
+        return e
+

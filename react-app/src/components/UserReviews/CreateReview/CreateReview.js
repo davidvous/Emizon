@@ -48,7 +48,7 @@ function CreateReview({ productId, user, setShowModal }) {
     setRating(e.target.value);
   };
   const updateReviewImg = (e) => {
-    setReviewImg(e.target.value);
+    setReviewImg(e.target.files[0]);
   };
 
   return (
@@ -103,7 +103,7 @@ function CreateReview({ productId, user, setShowModal }) {
             onChange={updateRating}
             value={rating}
           ></input>
-          <label className="reviewImgText" for="reviewImage">Leave a photo review:</label>
+          <label className="reviewImgText" htmlFor="reviewImage">Leave a photo review:</label>
           <input onChange={updateReviewImg} className="reviewImgText" type="file" id="avatar" name="reviewImage" accept="image/png, image/jpeg"></input>
         </div>
       </div>
