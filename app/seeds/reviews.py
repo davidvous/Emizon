@@ -14,9 +14,9 @@ def seed_reviews():
     review6 = Review(user_id=1, product_id=4, headline="This is great to protect your hands!", body="When you type all day and need some protection for your fingers, this is the thing to get! I love the color too!",
     rating=4)
     review7 = Review(user_id=1, product_id=5, headline="This light is awesome! I can't believe how cool it is!", body="Zenitsu is the best character in Demon Slayer and I love this light. It makes me feel like I can do Thunder Breathing too.",
-    rating=5)
+    rating=5, reviewImg='https://images-na.ssl-images-amazon.com/images/I/A1YwT4-1f7L._SL1600_.jpg')
     review8 = Review(user_id=1, product_id=6, headline="Kaneki! Or can I believe it?", body="Such a cool figurine! I have it next to my Zenitsu light and no monsters will dare come out to attack me.",
-    rating=5, reviewImg='https://media.discordapp.net/attachments/917541871457275925/918846475897798727/default-user.jpeg')
+    rating=5, reviewImg='https://images-na.ssl-images-amazon.com/images/I/C1r2R0A1v9S._SL1600_.jpg')
 
     db.session.add(review1)
     db.session.add(review2)

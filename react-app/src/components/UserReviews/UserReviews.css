@@ -16,6 +16,15 @@
     overflow-wrap: anywhere;
 }
 
+.userReviews__img {
+    margin-top: 1rem;
+    height: 5rem;
+    width: 5rem;
+    cursor: -moz-zoom-in; 
+    cursor: -webkit-zoom-in; 
+    cursor: zoom-in;
+}
+
 .userReviews__user > span, .usersReviews__date {
     font-size: 0.85rem;
     line-height: 20px;

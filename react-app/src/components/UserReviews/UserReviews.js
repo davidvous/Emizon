@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { deleteReview } from "../../store/review";
 import "./UserReviews.css";
 import EditReviewModal from "./EditReviewModal/EditReviewModal";
+import ReviewImgModal from "./ReviewImgModal/ReviewImgModal";
 
 function UserReviews({currentUserReview, reviewInfo}) {
     const dispatch = useDispatch()
@@ -46,6 +47,7 @@ function UserReviews({currentUserReview, reviewInfo}) {
         <div className="userReviews__review">
           <span className="userReviews__review__body">{reviewInfo.body}</span>
         </div>
+        {reviewInfo.reviewImg ? <ReviewImgModal reviewInfo={reviewInfo}/> : null }
         {currentUserReview ? (
           <div className="userReviews_review_buttons">
             <button
