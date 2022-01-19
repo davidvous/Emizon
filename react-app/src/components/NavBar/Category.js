@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function Category({departments}) {
 
     const uniqueDepartments = new Set(departments)
@@ -5,7 +7,7 @@ function Category({departments}) {
     return (  
       <div className="category">
           {[...uniqueDepartments].slice(0,7).map((each,idx) => 
-              <span key={idx} className="category__heading disabled">{each}</span>
+              <Link className="general__link" key={idx} to={`/products/category/${each}`}>{each}</Link>
           )}
       </div>
     );
