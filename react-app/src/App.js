@@ -11,6 +11,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import ProductDetail from './components/ProductDetail/ProductDetail';
 import ConfirmOrder from './components/ConfirmOrder/ConfirmOrder';
+import IndivCategory from './components/IndivCategory/IndivCategory';
 import { authenticate } from './store/session';
 import Orders from './components/Orders/Orders';
 
@@ -47,6 +48,9 @@ function App() {
         </ProtectedRoute>
         <Route path="/products/:productId" exact={true}>
           <ProductDetail />
+        </Route>
+        <Route path="/products/category/:category" exact={true}>
+          <IndivCategory />
         </Route>
         <Route path="/cart" exact={true}>
           <Cart />
