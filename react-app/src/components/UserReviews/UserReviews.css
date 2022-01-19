@@ -25,6 +25,15 @@
     cursor: zoom-in;
 }
 
+.userReviews__img__full {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: auto;
+    max-height: 90vh;
+    max-width: 70vw;
+}
+
 .userReviews__user > span, .usersReviews__date {
     font-size: 0.85rem;
     line-height: 20px;
