@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux'
-import { addAReview } from '../../../store/review'
+import { addAReview, uploadFile } from '../../../store/review'
 import '../ReviewModal.css'
 
 function CreateReview({ productId, user, setShowModal }) {
@@ -8,6 +8,7 @@ function CreateReview({ productId, user, setShowModal }) {
   const [headline, setHeadline] = useState("");
   const [body, setBody] = useState("");
   const [rating, setRating] = useState(3);
+  const [reviewImg, setReviewImg] = useState("");
   const [validationErrors, setValidationErrors] = useState([]);
   const dispatch = useDispatch();
 
@@ -26,7 +27,8 @@ function CreateReview({ productId, user, setShowModal }) {
     if (errors.length > 0) return setValidationErrors(errors);
     else {
       const data = await dispatch(
-        addAReview(productId, user.id, headline, body, rating)
+        // addAReview(productId, user.id, headline, body, rating)
+        uploadFile(productId, user.id, headline, body, rating, reviewImg)
       );
       setShowModal(false);
       if (data) {
@@ -44,6 +46,9 @@ function CreateReview({ productId, user, setShowModal }) {
   };
   const updateRating = (e) => {
     setRating(e.target.value);
+  };
+  const updateReviewImg = (e) => {
+    setReviewImg(e.target.files[0]);
   };
 
   return (
@@ -98,6 +103,8 @@ function CreateReview({ productId, user, setShowModal }) {
             onChange={updateRating}
             value={rating}
           ></input>
+          <label className="reviewImgText" htmlFor="reviewImage">Leave a photo review:</label>
+          <input onChange={updateReviewImg} className="reviewImgText" type="file" id="avatar" name="reviewImage" accept="image/png, image/jpeg"></input>
         </div>
       </div>
       <button onClick={onCreate} type="submit" className="signUpContent-btn">

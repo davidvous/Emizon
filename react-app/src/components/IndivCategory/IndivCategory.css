@@ -1,7 +1,7 @@
 .category__row {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     z-index: 1;
     margin-left: 5px;
     margin-right: 5px;
-    flex-wrap: wrap;
 }
